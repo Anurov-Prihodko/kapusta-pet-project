@@ -1,4 +1,5 @@
 import Container from './components/Container';
+import HomeView from './views/HomeView';
 
 export default function App() {
   // const style = {
@@ -28,5 +29,9 @@ export default function App() {
   //   </div>
   // );
 
-  return <Container></Container>;
+  return (
+    <Container>
+      <HomeView />
+    </Container>
+  );
 }
