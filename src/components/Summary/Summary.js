@@ -46,14 +46,18 @@ const Summary = ({ data }) => {
     <div className={s.summary__container}>
       <p className={s.summary__title}>Сводка</p>
       <table className={s.summary__table}>
-        {data.map(monthData => {
-          return (
-            <tr>
-              <td className={s.summary__month}>{MONTHS[monthData.month]}</td>
-              <td className={s.summary__sum}>{formatNumber(monthData.sum)}</td>
-            </tr>
-          );
-        })}
+        <tbody>
+          {data.map((monthData, index) => {
+            return (
+              <tr key={index}>
+                <td className={s.summary__month}>{MONTHS[monthData.month]}</td>
+                <td className={s.summary__sum}>
+                  {formatNumber(monthData.sum)}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
