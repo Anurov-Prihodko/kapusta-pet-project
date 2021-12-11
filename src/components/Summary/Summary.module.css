@@ -1,0 +1,38 @@
+.summaryContainer {
+  background-color: #ccccff;
+  border-radius: 20px;
+}
+
+.summaryTitle {
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 10px;
+}
+
+.summaryTable {
+  width: 240px;
+}
+
+.summaryMonth {
+  padding-left: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.summarySum {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.summaryTable,
+.summaryMonth,
+.summarySum {
+  border: 2px solid #ffffff;
+  border-collapse: collapse;
+}
