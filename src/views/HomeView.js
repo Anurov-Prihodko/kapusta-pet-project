@@ -1,11 +1,9 @@
-import Header from '../components/Header';
-import Main from '../components/Main';
+import { Summary } from '../components/Summary';
 
 export default function HomeView() {
   return (
     <>
-      <Header />
-      <Main />
+      <Summary />
     </>
   );
 }
