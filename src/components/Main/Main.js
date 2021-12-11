@@ -1,5 +1,6 @@
 import s from './Main.module.css';
 import Icons from '../../Icons';
+import LoginForm from '../LoginForm/LoginForm';
 
 export default function Main() {
   return (
