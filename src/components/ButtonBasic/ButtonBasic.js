@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import styles from './ButtonBasic.module.scss';
 
 export default function ButtonBasic({
@@ -18,12 +20,28 @@ export default function ButtonBasic({
     <button
       className={classNames.join(' ')}
       type={type}
-      shadow={shadow}
-      bordered={bordered}
-      active={active}
+      shadow={shadow ? 1 : 0}
+      bordered={bordered ? 1 : 0}
+      active={active ? 1 : 0}
       {...props}
     >
       {children}
     </button>
   );
 }
+
+ButtonBasic.defaultProps = {
+  children: null,
+  type: 'button',
+  shadow: false,
+  bordered: false,
+  active: false,
+};
+
+ButtonBasic.propTypes = {
+  children: PropTypes.node,
+  type: PropTypes.string,
+  shadow: PropTypes.bool,
+  bordered: PropTypes.bool,
+  active: PropTypes.bool,
+};
