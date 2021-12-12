@@ -1,9 +1,10 @@
-.summaryContainer {
+.summary__container {
   background-color: #ccccff;
   border-radius: 20px;
+  width: 240px;
 }
 
-.summaryTitle {
+.summary__title {
   font-family: Roboto;
   font-size: 12px;
   font-style: normal;
@@ -13,26 +14,30 @@
   text-align: center;
   text-transform: uppercase;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.summaryTable {
-  width: 240px;
+.summary__table {
+  width: 244px;
+  margin-left: -2px;
+  margin-right: -2px;
 }
 
-.summaryMonth {
+.summary__month {
   padding-left: 20px;
   padding-top: 6px;
   padding-bottom: 6px;
+  text-transform: uppercase;
 }
 
-.summarySum {
+.summary__sum {
   text-align: right;
   padding-right: 20px;
 }
 
-.summaryTable,
-.summaryMonth,
-.summarySum {
+.summary__table,
+.summary__month,
+.summary__sum {
   border: 2px solid #ffffff;
   border-collapse: collapse;
 }
