@@ -41,7 +41,7 @@ Component Summary expects props in form:
   }
 */
 const Summary = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <div className={s.summary__container}>
       <p className={s.summary__title}>Сводка</p>
