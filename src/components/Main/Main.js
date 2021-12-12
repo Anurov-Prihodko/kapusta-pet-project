@@ -1,5 +1,6 @@
 import s from './Main.module.css';
 import Icons from '../../Icons';
+import LoginForm from '../LoginForm/LoginForm';
 
 export default function Main() {
   return (
@@ -22,6 +23,7 @@ export default function Main() {
           className={s.main__cole}
         />
       </div>
+      <LoginForm />
     </div>
   );
 }
