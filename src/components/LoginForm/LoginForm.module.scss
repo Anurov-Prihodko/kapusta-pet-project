@@ -76,6 +76,9 @@
 }
 
 .loginForm {
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.04em;
 }
 
 .inputLabel {
@@ -89,11 +92,6 @@
 
   margin-bottom: 13px;
 
-  font-size: 10px;
-  line-height: 12px;
-
-  letter-spacing: 0.04em;
-
   color: #000000;
 
   @media screen and (min-width: 768px) {
@@ -103,7 +101,7 @@
 }
 
 .requiredLabel {
-  display: none; //
+  color: #eb5757;
 }
 
 .input {
@@ -121,11 +119,16 @@
 .input::placeholder {
   font-size: 14px;
   line-height: 16px;
-  letter-spacing: 0.04em;
+
   color: #a6abb9;
 }
 
 .inputErrorMessage {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #eb5757;
 }
 
 .loginFormBtnGroup {
