@@ -1,5 +1,6 @@
 import { Summary } from '../components/Summary';
 
+
 const exampleSummary = [
   { month: 0, sum: 10000.0 },
   { month: 1, sum: 10000.0 },
@@ -18,7 +19,9 @@ const exampleSummary = [
 export default function HomeView() {
   return (
     <>
+
       <Summary data={exampleSummary} />
+
     </>
   );
 }
