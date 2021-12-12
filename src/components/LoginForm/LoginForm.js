@@ -1,5 +1,6 @@
 import styles from './LoginForm.module.scss';
 import Icons from '../../Icons';
+import ButtonBasic from '../ButtonBasic/ButtonBasic';
 
 export default function LoginForm() {
   return (
@@ -46,6 +47,14 @@ export default function LoginForm() {
           />
         </label>
         <span className={styles.inputErrorMessage}></span>
+        <div className={styles.loginFormBtnGroup}>
+          <ButtonBasic type="submit" shadow active>
+            Войти
+          </ButtonBasic>
+          <ButtonBasic type="submit" shadow>
+            Регистрация
+          </ButtonBasic>
+        </div>
       </form>
     </section>
   );
