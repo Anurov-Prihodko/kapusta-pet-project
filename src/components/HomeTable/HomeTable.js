@@ -12,6 +12,7 @@ const transactions = ['id','asdfas','sdfasdf','asdfas','asdf', 'date', 'discript
 export default function HomeTable() {
     return (
         <>
+            <div className={'wrapper-table table-scroll'}>
             <table className = {'table'}>
                 <thead className = {'table-head'}>
                     <tr className = {'table-head_row'}>
@@ -21,7 +22,10 @@ export default function HomeTable() {
                             </th>
                         ))}
                     </tr>                    
-                </thead>
+                    </thead>
+                </table>
+                <div className={'wrapper-body table-scroll-body'}>
+                <table>
                 <tbody className={'table-body'} id={'scroll'}>                    
                     {transactions.map(
                         ({ id, date, discription, category, sum }) => (
@@ -44,8 +48,9 @@ export default function HomeTable() {
                             
                         ))}
                     </tbody>
-            </table>
-            
+                    </table>
+                    </div>
+            </div>
         </>
     )
 }

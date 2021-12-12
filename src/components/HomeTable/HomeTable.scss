@@ -26,18 +26,35 @@
     }
   }
 }
-#scroll {
-  overflow-y: scroll;
+
+.table-scroll-body {
+  height: 140px;
+  overflow-x: auto;
 }
-#scroll::-webkit-scrollbar {
+.table-scroll table {
+  width: 100%;
+  table-layout: fixed;
+  border: none;
+}
+
+/* Стили для скролла */
+.table-scroll-body::-webkit-scrollbar {
   width: 6px;
+}
+
+.table-scroll-body::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #ff751d;
   border-radius: 2px;
 }
+
 @media screen and (min-width: 768px) {
-  .table {
+  .wrapper-table {
     width: 605px;
     min-height: 384px;
+  }
+  .wrapper-body {
+    height: 346px;
   }
 
   .table-head {
@@ -118,9 +135,13 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .table {
+  .wrapper-table {
     width: 760px;
-    min-height: 380px;
+    height: 380px;
+  }
+  .wrapper-body {
+    width: 760px;
+    height: 344px;
   }
   .table-head {
     display: block;
