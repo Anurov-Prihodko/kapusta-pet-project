@@ -1,4 +1,4 @@
-import s from './Header.module.css';
+import s from './Header.module.scss';
 import Icons from '../../Icons';
 
 export default function Header() {
