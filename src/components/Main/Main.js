@@ -23,6 +23,7 @@ export default function Main() {
           className={s.main__cole}
         />
       </div>
+      <LoginForm />
     </div>
   );
 }
