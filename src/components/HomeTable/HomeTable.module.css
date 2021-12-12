@@ -1,0 +1,25 @@
+.table {
+  display: block;
+  background-color: red;
+  border-radius: 20px 20px 0 0;
+  width: 605px;
+}
+
+.tableHead {
+  display: block;
+}
+
+.tableHead_row {
+  padding: 2px 84px 2px 21px;
+
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+}
