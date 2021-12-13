@@ -1,12 +1,10 @@
-// import Header from '../components/Header';
-import HeaderHome from '../components/HeaderHome';
+import Header from '../components/Header';
 import Main from '../components/Main';
 
 export default function LoginView() {
   return (
     <>
-      {/* <Header /> */}
-      <HeaderHome />
+      <Header />
       <Main />
     </>
   );

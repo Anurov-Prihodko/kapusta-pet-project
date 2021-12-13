@@ -1,5 +1,6 @@
 import { Summary } from '../components/Summary';
 import HomeTable from '../components/HomeTable';
+import HeaderHome from '../components/HeaderHome';
 
 const exampleSummary = [
   { month: 0, sum: 10000.0 },
@@ -19,6 +20,7 @@ const exampleSummary = [
 export default function HomeView() {
   return (
     <>
+      <HeaderHome />
       <Summary data={exampleSummary} />
       <HomeTable />
     </>
