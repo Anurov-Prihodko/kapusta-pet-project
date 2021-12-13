@@ -1,0 +1,15 @@
+.container {
+  width: 230px;
+  display: flex;
+}
+
+.href {
+}
+
+.icon {
+}
+
+.text {
+  color: #888888;
+  margin-left: 10px;
+}
