@@ -3,7 +3,12 @@ import { ReturnHome } from '../components/ReturnHome';
 import { MonthSelector } from '../components/MonthSelector';
 import { BalanceReport } from '../components/BalanceReport';
 import HomeTable from '../components/HomeTable';
+
+import Balance from '../components/Balance'
+import Reports from '../components/Reports'
+
 import HeaderHome from '../components/HeaderHome';
+
 
 const exampleSummary = [
   { month: 0, sum: 10000.0 },
@@ -33,6 +38,8 @@ export default function HomeView() {
       <MonthSelector month={month} year={year} />
       <BalanceReport incomes={123000} outcomes={234075} />
       <HomeTable />
+      <Balance />
+      <Reports />
     </>
   );
 }
