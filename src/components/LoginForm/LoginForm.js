@@ -25,9 +25,23 @@ export default function LoginForm() {
     setIsRegisterActive(true);
   };
 
-  const onLoginFormSubmit = data => {
-    console.log(data); //for test
-  };
+  async function onLoginFormSubmit(data = {}) {
+
+    const response = await fetch('http://localhost:3001/api/users/signup', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'aplication/json'
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(data)
+    })
+    return await response.json()
+  }
+  
 
   const requiredErrorEmail = errors?.password?.type === 'required';
   const requiredErrorPassword = errors?.password?.type === 'required';
