@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
-import HomeTable from '../HomeTable';
+// import HomeTable from '../HomeTable';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
 
@@ -19,9 +19,9 @@ export default function ExpInTable() {
             name="inset"
             value=""
             id="tab_1"
-            checked
+            // checked консоль бьет ошибку что нет обработчика события
           />
-          <label className={s.tabtitle} for="tab_1">
+          <label className={s.tabtitle} data-for="tab_1">
             <span>РАСХОД</span>
           </label>
           <input
@@ -31,14 +31,14 @@ export default function ExpInTable() {
             value=""
             id="tab_2"
           />
-          <label className={s.tabtitle} for="tab_2">
+          <label className={s.tabtitle} data-for="tab_2">
             <span>ДОХОД</span>
           </label>
         </div>
         <div className={s.expinboard}>
           <div className={s.expinrail}>
             <div className={s.calendarblock}>
-              <label for="date">
+              <label data-for="date">
                 <Icons
                   name="calendar"
                   width={20}
@@ -51,7 +51,7 @@ export default function ExpInTable() {
                 className={s.calendar}
                 selected={startDate}
                 onChange={date => setStartDate(date)}
-                dateFormat="dd.MM.yyyy"
+                // datedata-format="dd.MM.yyyy" Не работает
               />
             </div>
             <div className={s.expininput}>
@@ -85,20 +85,18 @@ export default function ExpInTable() {
             <div className={s.btnGroup}>
               <ButtonBasic
                 type="submit"
-                shadow={0}
-                active={1}
+                shadow={false}
+                active={true}
                 name="enter"
-                onClick
               >
                 Ввод
               </ButtonBasic>
               <ButtonBasic
                 type="submit"
-                shadow={0}
-                active={0}
-                bordered={1}
+                shadow={false}
+                active={false}
+                bordered={true}
                 name="clean"
-                onClick
               >
                 Очистить
               </ButtonBasic>
@@ -109,7 +107,7 @@ export default function ExpInTable() {
       </section>
       <section className={s.expinmainmobile}>
         <div className={s.calendarmob}>
-          <label for="datemob">
+          <label data-for="datemob">
             <Icons
               name="calendar"
               width={20}
@@ -122,7 +120,7 @@ export default function ExpInTable() {
             className={s.calendar}
             selected={startDate}
             onChange={date => setStartDate(date)}
-            dateFormat="dd.MM.yyyy"
+            datedata-format="dd.MM.yyyy"
           />
         </div>
         {/* <div>Здесь мобильная таблица расходов</div> */}

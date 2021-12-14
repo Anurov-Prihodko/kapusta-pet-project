@@ -1,4 +1,3 @@
-// import { Component } from 'react';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -28,12 +27,10 @@ export default function Modal({ children, onClose }) {
     return;
   };
 
-  // render() {
   return createPortal(
     <div className={s.backdrop} onClick={handleBackdropClick}>
       <div className={s.content}>{children}</div>
     </div>,
     modalRoot,
   );
-  // }
 }
