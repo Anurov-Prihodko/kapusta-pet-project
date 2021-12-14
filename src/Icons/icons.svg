@@ -40,5 +40,17 @@
 <path fill="#ffb300" style="fill: var(--color8, #ffb300)" d="M5.46 20.759l1.428-1.003c-0.456-1.161-0.707-2.429-0.707-3.756 0-1.507 0.323-2.937 0.902-4.22l-1.37-1.014c-0.889 1.504-1.406 3.269-1.418 5.164-0.012 1.747 0.411 3.392 1.164 4.829z"></path>
 </symbol>
 
+<symbol id="icon-arrow-left" viewBox="0 0 18 12">
+<path fill="#cbccd0" style="fill: var(--color2, #cbccd0)" d="M6.70339 10.5895L6 11.2929L0.707107 6L6 0.707107L6.70339 1.41049L3.47595 4.64694L2.62527 5.5H3.83H17.5V6.5H3.83H2.62527L3.47595 7.35306L6.70339 10.5895Z"></path>
+</symbol>
+
+<symbol id="icon-after" viewBox="0 0 7 12">
+<path fill="#cbccd0" style="fill: var(--color2, #cbccd0)" d="M1 1L5 6L1 11" stroke="#FF751D" stroke-width="2"></path>
+</symbol>
+
+<symbol id="icon-before" viewBox="0 0 7 12">
+<path fill="#cbccd0" style="fill: var(--color2, #cbccd0)" d="M6 1L2 6L6 11" stroke="#FF751D" stroke-width="2"></path>
+</symbol>
+
     </defs>
 </svg>
