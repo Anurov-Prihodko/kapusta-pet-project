@@ -7,23 +7,49 @@
   display: flex;
   justify-content: center;
 
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  padding-top: 15px;
+  padding-top: 10px;
   letter-spacing: 0.02em;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 15px;
+    margin-bottom: 25px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-top: 15px;
+    margin-bottom: 25px;
+  }
 }
 
 .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 50px;
+  padding-bottom: 35px;
+
+  @media screen and (min-width: 768px) {
+    padding-bottom: 50px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-bottom: 50px;
+  }
 }
 
 .button__yes {
-  margin-right: 15px;
+  margin-right: 7px;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 15px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-right: 15px;
+  }
 }
 
 .close__btn {
