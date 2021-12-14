@@ -6,10 +6,10 @@ const ReturnHome = ({ whereto }) => {
     <div className={s.container}>
       <a href={whereto} className={s.href}>
         <Icons
-          name="delete"
+          name="arrow-left"
           color="#FF751D"
-          width="32"
-          height="32"
+          width="18"
+          height="12"
           className={s.icon}
         />
         <span className={s.text}>Вернуться на главную</span>

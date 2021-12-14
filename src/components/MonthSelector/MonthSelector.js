@@ -24,10 +24,10 @@ const MonthSelector = ({ month, year }) => {
       <div className={s.selector_line}>
         <a href={`#?month=${prevMonth}&year=${prevYear}`} className={s.href}>
           <Icons
-            name="delete"
+            name="before"
             color="#FF751D"
-            width="4"
-            height="10"
+            width="7"
+            height="12"
             className={s.icon}
           />
         </a>
@@ -37,10 +37,10 @@ const MonthSelector = ({ month, year }) => {
 
         <a href={`#?month=${nextMonth}&year=${nextYear}`} className={s.href}>
           <Icons
-            name="delete"
+            name="after"
             color="#FF751D"
-            width="4"
-            height="10"
+            width="7"
+            height="12"
             className={s.icon}
           />
         </a>
