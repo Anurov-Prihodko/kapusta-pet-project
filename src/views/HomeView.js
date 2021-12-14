@@ -1,4 +1,7 @@
 import { Summary } from '../components/Summary';
+import { ReturnHome } from '../components/ReturnHome';
+import { MonthSelector } from '../components/MonthSelector';
+import { BalanceReport } from '../components/BalanceReport';
 import HomeTable from '../components/HomeTable';
 import HeaderHome from '../components/HeaderHome';
 
@@ -17,11 +20,18 @@ const exampleSummary = [
   { month: 11, sum: 10000.0 },
 ];
 
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth();
+
 export default function HomeView() {
   return (
     <>
       <HeaderHome />
       <Summary data={exampleSummary} />
+      <ReturnHome whereto="home" />
+      <MonthSelector month={month} year={year} />
+      <BalanceReport incomes={123000} outcomes={234075} />
       <HomeTable />
     </>
   );

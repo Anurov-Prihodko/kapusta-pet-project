@@ -1,0 +1,28 @@
+.selector_container {
+  width: 134px;
+}
+
+.selector_title {
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.selector_line {
+  display: flex;
+  justify-content: space-around;
+}
+
+.month,
+.year {
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+}
