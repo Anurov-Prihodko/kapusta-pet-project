@@ -9,8 +9,12 @@ export default function ModalBody({ children, onClose }) {
 
   useEffect(() => {
     const button = document.getElementById('button-close');
+    const btnNo = document.getElementById('btnNo');
+
+    btnNo.addEventListener('click', onClose);
     button.addEventListener('click', onClose);
     return () => {
+      btnNo.removeEventListener('click', onClose);
       button.removeEventListener('click', onClose);
     };
   }, [onClose]);
@@ -49,8 +53,9 @@ export default function ModalBody({ children, onClose }) {
 
         <div>
           <ButtonBasic
-            type="submit"
+            type="button"
             shadow
+            id="btnNo"
             active={isRegisterActive}
             name="no"
             onClick={toggleRegisterActiveBtn}
