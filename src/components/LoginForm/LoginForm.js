@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 import styles from './LoginForm.module.scss';
 import Icons from '../../Icons';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
-import { useState } from 'react';
 
 export default function LoginForm() {
   const [isEnterActive, setIsEnterActive] = useState(true);
