@@ -1,0 +1,60 @@
+.comment {
+  text-align: center;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   flex-wrap: wrap;
+}
+
+.comment p {
+  margin: 0 0 10px 0;
+}
+
+.dialog {
+  margin-top: 15px;
+  position: relative;
+  background-image: linear-gradient(to right, #1d346a 100%, #031634 100%);
+  width: 282px;
+  height: 163px;
+  color: #ffffff;
+  border-radius: 30px;
+  margin-left: 20px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.dialog::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #1d346a;
+  left: 50px;
+  top: -12px;
+}
+
+.message-text {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+}
+.message-text:last-child {
+  margin-top: 20px;
+}
+.text-wrap {
+  text-align: start;
+  padding: 41px 25px 31px 25px;
+}
+
+@media screen and (min-width: 1280px) {
+  .text-wrap {
+    padding: 41px 30px 31px 30px;
+  }
+  .dialog {
+    width: 292px;
+  }
+}

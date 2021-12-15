@@ -7,6 +7,10 @@ const tableHead = [
     'КАТЕГОРИЯ',
     'СУММА',
 ]
+
+const shortid = require('shortid')
+const _id = shortid.generate();
+
 const transactions = ['id','asdfas','sdfasdf','asdfas','asdf', 'date', 'discription', 'category', 'sum','id','asdfas','sdfasdf','asdfas','asdf', 'date', 'discription', 'category', 'sum'];
 
 export default function HomeTable() {
@@ -29,7 +33,7 @@ export default function HomeTable() {
                 <tbody className={'table-body'} id={'scroll'}>                    
                     {transactions.map(
                         ({ id, date, discription, category, sum }) => (
-                            <tr className={'table-body_row'}>
+                            <tr key={_id} className={'table-body_row'}>
                                 <td className={'table-body_data'}>{date}</td>
                                 <td className={'table-body_data'}>{discription}</td>
                                 <td className={'table-body_data'}>{category}</td>
