@@ -6,7 +6,7 @@ import ButtonBasic from '../ButtonBasic/ButtonBasic';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
 
-export default function ExpInTable() {
+export default function ExpInTable({ children }) {
   const [startDate, setStartDate] = useState(new Date());
 
   return (
@@ -103,6 +103,7 @@ export default function ExpInTable() {
             </div>
           </div>
           {/* <HomeTable /> */}
+          {children}
         </div>
       </section>
       <section className={s.expinmainmobile}>
@@ -124,10 +125,10 @@ export default function ExpInTable() {
           />
         </div>
         {/* <div>Здесь мобильная таблица расходов</div> */}
-        <div className={s.expbtnblock}>
+        {/* <div className={s.expbtnblock}>
           <button className={s.expmobBtn}>Расход</button>
           <button className={s.expmobBtn}>Доход</button>
-        </div>
+        </div> */}
       </section>
     </div>
   );

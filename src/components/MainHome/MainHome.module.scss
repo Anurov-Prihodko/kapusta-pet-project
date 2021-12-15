@@ -1,0 +1,42 @@
+.main__container {
+  min-width: 320px;
+
+  .hero {
+    padding-top: 286px;
+    border-bottom-left-radius: 90px;
+    background-color: #f5f6fb;
+  }
+
+  .main {
+    padding-top: 225px;
+    background-repeat: no-repeat;
+    background-position: bottom 0px left 35px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    .hero {
+      padding-top: 578px;
+    }
+
+    .main {
+      padding-top: 800px;
+      background-image: url(../../image/table-2cole.png);
+      background-position: bottom 64px right 88px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 1280px;
+
+    .hero {
+      padding-top: 582.5px;
+    }
+
+    .main {
+      padding-top: 268px;
+      background-image: url(../../image/coles.png);
+      background-position: bottom 38px left 10px;
+    }
+  }
+}
