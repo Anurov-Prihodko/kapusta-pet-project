@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import s from './HeaderHome.module.scss';
@@ -10,6 +10,10 @@ import ModalBody from '../ModalBody';
 export default function HeaderHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const togleModal = () => setIsModalOpen(state => !state);
+
+  useEffect(() => {
+    document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
+  }, [isModalOpen]);
 
   const desctopOrLaptopSize = useMediaQuery({
     query: '(min-width: 768px)',

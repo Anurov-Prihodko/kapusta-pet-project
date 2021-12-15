@@ -51,7 +51,7 @@ export default function ExpInTable({ children }) {
                 className={s.calendar}
                 selected={startDate}
                 onChange={date => setStartDate(date)}
-                // datedata-format="dd.MM.yyyy" Не работает
+                datedata-format="dd.MM.yyyy"
               />
             </div>
             <div className={s.expininput}>
@@ -83,17 +83,11 @@ export default function ExpInTable({ children }) {
               />
             </div>
             <div className={s.btnGroup}>
-              <ButtonBasic
-                type="submit"
-                shadow={false}
-                active={true}
-                name="enter"
-              >
+              <ButtonBasic type="submit" active={true} name="enter">
                 Ввод
               </ButtonBasic>
               <ButtonBasic
                 type="submit"
-                shadow={false}
                 active={false}
                 bordered={true}
                 name="clean"
