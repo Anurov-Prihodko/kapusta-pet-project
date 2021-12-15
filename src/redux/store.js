@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
+import authReducer from './reducers/authReducer';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -22,14 +23,14 @@ const middleware = [
 ];
 
 const contactsPersistConfig = {
-  key: 'contacts',
+  key: 'auth',
   storage,
   blacklist: ['filter'],
 };
 
 const store = configureStore({
-  reducer: {
-    // mainState: persistReducer(contactsPersistConfig, contacts),
+  reducer:  {
+    auth: persistReducer(contactsPersistConfig, authReducer),
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../../redux/reducers/authReducer'
 
 import styles from './LoginForm.module.scss';
 import Icons from '../../Icons';
@@ -8,6 +10,8 @@ import { useState } from 'react';
 export default function LoginForm() {
   const [isEnterActive, setIsEnterActive] = useState(true);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
+  const [error, setError] = useState()
+  const dispatch = useDispatch()
 
   const {
     register,
@@ -25,23 +29,30 @@ export default function LoginForm() {
     setIsRegisterActive(true);
   };
 
-  async function onLoginFormSubmit(data = {}) {
+  const onLoginFormSubmit = async data => {
+    setError(null)
 
-    const response = await fetch('http://localhost:3001/api/users/signup', {
+    const endpoint = isEnterActive
+      ? '/api/users/signin'
+      : '/api/users/signup';
+
+    const response = await fetch(`http://localhost:3001${endpoint}`, {
       method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
       headers: {
-        'Content-Type': 'aplication/json'
+        'Content-Type': 'application/json',
       },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-    return await response.json()
-  }
-  
+    const json = await response.json();
+    if (!response.ok) {
+      setError(json.message)
+      return;
+    }
+
+    if (isEnterActive) {
+      dispatch(login(json.data))
+    }
+  };
 
   const requiredErrorEmail = errors?.password?.type === 'required';
   const requiredErrorPassword = errors?.password?.type === 'required';
@@ -90,6 +101,7 @@ export default function LoginForm() {
             })}
           />
           <span className={styles.inputErrorMessage}>
+            {error}
             {requiredErrorEmail && 'это обязательное поле'}
             {errors?.email?.type === 'pattern' &&
               'это не похоже на адрес эл. почты - проверьте правильность ввода'}
