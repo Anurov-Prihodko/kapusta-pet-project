@@ -4,7 +4,7 @@ import HomeTable from '../components/HomeTable';
 import Balance from '../components/Balance';
 import Reports from '../components/Reports';
 import HeaderHome from '../components/HeaderHome';
-import BalanceMessage from '../components/BalanceMessage'
+import BalanceMessage from '../components/BalanceMessage';
 
 const exampleSummary = [
   { month: 0, sum: 10000.0 },

@@ -2,6 +2,7 @@ import HeaderHome from '../components/HeaderHome';
 import { ReturnHome } from '../components/ReturnHome';
 import { MonthSelector } from '../components/MonthSelector';
 import { BalanceReport } from '../components/BalanceReport';
+import ReportIncomeExpenses from '../components/ReportIncomeExpenses';
 import s from './ReportView.module.css';
 
 const date = new Date();
@@ -21,6 +22,7 @@ export default function ReportView() {
         <div className={s.balance_line}>
           <BalanceReport incomes={234075} outcomes={123000} />
         </div>
+        <ReportIncomeExpenses />
       </div>
     </>
   );
