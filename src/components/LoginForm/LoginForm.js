@@ -1,5 +1,9 @@
 import { useForm } from 'react-hook-form';
+
 import { useState } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../redux/reducers/authReducer';
 
 import styles from './LoginForm.module.scss';
 import Icons from '../../Icons';
@@ -8,6 +12,8 @@ import ButtonBasic from '../ButtonBasic/ButtonBasic';
 export default function LoginForm() {
   const [isEnterActive, setIsEnterActive] = useState(true);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
+  const [error, setError] = useState();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -25,8 +31,27 @@ export default function LoginForm() {
     setIsRegisterActive(true);
   };
 
-  const onLoginFormSubmit = data => {
-    console.log(data); //for test
+  const onLoginFormSubmit = async data => {
+    setError(null);
+
+    const endpoint = isEnterActive ? '/api/users/signin' : '/api/users/signup';
+
+    const response = await fetch(`http://localhost:3001${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const json = await response.json();
+    if (!response.ok) {
+      setError(json.message);
+      return;
+    }
+
+    if (isEnterActive) {
+      dispatch(login(json.data));
+    }
   };
 
   const requiredErrorEmail = errors?.password?.type === 'required';
@@ -76,6 +101,7 @@ export default function LoginForm() {
             })}
           />
           <span className={styles.inputErrorMessage}>
+            {error}
             {requiredErrorEmail && 'это обязательное поле'}
             {errors?.email?.type === 'pattern' &&
               'это не похоже на адрес эл. почты - проверьте правильность ввода'}

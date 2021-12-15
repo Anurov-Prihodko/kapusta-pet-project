@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux';
 import s from './Main.module.scss';
 import Icons from '../../Icons';
 import LoginForm from '../LoginForm/LoginForm';
 
 export default function Main() {
+  const user = useSelector(state => state.auth.user);
+
   return (
     <div className={s.main__container}>
       <div className={s.hero}>
@@ -41,7 +44,7 @@ export default function Main() {
         </div>
       </div>
       <div className={s.main}></div>
-      <LoginForm />
+      {!user && <LoginForm />}
     </div>
   );
 }
