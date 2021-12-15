@@ -1,0 +1,58 @@
+.main_container {
+  position: relative;
+
+  .home_container {
+    position: absolute;
+    top: 0;
+    left: 110px;
+  }
+
+  .reports {
+    position: absolute;
+    top: 30px;
+    left: 83px;
+  }
+
+  .balance {
+    position: absolute;
+    top: 94px;
+    left: 35px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .home_container {
+      top: 142px;
+      left: 51px;
+    }
+
+    .reports {
+      top: 50px;
+      left: 562px;
+    }
+
+    .balance {
+      top: 40px;
+      left: 82px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .home_container {
+      top: 93px;
+      left: 110px;
+    }
+
+    .table_container {
+      display: flex;
+    }
+
+    .reports {
+      left: 1016px;
+    }
+
+    .balance {
+      top: 40px;
+      left: 442px;
+    }
+  }
+}

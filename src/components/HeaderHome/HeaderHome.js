@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
-// import Media from 'react-media';
 
 import s from './HeaderHome.module.scss';
 import Icons from '../../Icons';
 import LogoutBtn from '../LogoutBtn';
 import Modal from '../Modal';
 import ModalBody from '../ModalBody';
-// import { GLOBAL_MEDIA_QUERIES } from '../../constants/constants';
 
 export default function HeaderHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
