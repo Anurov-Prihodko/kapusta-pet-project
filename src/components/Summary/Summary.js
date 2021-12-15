@@ -1,6 +1,7 @@
 import s from './Summary.module.css';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
+import { exampleSummary } from './exampleSummary';
 
 /*
 Component Summary expects props in form:
@@ -14,14 +15,14 @@ Component Summary expects props in form:
       ],
   }
 */
-const Summary = ({ data }) => {
+const Summary = () => {
   // console.log(data);
   return (
     <div className={s.summary__container}>
       <p className={s.summary__title}>Сводка</p>
       <table className={s.summary__table}>
         <tbody>
-          {data.map((monthData, index) => {
+          {exampleSummary.map((monthData, index) => {
             return (
               <tr key={index}>
                 <td className={s.summary__month}>{MONTHS[monthData.month]}</td>
