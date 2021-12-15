@@ -1,0 +1,13 @@
+.balance_container {
+  display: flex;
+  justify-content: space-around;
+  width: 423px;
+}
+
+.outcomes {
+  color: #ff0000;
+}
+
+.incomes {
+  color: #00ff00;
+}

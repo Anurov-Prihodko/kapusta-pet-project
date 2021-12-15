@@ -1,0 +1,243 @@
+.exptabs {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.expinmain {
+  display: block;
+  position: relative;
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+input {
+  outline: none;
+}
+
+.expintab {
+  margin: auto;
+}
+
+.tabinput {
+  display: none;
+}
+
+.tabtitle {
+  display: table-cell;
+  height: 40px;
+  width: 138px;
+  margin: 0 -5px 0 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+  vertical-align: middle;
+  color: #000000;
+  border-radius: 20px 20px 0 0;
+  background: #fafbfd;
+  cursor: pointer;
+}
+
+.tabinput:checked + .tabtitle {
+  color: #ff751d;
+  background: #fefefe;
+}
+
+.expinboard {
+  display: block;
+  background: #ffffff;
+  box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+  border-radius: 0px 30px 30px 30px;
+  padding: 28px 30px 48px;
+  width: 665px;
+  height: 626px;
+  @media screen and (min-width: 1280px) {
+    width: 1060px;
+    height: 579px;
+    padding: 33px 20px 60px 10px;
+  }
+}
+
+.calendarblock {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+
+.calendaricon {
+  display: flex;
+}
+
+.calendar {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #52555f;
+  width: 74px;
+  margin-left: 10px;
+  border: 0;
+  background: transparent;
+}
+
+.expinplace {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0 20px 0;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  text-align: left;
+  background: transparent;
+}
+
+.expinplace::placeholder {
+  color: #c7ccdc;
+}
+
+.expinplace option {
+  background-color: #ffffff;
+  color: #c7ccdc;
+}
+
+.expinplace:nth-child(2) {
+  color: #c7ccdc;
+  border-left: 2px solid #f5f6fb;
+  width: 166px;
+  text-align: left;
+  @media screen and (min-width: 1280px) {
+    width: 184px;
+  }
+}
+
+.expinplace:nth-child(3) {
+  padding: 0 45px 0 10px;
+  border-left: 2px solid #f5f6fb;
+  width: 104px;
+  text-align: right;
+  @media screen and (min-width: 1280px) {
+    width: 124px;
+    padding: 0 50px 0 20px;
+  }
+}
+
+.expinrail {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 59px;
+  }
+}
+
+.expininput {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+  width: 598px;
+  height: 44px;
+  border: 2px solid #f5f6fb;
+  border-radius: 16px 16px 16px 0;
+  margin-left: 24px;
+  @media screen and (min-width: 768px) {
+    width: 462px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 598px;
+  }
+}
+
+.expininput div:nth-child(2) {
+  width: 56px;
+}
+
+.iconCalculator {
+  position: absolute;
+  transform: translateY(50%);
+  right: 20px;
+}
+
+.expinbuttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.expinbuttons > button {
+  width: 125px;
+  height: 44px;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  background-color: #ffffff;
+  border: 2px solid #f6f7fc;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+.btnGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 266px;
+  margin: 30px 0 48px 0;
+  @media screen and (min-width: 1280px) {
+    margin: 0 0 0 27px;
+  }
+}
+
+.expinmainmobile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.calendarmob {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expbtnblock {
+  position: fixed;
+  bottom: 0;
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.expmobBtn {
+  width: 159px;
+  height: 53px;
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: #f5f6fb;
+  color: #000000;
+  border: 0;
+}
+
+.expmobBtn {
+  &:hover,
+  &:focus,
+  &.active {
+    color: #ffffff;
+    background-color: #ff751d;
+  }
+}

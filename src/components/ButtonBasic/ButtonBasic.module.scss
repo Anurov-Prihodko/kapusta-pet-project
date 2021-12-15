@@ -1,0 +1,50 @@
+.button {
+  width: 125px;
+  height: 44px;
+
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #52555f;
+
+  border-radius: 16px;
+}
+
+.button {
+  &:hover,
+  &:focus,
+  &.active {
+    color: #ffffff;
+    background-color: #ff751d;
+  }
+}
+
+.button.bordered {
+  background-color: #ffffff;
+  border: 2px solid #f6f7fc;
+}
+
+.button.bordered:hover,
+.button.bordered:focus,
+.button.active {
+  background-color: #ff751d;
+  border: 2px solid #ff751d;
+}
+
+.shadow {
+  background-color: #f5f6fb;
+  box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+  border: none;
+}
+
+.shadow {
+  &:hover,
+  &:hover,
+  &.active {
+    box-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
+  }
+}

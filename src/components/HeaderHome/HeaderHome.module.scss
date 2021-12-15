@@ -1,0 +1,76 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 320px;
+  padding: 12px 0 12px 19px;
+
+  .login__container {
+    display: inline-flex;
+    padding-right: 19px;
+  }
+
+  .header__user {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .logout__btn {
+    background-color: #fff;
+    border: none;
+  }
+
+  .header__logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: #f5f6fa;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 768px;
+    // .logout__btn {
+    //   color: #52555f;
+    //   font-size: 12px;
+    //   line-height: 1.16;
+    //   letter-spacing: 0.04em;
+    // }
+
+    .logout__user_name {
+      position: relative;
+      color: #52555f;
+      font-size: 12px;
+      line-height: 1.16;
+      letter-spacing: 0.04em;
+      margin-right: 40px;
+    }
+
+    .header__logout {
+      margin-right: 10px;
+    }
+
+    .header__user::after {
+      content: '';
+      display: block;
+      background: #e0e5eb;
+      position: absolute;
+      right: 45%;
+      width: 1px;
+      height: 36px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    max-width: 1280px;
+  }
+}
+
+.header__logo {
+  width: 90px;
+  height: 31px;
+}
