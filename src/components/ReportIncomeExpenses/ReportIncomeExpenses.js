@@ -222,7 +222,7 @@ export default function ReportIncomeExpenses() {
           ))}
         </ul>
       </div>
-      {screenWidth <= 320 ? (
+      {screenWidth < 768 ? (
         <ReportChartMobile data={data} />
       ) : (
         <ReportChart data={data} />

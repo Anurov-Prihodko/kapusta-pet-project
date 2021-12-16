@@ -32,8 +32,6 @@ export default function ReportChart({ data }) {
         className={styles.chartResponsiveContainer}
       >
         <BarChart
-          // width={758}
-          // height={328}
           margin={{ top: 50, bottom: 9 }}
           data={data}
           barCategoryGap={20}

@@ -10,6 +10,8 @@ import {
   YAxis,
 } from 'recharts';
 
+import styles from './ReportIncomeExpenses.module.scss';
+
 export default function ReportChartMobile({ data }) {
   const renderBarLabel = ({ x, y, width, value }) => (
     <text x={x + width / 1.1} y={y} textAnchor="middle" fontSize={10} dy={-10}>
@@ -24,7 +26,11 @@ export default function ReportChartMobile({ data }) {
   );
 
   return (
-    <ResponsiveContainer width="100%" height={50 * data.length}>
+    <ResponsiveContainer
+      width="100%"
+      height={50 * data.length}
+      className={styles.chartMobileWrap}
+    >
       <BarChart
         layout="vertical"
         data={data}
