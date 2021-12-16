@@ -4,11 +4,23 @@
 }
 
 .outcomes {
-  color: #ff0000;
+  color: #e53935;
 }
 
 .incomes {
-  color: #00ff00;
+  color: #407946;
+}
+
+.title,
+.incomes,
+.outcomes {
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 
 @media screen and (max-width: 767px) {
@@ -33,7 +45,6 @@
   .outcomes_div,
   .incomes_div {
     display: flex;
-    //text-justify: center;
   }
 
   .incomes_div {

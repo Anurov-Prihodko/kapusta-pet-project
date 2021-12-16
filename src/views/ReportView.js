@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import HeaderHome from '../components/HeaderHome';
 import { ReturnHome } from '../components/ReturnHome';
 import { MonthSelector } from '../components/MonthSelector';
-import { BalanceReport } from '../components/BalanceReport';
+import { IncomesOutcomesMonthly } from '../components/IncomesOutcomesMonthly';
 import ReportIncomeExpenses from '../components/ReportIncomeExpenses';
 import s from './ReportView.module.css';
 
@@ -38,10 +38,10 @@ export default function ReportView() {
           )}
         </div>
         <div className={s.balance_line}>
-          <BalanceReport incomes={234075} outcomes={123000} />
+          <IncomesOutcomesMonthly incomes={234075} outcomes={123000} />
         </div>
-        <ReportIncomeExpenses />
       </div>
+      <ReportIncomeExpenses />
     </>
   );
 }
