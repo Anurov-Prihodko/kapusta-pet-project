@@ -1,7 +1,6 @@
 .balance_container {
   display: flex;
   justify-content: space-around;
-  width: 423px;
 }
 
 .outcomes {
@@ -10,4 +9,34 @@
 
 .incomes {
   color: #00ff00;
+}
+
+@media screen and (max-width: 767px) {
+  .outcomes_div,
+  .incomes_div {
+    text-align: center;
+  }
+  .incomes_div {
+    margin-left: 30px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .outcomes {
+    padding-left: 5px;
+  }
+
+  .incomes {
+    padding-left: 5px;
+  }
+
+  .outcomes_div,
+  .incomes_div {
+    display: flex;
+    //text-justify: center;
+  }
+
+  .incomes_div {
+    margin-left: 30px;
+  }
 }
