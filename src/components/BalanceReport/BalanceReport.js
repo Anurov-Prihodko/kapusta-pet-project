@@ -5,10 +5,14 @@ import { formatNumber } from '../../utils/formatNumber';
 const BalanceReport = ({ incomes, outcomes }) => {
   return (
     <div className={s.balance_container}>
-      <p className={s.title}>Расходы:</p>
-      <p className={s.outcomes}>{`- ${formatNumber(outcomes)} грн.`}</p>
-      <p className={s.title}>Доходы:</p>
-      <p className={s.incomes}>{`${formatNumber(incomes)} грн.`}</p>
+      <div className={s.outcomes_div}>
+        <p className={s.title}>Расходы:</p>
+        <p className={s.outcomes}>{`- ${formatNumber(outcomes)} грн.`}</p>
+      </div>
+      <div className={s.incomes_div}>
+        <p className={s.title}>Доходы:</p>
+        <p className={s.incomes}>{`+ ${formatNumber(incomes)} грн.`}</p>
+      </div>
     </div>
   );
 };

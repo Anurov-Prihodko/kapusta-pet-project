@@ -1,5 +1,4 @@
 .selector_container {
-  width: 134px;
 }
 
 .selector_title {
@@ -25,4 +24,11 @@
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.02em;
+}
+.month {
+  padding-left: 10px;
+}
+.year {
+  padding-left: 10px;
+  padding-right: 10px;
 }

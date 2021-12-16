@@ -1,7 +1,7 @@
 import Icons from '../../Icons';
 import s from './ReturnHome.module.css';
 
-const ReturnHome = ({ whereto }) => {
+const ReturnHome = ({ whereto, text }) => {
   return (
     <div className={s.container}>
       <a href={whereto} className={s.href}>
@@ -12,7 +12,7 @@ const ReturnHome = ({ whereto }) => {
           height="12"
           className={s.icon}
         />
-        <span className={s.text}>Вернуться на главную</span>
+        <span className={s.text}>{text}</span>
       </a>
     </div>
   );
