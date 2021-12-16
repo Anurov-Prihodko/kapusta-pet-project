@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { registerLocale } from 'react-datepicker';
+import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
 // import HomeTable from '../HomeTable';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
+registerLocale('ru', ru);
 
 export default function ExpInTable({ children }) {
   const [startDate, setStartDate] = useState(new Date());
@@ -51,7 +54,8 @@ export default function ExpInTable({ children }) {
                 className={s.calendar}
                 selected={startDate}
                 onChange={date => setStartDate(date)}
-                datedata-format="dd.MM.yyyy"
+                dateFormat="dd.MM.yyyy"
+                locale="ru"
               />
             </div>
             <div className={s.expininput}>
@@ -115,7 +119,8 @@ export default function ExpInTable({ children }) {
             className={s.calendar}
             selected={startDate}
             onChange={date => setStartDate(date)}
-            datedata-format="dd.MM.yyyy"
+            dateFormat="dd.MM.yyyy"
+            locale="ru"
           />
         </div>
         {/* <div>Здесь мобильная таблица расходов</div> */}
