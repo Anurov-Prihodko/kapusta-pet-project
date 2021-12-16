@@ -1,4 +1,5 @@
 .balance_container {
+  position: relative;
   display: flex;
   justify-content: space-around;
 }
@@ -36,7 +37,18 @@
     //text-justify: center;
   }
 
+  .outcomes_div::after {
+    content: '';
+    display: block;
+    background: #e0e5eb;
+    position: absolute;
+    top: -50%;
+    left: 210px;
+    width: 1px;
+    height: 36px;
+  }
+
   .incomes_div {
-    margin-left: 30px;
+    margin-left: 40px;
   }
 }
