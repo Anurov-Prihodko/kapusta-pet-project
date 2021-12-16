@@ -36,7 +36,7 @@ export default function LoginForm() {
 
     const endpoint = isEnterActive ? '/api/users/signin' : '/api/users/signup';
 
-    const response = await fetch(`http://localhost:3001${endpoint}`, {
+    const response = await fetch(`https://kapusta-team-project-back-end.herokuapp.com${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
