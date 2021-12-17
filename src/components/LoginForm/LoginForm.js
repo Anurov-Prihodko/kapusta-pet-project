@@ -97,7 +97,10 @@ export default function LoginForm() {
         />
       </div>
       // ====== Google login ====== */}
-      <a href="#" className={styles.loginGoogle}>
+      <a
+        href="https://kapusta-team-project-back-end.herokuapp.com/api/users/google"
+        className={styles.loginGoogle}
+      >
         <Icons
           name="google"
           width="18"
