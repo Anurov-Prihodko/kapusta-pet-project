@@ -14,7 +14,7 @@ import styles from './ReportIncomeExpenses.module.scss';
 
 export default function ReportChartMobile({ data }) {
   const renderBarLabel = ({ x, y, width, value }) => (
-    <text x={x + width / 1.1} y={y} textAnchor="middle" fontSize={10} dy={-10}>
+    <text x={250} y={y} textAnchor="middle" fontSize={10} dy={-10}>
       {value ? `${value} грн` : ''}
     </text>
   );
