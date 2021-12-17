@@ -1,7 +1,10 @@
+import React from 'react';
+
 import { useForm } from 'react-hook-form';
-
 import { useState } from 'react';
-
+// ====== Google login ======
+// import GoogleLogin from 'react-google-login';
+// ====== Google login ======
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../redux/reducers/authReducer';
 
@@ -36,13 +39,16 @@ export default function LoginForm() {
 
     const endpoint = isEnterActive ? '/api/users/signin' : '/api/users/signup';
 
-    const response = await fetch(`https://kapusta-team-project-back-end.herokuapp.com${endpoint}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `https://kapusta-team-project-back-end.herokuapp.com${endpoint}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    });
+    );
     const json = await response.json();
     if (!response.ok) {
       setError(json.message);
@@ -53,6 +59,20 @@ export default function LoginForm() {
       dispatch(login(json.data));
     }
   };
+
+  // ====== Google login ======
+
+  // const handleLogin = async () => {
+  //   const res = await fetch(
+  //     'https://kapusta-team-project-back-end.herokuapp.com/api/users/google',
+  //   );
+
+  //   const data = await res.json();
+  //   console.log(data);
+  //   // store returned user somehow
+  // };
+
+  // ====== Google login ======
 
   const requiredErrorEmail = errors?.password?.type === 'required';
   const requiredErrorPassword = errors?.password?.type === 'required';
@@ -66,6 +86,17 @@ export default function LoginForm() {
       <p className={styles.loginDescription}>
         Вы можете авторизоваться с помощью Google Account:
       </p>
+      {/* // ====== Google login ======
+      <div className={styles.loginGoogle}>
+        <GoogleLogin
+          clientId="1074449574862-b74u2p9c4crciqqgbvvp05btqdlc724a.apps.googleusercontent.com"
+          buttonText="Google"
+          onSuccess={handleLogin}
+          onFailure={handleLogin}
+          cookiePolicy={'single_host_origin'}
+        />
+      </div>
+      // ====== Google login ====== */}
       <a href="#" className={styles.loginGoogle}>
         <Icons
           name="google"
@@ -78,7 +109,6 @@ export default function LoginForm() {
       <p className={`${styles.loginDescription} ${styles.textCentered}`}>
         Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
       </p>
-
       <form
         className={styles.loginForm}
         onSubmit={handleSubmit(onLoginFormSubmit)}
