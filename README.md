@@ -1,1 +1,1 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/532e6cd3-7aba-4218-b4a6-b815623f0bf4/deploy-status)](https://app.netlify.com/sites/kapusta-pet-project/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9d0d5b71-6a29-459d-859f-170525b8ece3/deploy-status)](https://app.netlify.com/sites/kapusta-pet-project/deploys)
