@@ -5,7 +5,7 @@ import Wrapper from '../Wrapper';
 import Balance from '../Balance';
 import { ReturnHome } from '../ReturnHome';
 import { MonthSelector } from '../MonthSelector';
-import { BalanceReport } from '../BalanceReport';
+import { IncomesOutcomesMonthly } from '../IncomesOutcomesMonthly';
 import ReportIncomeExpenses from '../ReportIncomeExpenses';
 import s from './Report.module.scss';
 
@@ -45,7 +45,7 @@ export default function Report() {
               )}
             </div>
             <div className={s.balance_line}>
-              <BalanceReport incomes={234075} outcomes={123000} />
+              <IncomesOutcomesMonthly incomes={234075} outcomes={123000} />
             </div>
             <ReportIncomeExpenses />
           </div>

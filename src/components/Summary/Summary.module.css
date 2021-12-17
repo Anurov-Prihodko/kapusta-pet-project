@@ -1,6 +1,9 @@
 .summary__container {
-  background-color: #ccccff;
-  border-radius: 20px;
+  background-color: #f5f6fb;
+  //border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   width: 240px;
 }
 
@@ -40,4 +43,15 @@
 .summary__sum {
   border: 2px solid #ffffff;
   border-collapse: collapse;
+}
+
+.summary__month,
+.summary__sum {
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+  color: #52555f;
 }

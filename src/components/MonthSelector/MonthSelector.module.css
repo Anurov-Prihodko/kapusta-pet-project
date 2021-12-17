@@ -26,9 +26,12 @@
   letter-spacing: 0.02em;
 }
 .month {
-  padding-left: 10px;
+  padding-left: 6px;
+  width: 72px;
+  text-align: right;
 }
 .year {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  width: 44px;
 }
