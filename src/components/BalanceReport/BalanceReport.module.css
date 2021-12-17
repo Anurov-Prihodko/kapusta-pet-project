@@ -1,15 +1,34 @@
 .balance_container {
   position: relative;
   display: flex;
-  justify-content: space-around;
 }
 
-.outcomes {
-  color: #ff0000;
+.article {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 14px;
+
+  color: #52555f;
 }
 
-.incomes {
-  color: #00ff00;
+.red {
+  color: #e53935;
+}
+
+.green {
+  color: #407946;
+}
+
+.summ {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+
+  letter-spacing: 0.04em;
 }
 
 @media screen and (max-width: 767px) {
@@ -19,6 +38,10 @@
   }
   .incomes_div {
     margin-left: 30px;
+  }
+
+  .title {
+    margin-bottom: 5px;
   }
 }
 
@@ -34,7 +57,6 @@
   .outcomes_div,
   .incomes_div {
     display: flex;
-    //text-justify: center;
   }
 
   .outcomes_div::after {
@@ -49,6 +71,19 @@
   }
 
   .incomes_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 40px;
   }
+}
+
+.title {
+  margin-right: 15px;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #52555f;
 }
