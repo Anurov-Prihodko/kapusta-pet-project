@@ -41,6 +41,12 @@ export default function Balance() {
           {mobile && <BalanceButton onClick={togleModal} />}
           {desctopOrLaptopSize && <BalanceButton onClick={togleModal} />}
         </div>
+        <div className="bubble">
+          <div className="arrow">
+            <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
+            <p>Ты не можешь тратить деньги пока их у тебя нет :)</p>
+          </div>
+        </div>
         {isModalOpen && (
           <Modal onClose={togleModal}>
             <ModalBody onClose={togleModal}>Вы уверены?</ModalBody>

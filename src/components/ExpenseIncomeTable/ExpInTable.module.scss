@@ -19,15 +19,16 @@ input {
   margin: auto;
 }
 
-.tabinput {
-  display: none;
+.expintab {
+  margin: auto;
 }
 
 .tabtitle {
   display: table-cell;
   height: 40px;
   width: 138px;
-  margin: 0 -5px 0 0;
+  border: 0;
+  margin: 0;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-align: center;
@@ -36,6 +37,12 @@ input {
   border-radius: 20px 20px 0 0;
   background: #fafbfd;
   cursor: pointer;
+  &:hover,
+  &:focus,
+  &.active {
+    color: #ff751d;
+    background: #fefefe;
+  }
 }
 
 .tabinput:checked + .tabtitle {

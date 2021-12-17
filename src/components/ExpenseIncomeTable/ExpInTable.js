@@ -15,7 +15,7 @@ export default function ExpInTable({ children }) {
   return (
     <div className={s.exptabs}>
       <section className={s.expinmain}>
-        <div className={s.expintab}>
+        {/* <div className={s.expintab}>
           <input
             className={s.tabinput}
             type="radio"
@@ -37,6 +37,10 @@ export default function ExpInTable({ children }) {
           <label className={s.tabtitle} data-for="tab_2">
             <span>ДОХОД</span>
           </label>
+        </div> */}
+        <div className={s.expintab}>
+          <button className={s.tabtitle}>РАСХОД</button>
+          <button className={s.tabtitle}>ДОХОД</button>
         </div>
         <div className={s.expinboard}>
           <div className={s.expinrail}>
