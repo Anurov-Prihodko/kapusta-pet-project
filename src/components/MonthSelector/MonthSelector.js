@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Icons from '../../Icons';
 import s from './MonthSelector.module.css';
 import { MONTHS } from '../../utils/months';
