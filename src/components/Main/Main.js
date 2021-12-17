@@ -15,7 +15,8 @@ export default function Main() {
         <h1 className={s.hero__title}>Smart Finance</h1>
       </div>
       <div className={s.main}></div>
-      {!user && <LoginForm />}
+      <LoginForm />
+      {/* {!user && <LoginForm />} */}
     </div>
   );
 }

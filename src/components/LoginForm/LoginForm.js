@@ -5,7 +5,7 @@ import { useState } from 'react';
 // ====== Google login ======
 // import GoogleLogin from 'react-google-login';
 // ====== Google login ======
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../../redux/reducers/authReducer';
 
 import styles from './LoginForm.module.scss';

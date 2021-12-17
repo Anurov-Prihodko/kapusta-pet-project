@@ -19,7 +19,7 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  logger,
+  // logger,
 ];
 
 const contactsPersistConfig = {
@@ -29,7 +29,7 @@ const contactsPersistConfig = {
 };
 
 const store = configureStore({
-  reducer:  {
+  reducer: {
     auth: persistReducer(contactsPersistConfig, authReducer),
   },
   middleware,
