@@ -24,6 +24,8 @@ const renderBarLabel = ({ x, y, width, value }) => {
 };
 
 export default function ReportChart({ data }) {
+  // const { transactionName, transactionTotalSum } = data;
+
   return (
     <div className={styles.chartView}>
       <ResponsiveContainer
@@ -40,7 +42,7 @@ export default function ReportChart({ data }) {
         >
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey="name"
+            dataKey="transactionName"
             axisLine={false}
             tickLine={false}
             dy={5}
@@ -48,7 +50,11 @@ export default function ReportChart({ data }) {
             color={'#52555F'}
           />
 
-          <Bar dataKey="total" radius={[10, 10, 0, 0]} label={renderBarLabel}>
+          <Bar
+            dataKey="transactionTotalSum"
+            radius={[10, 10, 0, 0]}
+            label={renderBarLabel}
+          >
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}

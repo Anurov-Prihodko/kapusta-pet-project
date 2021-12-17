@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import authReducer from './reducers/authReducer';
+import reportsReducer from './reports/reportsSlice';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -28,9 +29,16 @@ const contactsPersistConfig = {
   blacklist: ['filter'],
 };
 
+// const reportsPersistConfig = {
+//   key: 'reports',
+//   storage,
+//   // blacklist: [''],
+// };
+
 const store = configureStore({
-  reducer:  {
+  reducer: {
     auth: persistReducer(contactsPersistConfig, authReducer),
+    reports: reportsReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
