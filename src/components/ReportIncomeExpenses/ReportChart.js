@@ -3,7 +3,6 @@ import {
   Bar,
   Cell,
   XAxis,
-  YAxis,
   CartesianGrid,
   ResponsiveContainer,
 } from 'recharts';
@@ -24,8 +23,6 @@ const renderBarLabel = ({ x, y, width, value }) => {
 };
 
 export default function ReportChart({ data }) {
-  // const { transactionName, transactionTotalSum } = data;
-
   return (
     <div className={styles.chartView}>
       <ResponsiveContainer

@@ -37,20 +37,24 @@ const Chart = ({ chartData }) => {
 
 export default function ReportIncomeExpenses() {
   const [categoryActiveIndex, setCategoryActiveIndex] = useState(0);
+  const [reportType, setReportType] = useState('income');
 
   const dispatch = useDispatch();
 
   const reportMonth = useSelector(getReportMonth);
   const reportYear = useSelector(getReportYear);
 
-  const reportDate = `${reportMonth}-${reportYear}`;
-
-  useEffect(() => {
-    dispatch(getTransactionsByDate(reportDate));
-  }, [dispatch, reportDate]);
-
   const categoryDataExpense = useSelector(getCategoryDataExpense);
   const categoryDataIncome = useSelector(getCategoryDataIncome);
+
+  useEffect(() => {
+    let reportDate;
+
+    if (reportMonth && reportYear) {
+      reportDate = `${reportMonth}-${reportYear}`;
+      dispatch(getTransactionsByDate(reportDate));
+    }
+  }, [dispatch, reportMonth, reportYear]);
 
   let chartTransactionsDataExpense;
   if (categoryDataExpense) {
@@ -67,8 +71,6 @@ export default function ReportIncomeExpenses() {
   let categoryData = [],
     chartData = [],
     reportLabel = '';
-
-  const [reportType, setReportType] = useState('income');
 
   const toggleReport = () => {
     setCategoryActiveIndex(0);
