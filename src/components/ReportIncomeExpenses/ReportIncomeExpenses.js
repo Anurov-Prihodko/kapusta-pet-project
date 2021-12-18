@@ -64,8 +64,9 @@ export default function ReportIncomeExpenses() {
       categoryDataIncome[categoryActiveIndex]?.transactions;
   }
 
-  let categoryData = [];
-  let chartData = [];
+  let categoryData = [],
+    chartData = [],
+    reportLabel = '';
 
   const [reportType, setReportType] = useState('income');
 
@@ -79,11 +80,13 @@ export default function ReportIncomeExpenses() {
   if (reportType === 'expense') {
     categoryData = categoryDataExpense;
     chartData = chartTransactionsDataExpense;
+    reportLabel = 'Расходы';
   }
 
   if (reportType === 'income') {
     categoryData = categoryDataIncome;
     chartData = chartTransactionsDataIncome;
+    reportLabel = 'Доходы';
   }
 
   const getCategoryBtnClassNames = activeIndex => {
@@ -112,7 +115,7 @@ export default function ReportIncomeExpenses() {
               className={styles.toggleIcon}
             />
           </button>
-          <span>Доход/Расход</span>
+          <span className={styles.reportLabel}>{reportLabel}</span>
           <button
             type="button"
             className={styles.toggleReportBtn}
