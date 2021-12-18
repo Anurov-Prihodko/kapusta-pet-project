@@ -26,14 +26,17 @@
 }
 
 .toggleReport {
-  display: block;
   margin: 0 auto 20px auto;
+  text-align: center;
 }
 
 .toggleReportBtn {
+  padding: 0 20px;
+
   background-color: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 .toggleIcon {
