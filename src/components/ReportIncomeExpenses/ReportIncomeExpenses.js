@@ -43,11 +43,14 @@ export default function ReportIncomeExpenses() {
   const reportMonth = useSelector(getReportMonth);
   const reportYear = useSelector(getReportYear);
 
-  const reportDate = `${reportMonth}-${reportYear}`;
-
   useEffect(() => {
-    dispatch(getTransactionsByDate(reportDate));
-  }, [dispatch, reportDate]);
+    let reportDate;
+
+    if (reportMonth && reportYear) {
+      reportDate = `${reportMonth}-${reportYear}`;
+      dispatch(getTransactionsByDate(reportDate));
+    }
+  }, [dispatch, reportMonth, reportYear]);
 
   const categoryDataExpense = useSelector(getCategoryDataExpense);
   const categoryDataIncome = useSelector(getCategoryDataIncome);

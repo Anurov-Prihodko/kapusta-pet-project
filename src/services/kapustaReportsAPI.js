@@ -6,7 +6,7 @@ axios.defaults.baseURL = BASE_URL;
 ////////////===Auth===///////////////
 ///======= for test =========
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjVjMjZiOTZjYTk1MTUwNDhhZTZlYiIsImlhdCI6MTYzOTgyOTk1NiwiZXhwIjoxNjM5ODMzNTU2fQ.kLRiubziaMJ5RCzn_Zzmgljzs5iQuJYPhKYQocBc1dk';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjVjMjZiOTZjYTk1MTUwNDhhZTZlYiIsImlhdCI6MTYzOTgzMzU2MywiZXhwIjoxNjM5ODM3MTYzfQ.8lb5Z3M2JTkSre71bhlhZqvxUogZ_D4UV3oQG0uRoVQ';
 
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
@@ -14,7 +14,7 @@ axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 async function fetchTransactionsByDate(date) {
   const { data } = await axios.get(`/transactions/${date}`);
-  // console.log('data', data);
+
   return data;
 }
 
