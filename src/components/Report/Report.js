@@ -1,4 +1,5 @@
 import { useMediaQuery } from 'react-responsive';
+import { useSelector } from 'react-redux';
 
 import MainReport from '../MainReport';
 import Wrapper from '../Wrapper';
@@ -9,7 +10,15 @@ import { IncomesOutcomesMonthly } from '../IncomesOutcomesMonthly';
 import ReportIncomeExpenses from '../ReportIncomeExpenses';
 import s from './Report.module.scss';
 
+import {
+  getIncomesTotalSum,
+  getExpensesTotalSum,
+} from '../../redux/reports/reportsSelectors';
+
 export default function Report() {
+  const incomesTotalSum = useSelector(getIncomesTotalSum);
+  const expensesTotalSum = useSelector(getExpensesTotalSum);
+
   const mobile = useMediaQuery({
     query: '(max-width: 767px)',
   });
@@ -45,7 +54,10 @@ export default function Report() {
               )}
             </div>
             <div className={s.balance_line}>
-              <IncomesOutcomesMonthly incomes={234075} outcomes={123000} />
+              <IncomesOutcomesMonthly
+                incomes={incomesTotalSum}
+                outcomes={expensesTotalSum}
+              />
             </div>
             <ReportIncomeExpenses />
           </div>
