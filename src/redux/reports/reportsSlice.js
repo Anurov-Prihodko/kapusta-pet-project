@@ -3,6 +3,8 @@ import { getTransactionsByDate } from '../reports/reportsOperations';
 
 const initialState = {
   transactionsAll: [],
+  reportMonth: null,
+  reportYear: null,
   transactionsAllLoading: false,
   transactionsAllError: null,
 };
@@ -10,6 +12,14 @@ const initialState = {
 const reportsSlice = createSlice({
   name: 'reports',
   initialState,
+  reducers: {
+    changeReportMonth: (state, { payload }) => {
+      state.reportMonth = payload;
+    },
+    changeReportYear: (state, { payload }) => {
+      state.reportYear = payload;
+    },
+  },
   extraReducers: {
     [getTransactionsByDate.pending](state) {
       state.transactionsAllLoading = true;
@@ -26,5 +36,7 @@ const reportsSlice = createSlice({
     },
   },
 });
+
+export const { changeReportMonth, changeReportYear } = reportsSlice.actions;
 
 export default reportsSlice.reducer;

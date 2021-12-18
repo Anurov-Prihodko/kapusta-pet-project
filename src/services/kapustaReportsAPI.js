@@ -6,7 +6,7 @@ axios.defaults.baseURL = BASE_URL;
 ////////////===Auth===///////////////
 ///================
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjVjMjZiOTZjYTk1MTUwNDhhZTZlYiIsImlhdCI6MTYzOTgxNDcyMiwiZXhwIjoxNjM5ODE4MzIyfQ.afQQSWjkTrCKOvwQRC-oINzRS5L-M2_TIbvxAfUntck';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjVjMjZiOTZjYTk1MTUwNDhhZTZlYiIsImlhdCI6MTYzOTgxODk4MywiZXhwIjoxNjM5ODIyNTgzfQ.4-61FmwE3cut6vLl2BcqP40Vmw_AnYs7YuNRlkmt9CA';
 
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
