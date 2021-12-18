@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import authReducer from './reducers/authReducer';
 import reportsReducer from './reports/reportsSlice';
 
@@ -20,7 +20,7 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  logger,
+  // logger,
 ];
 
 const contactsPersistConfig = {
@@ -28,12 +28,6 @@ const contactsPersistConfig = {
   storage,
   blacklist: ['filter'],
 };
-
-// const reportsPersistConfig = {
-//   key: 'reports',
-//   storage,
-//   // blacklist: [''],
-// };
 
 const store = configureStore({
   reducer: {

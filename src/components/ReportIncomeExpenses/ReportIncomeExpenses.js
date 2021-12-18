@@ -148,17 +148,30 @@ const TEST_DATA = {
   },
 };
 
-export default function ReportIncomeExpenses() {
-  const [categoryActiveIndex, setCategoryActiveIndex] = useState(0);
+const Chart = ({ chartData }) => {
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
-  const dispatch = useDispatch();
-
   const handleScreenResize = () => setScreenWidth(window.screen.width);
 
   useEffect(() => {
     window.addEventListener('resize', handleScreenResize);
     return () => window.removeEventListener('resize', handleScreenResize);
   }, []);
+
+  return (
+    <>
+      {screenWidth < 768 ? (
+        <ReportChartMobile data={chartData} />
+      ) : (
+        <ReportChart data={chartData} />
+      )}
+    </>
+  );
+};
+
+export default function ReportIncomeExpenses() {
+  const [categoryActiveIndex, setCategoryActiveIndex] = useState(0);
+
+  const dispatch = useDispatch();
 
   const date = '12-2021';
 
@@ -167,27 +180,40 @@ export default function ReportIncomeExpenses() {
   }, [dispatch]);
 
   // const categoryDataExpense = TEST_DATA.data.expense; //for test
-  const transData = TEST_DATA.data.expense.transactions;
+  // const transData = TEST_DATA.data.expense.transactions;
 
   const categoryDataExpense = useSelector(getCategoryDataExpense);
-  console.log('categoryDataExpense', categoryDataExpense);
   const categoryDataIncome = useSelector(getCategoryDataIncome);
 
-  const chartTransactionsDataExpense =
-    categoryDataExpense[categoryActiveIndex]?.transactions;
+  let chartTransactionsDataExpense;
+  if (categoryDataExpense) {
+    chartTransactionsDataExpense =
+      categoryDataExpense[categoryActiveIndex]?.transactions;
+  }
 
-  const chartTransactionsDataIncome =
-    categoryDataIncome[categoryActiveIndex]?.transactions;
+  let chartTransactionsDataIncome;
+  if (categoryDataIncome) {
+    chartTransactionsDataIncome =
+      categoryDataIncome[categoryActiveIndex]?.transactions;
+  }
 
   let categoryData = [];
   let chartData = [];
 
   const [reportType, setReportType] = useState('income');
 
+  const toggleReport = () => {
+    setCategoryActiveIndex(0);
+    reportType === 'expense'
+      ? setReportType('income')
+      : setReportType('expense');
+  };
+
   if (reportType === 'expense') {
     categoryData = categoryDataExpense;
     chartData = chartTransactionsDataExpense;
   }
+
   if (reportType === 'income') {
     categoryData = categoryDataIncome;
     chartData = chartTransactionsDataIncome;
@@ -203,21 +229,25 @@ export default function ReportIncomeExpenses() {
   };
 
   return (
-    // <h2 style={{ textAlign: 'center' }}>Hello!</h2>
     <div className={styles.container}>
       <div className={styles.categoryPanel}>
-        <button
-          type="button"
-          className={styles.toggleReport}
-          onClick={() => {
-            setCategoryActiveIndex(0);
-            reportType === 'expense'
-              ? setReportType('income')
-              : setReportType('expense');
-          }}
-        >
-          change report
-        </button>
+        <div className={styles.toggleReport}>
+          <button
+            type="button"
+            // className={styles.toggleReport}
+            onClick={toggleReport}
+          >
+            change report
+          </button>
+          <span>Доход/Расход</span>
+          <button
+            type="button"
+            // className={styles.toggleReport}
+            onClick={toggleReport}
+          >
+            change report
+          </button>
+        </div>
         <ul className={styles.categoryList}>
           {categoryData?.map(({ category, icon, totalSum }, index) => (
             <li key={index} className={styles.categoryItem}>
@@ -240,12 +270,7 @@ export default function ReportIncomeExpenses() {
           ))}
         </ul>
       </div>
-      {/* <ReportChart data={chartData} /> */}
-      {screenWidth < 768 ? (
-        <ReportChartMobile data={chartData} />
-      ) : (
-        <ReportChart data={chartData} />
-      )}
+      {chartData && <Chart chartData={chartData} />}
     </div>
   );
 }
