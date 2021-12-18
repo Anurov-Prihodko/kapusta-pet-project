@@ -14,7 +14,7 @@ import styles from './ReportIncomeExpenses.module.scss';
 
 export default function ReportChartMobile({ data }) {
   const renderBarLabel = ({ x, y, width, value }) => (
-    <text x={x + width / 1.1} y={y} textAnchor="middle" fontSize={10} dy={-10}>
+    <text x={250} y={y} textAnchor="middle" fontSize={10} dy={-10}>
       {value ? `${value} грн` : ''}
     </text>
   );
@@ -38,9 +38,9 @@ export default function ReportChartMobile({ data }) {
         barGap="15"
       >
         <XAxis hide axisLine={false} type="number" />
-        <YAxis dataKey="name" type="category" hide />
+        <YAxis dataKey="transactionName" type="category" hide />
         <Bar
-          dataKey="total"
+          dataKey="transactionTotalSum"
           barSize={15}
           radius={[0, 10, 10, 0]}
           label={renderBarLabel}
@@ -51,7 +51,7 @@ export default function ReportChartMobile({ data }) {
             <Cell key={`cell-${idx}`} fill={idx % 3 ? '#FFDAC0' : '#ff751d'} />
           ))}
           <LabelList
-            dataKey="name"
+            dataKey="transactionName"
             content={renderCategoryLabel}
             fill="#52555F"
           />

@@ -25,6 +25,33 @@
   }
 }
 
+.toggleReport {
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+
+.toggleReportBtn {
+  padding: 0 20px;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.toggleIcon {
+}
+
+.reportLabel {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.143;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
 .categoryList {
   display: flex;
   align-items: center;
@@ -54,6 +81,11 @@
 }
 
 .categoryItem {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: space-between;
+
   flex-basis: calc(
     (100% - 6 * 30px) / 6
   ); /*6 - number of elements in a row, 30px - distance between them*/
@@ -64,6 +96,18 @@
 }
 
 .categoryItem:not(:last-child) {
+}
+
+.categoryTotal {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .categoryBtn {
