@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Icons from '../../Icons';
 import s from './MonthSelector.module.css';
 import { MONTHS } from '../../utils/months';
@@ -17,7 +17,7 @@ const MonthSelector = () => {
   useEffect(() => {
     dispatch(changeReportYear(String(year)));
     dispatch(changeReportMonth(String(month + 1)));
-  }, [dispatch]);
+  }, [dispatch, month, year]);
 
   function previousMonth() {
     if (month === 0) {
