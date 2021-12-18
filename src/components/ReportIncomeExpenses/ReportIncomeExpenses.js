@@ -234,18 +234,30 @@ export default function ReportIncomeExpenses() {
         <div className={styles.toggleReport}>
           <button
             type="button"
-            // className={styles.toggleReport}
+            className={styles.toggleReportBtn}
             onClick={toggleReport}
           >
-            change report
+            <Icons
+              name="before"
+              color="#FF751D"
+              width="7"
+              height="12"
+              className={styles.toggleIcon}
+            />
           </button>
           <span>Доход/Расход</span>
           <button
             type="button"
-            // className={styles.toggleReport}
+            className={styles.toggleReportBtn}
             onClick={toggleReport}
           >
-            change report
+            <Icons
+              name="after"
+              color="#FF751D"
+              width="7"
+              height="12"
+              className={styles.toggleIcon}
+            />
           </button>
         </div>
         <ul className={styles.categoryList}>

@@ -125,13 +125,13 @@
             <path fill="#cbccd0" style="fill: var(--color2, #cbccd0)" d="M6.70339 10.5895L6 11.2929L0.707107 6L6 0.707107L6.70339 1.41049L3.47595 4.64694L2.62527 5.5H3.83H17.5V6.5H3.83H2.62527L3.47595 7.35306L6.70339 10.5895Z"></path>
         </symbol>
 
-        <symbol id="icon-after" viewBox="0 0 7 12">
-            <path fill="#cbccd0" style="fill: var(--color2, #cbccd0)" d="M1 1L5 6L1 11" stroke="#FF751D" stroke-width="2"></path>
-        </symbol>
+        <symbol id="icon-after" viewBox="0 0 19 32">
+<path fill="none" stroke="#ff751d" style="stroke: var(--color1, #ff751d)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="5.3333" d="M2.667 2.667l10.667 13.333-10.667 13.333"></path>
+</symbol>
 
-        <symbol id="icon-before" viewBox="0 0 7 12">
-            <path fill="#cbccd0" style="fill: var(--color2, #cbccd0)" d="M6 1L2 6L6 11" stroke="#FF751D" stroke-width="2"></path>
-        </symbol>
+        <symbol id="icon-before" viewBox="0 0 19 32">
+<path fill="none" stroke="#ff751d" style="stroke: var(--color1, #ff751d)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="5.3333" d="M16 2.667l-10.667 13.333 10.667 13.333"></path>
+</symbol>
 
         <symbol id="icon-close" viewBox="0 0 32 32">
             <path d="m1 1 12 12M1 13 13 1" stroke="#52555F" stroke-width="2"/>
