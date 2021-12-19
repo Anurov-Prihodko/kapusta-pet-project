@@ -7,6 +7,7 @@ import { useState } from 'react';
 // ====== Google login ======
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/reducers/authReducer';
+import { registerUser, loginUser } from '../../redux/auth/authOperations';
 
 import styles from './LoginForm.module.scss';
 import Icons from '../../Icons';
@@ -15,14 +16,14 @@ import ButtonBasic from '../ButtonBasic/ButtonBasic';
 export default function LoginForm() {
   const [isEnterActive, setIsEnterActive] = useState(true);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm(); //validation from 'react-hook-form'
 
   const toggleEnterActiveBtn = () => {
     setIsEnterActive(true);
@@ -34,30 +35,38 @@ export default function LoginForm() {
     setIsRegisterActive(true);
   };
 
-  const onLoginFormSubmit = async data => {
-    setError(null);
+  ///////////////////////////////////////
+  // const onLoginFormSubmit = async data => {
+  //   setError(null);
 
-    const endpoint = isEnterActive ? '/api/users/signin' : '/api/users/signup';
+  //   const endpoint = isEnterActive ? '/api/users/signin' : '/api/users/signup';
 
-    const response = await fetch(
-      `https://kapusta-team-project-back-end.herokuapp.com${endpoint}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      },
-    );
-    const json = await response.json();
-    if (!response.ok) {
-      setError(json.message);
-      return;
-    }
+  //   const response = await fetch(
+  //     `https://kapusta-team-project-back-end.herokuapp.com${endpoint}`,
+  //     {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(data),
+  //     },
+  //   );
+  //   const json = await response.json();
+  //   if (!response.ok) {
+  //     setError(json.message);
+  //     return;
+  //   }
 
-    if (isEnterActive) {
-      dispatch(login(json.data));
-    }
+  //   if (isEnterActive) {
+  //     dispatch(login(json.data));
+  //   }
+  // };
+  //////////////////////////////////////
+
+  const onLoginFormSubmit = data => {
+    if (isEnterActive) dispatch(loginUser(data));
+
+    if (isRegisterActive) dispatch(registerUser(data));
   };
 
   // ====== Google login ======

@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Icons from '../../Icons';
 import s from './ModalBody.module.scss';
 import ButtonBasic from '../ButtonBasic';
 
+import { getUserEmail } from '../../redux/auth/authSelectors';
+import { logOutUser } from '../../redux/auth/authOperations';
+import { useSelector } from 'react-redux';
+
 export default function ModalBody({ children, onClose }) {
   const [isEnterActive, setIsEnterActive] = useState(true);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
+  const dispatch = useDispatch();
+  const userEmail = useSelector(getUserEmail);
 
   useEffect(() => {
     const button = document.getElementById('button-close');
@@ -22,6 +30,8 @@ export default function ModalBody({ children, onClose }) {
   const toggleEnterActiveBtn = () => {
     setIsEnterActive(true);
     setIsRegisterActive(false);
+
+    dispatch(logOutUser(userEmail));
   };
 
   const toggleRegisterActiveBtn = () => {
