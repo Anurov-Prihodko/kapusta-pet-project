@@ -29,13 +29,6 @@
     text-transform: uppercase;
   }
 
-  .main {
-    padding-top: 514px;
-    background-image: url(../../image/cole.png);
-    background-repeat: no-repeat;
-    background-position: bottom 0px left 35px;
-  }
-
   @media screen and (min-width: 768px) {
     width: 768px;
     .hero {
@@ -56,12 +49,6 @@
       line-height: 1.18;
       letter-spacing: 0.18em;
     }
-
-    .main {
-      padding-top: 446px;
-      background-image: url(../../image/table-2cole.png);
-      background-position: bottom 56px left 103px;
-    }
   }
 
   @media screen and (min-width: 1280px) {
@@ -81,11 +68,6 @@
     .hero__title {
       top: 428px;
       left: 302px;
-    }
-
-    .main {
-      padding-top: 268px;
-      background-position: bottom 50px left 230px;
     }
   }
 }
