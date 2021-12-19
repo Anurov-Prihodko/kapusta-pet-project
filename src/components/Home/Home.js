@@ -16,7 +16,7 @@ export default function Home() {
             <ExpInTable>
               <div className={s.table_container}>
                 <HomeTable />
-                <Summary />
+                <Summary year={2021} type="incomes" />
               </div>
             </ExpInTable>
           </div>
