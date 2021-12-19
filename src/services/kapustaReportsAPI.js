@@ -1,14 +1,15 @@
 import axios from 'axios';
-const BASE_URL = 'https://kapusta-team-project-back-end.herokuapp.com/api';
+import { BASE_URL } from './kapustaAPIConstants';
+// import { authToken } from '../services/authToken';
 
 axios.defaults.baseURL = BASE_URL;
 
 ////////////===Auth===///////////////
 ///======= for test =========
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjVjMjZiOTZjYTk1MTUwNDhhZTZlYiIsImlhdCI6MTYzOTg1NDg3NCwiZXhwIjoxNjM5ODU4NDc0fQ.yklqDDTxRQBwhhCXQzJkxbp7zYOCv48TePXVraKFmHo';
+// const token =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjVjMjZiOTZjYTk1MTUwNDhhZTZlYiIsImlhdCI6MTYzOTkyMDMyNCwiZXhwIjoxNjM5OTIzOTI0fQ.zv6CHBg7qLoyD4bvWbrF1smFV1_d73IIYbKPGueJRNc';
 
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 ///==================
 

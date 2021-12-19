@@ -133,7 +133,7 @@ export default function ReportIncomeExpenses() {
           </button>
         </div>
         <ul className={styles.categoryList}>
-          {categoryData?.map(({ category, icon, totalSum }, index) => (
+          {categoryData?.map(({ category, iconName, totalSum }, index) => (
             <li key={index} className={styles.categoryItem}>
               <span className={styles.categoryTotal}>{totalSum}.00</span>
               <button
@@ -142,7 +142,7 @@ export default function ReportIncomeExpenses() {
               >
                 <div className={styles.categoryIconWrap}>
                   <Icons
-                    name={icon}
+                    name={iconName}
                     width="56"
                     height="56"
                     className={styles.categoryIcon}
