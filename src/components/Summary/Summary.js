@@ -20,6 +20,7 @@ Component Summary expects props in form:
 const Summary = ({ year, type }) => {
   const [summaryData, setSummaryData] = useState([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function dataForSummary() {
     /*this login is only for test. it is needed to create token*/
     const BASE_URL = 'https://kapusta-team-project-back-end.herokuapp.com';
@@ -46,9 +47,9 @@ const Summary = ({ year, type }) => {
     setSummaryData(table);
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     dataForSummary();
-  }, []);
+  }, [dataForSummary]);
 
   return (
     <div className={s.summary__container}>

@@ -27,13 +27,13 @@ axios.defaults.baseURL = BASE_URL;
 
 //axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-async function log() {
-  const { data: login } = await axios.post(`/api/users/signin`, postToAdd);
-  console.log(login);
-  if (login.code === 200) {
-    axios.defaults.headers.common.Authorization = `Bearer ${login.data.token}`;
-    const { data: trans } = await axios.get(`/api/transactions/12-2021`);
-    console.log(trans);
-  }
-}
-log();
+// async function log() {
+//   const { data: login } = await axios.post(`/api/users/signin`, postToAdd);
+//   console.log(login);
+//   if (login.code === 200) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${login.data.token}`;
+//     const { data: trans } = await axios.get(`/api/transactions/12-2021`);
+//     console.log(trans);
+//   }
+// }
+// log();
