@@ -44,12 +44,12 @@ const Summary = ({ year, type }) => {
     });
     // console.log(table);
 
-    setSummaryData(table);
+    // setSummaryData(table);
   }
 
-  useEffect(() => {
-    dataForSummary();
-  }, [dataForSummary]);
+  // useEffect(() => {
+  //   dataForSummary();
+  // }, [dataForSummary]);
 
   return (
     <div className={s.summary__container}>
