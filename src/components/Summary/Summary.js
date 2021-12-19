@@ -20,7 +20,7 @@ Component Summary expects props in form:
 const Summary = ({ year, type }) => {
   const [summaryData, setSummaryData] = useState([]);
 
-  useEffect(async () => {
+  async function dataForSummary() {
     /*this login is only for test. it is needed to create token*/
     const BASE_URL = 'https://kapusta-team-project-back-end.herokuapp.com';
     axios.defaults.baseURL = BASE_URL;
@@ -41,8 +41,12 @@ const Summary = ({ year, type }) => {
     const table = tableForYear.map((item, index) => {
       return { month: index, sum: item.sum };
     });
-    console.log(table);
+    //console.log(table);
     setSummaryData(table);
+  }
+
+  useEffect(async () => {
+    dataForSummary();
   }, []);
 
   return (
