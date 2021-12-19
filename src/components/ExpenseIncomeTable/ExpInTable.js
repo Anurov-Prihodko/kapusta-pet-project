@@ -11,6 +11,20 @@ registerLocale('ru', ru);
 
 export default function ExpInTable({ children }) {
   const [startDate, setStartDate] = useState(new Date());
+  const [request, setRequest] = useState('');
+  const [expenses, setExpenses] = useState('');
+
+  const handleNameChange = event => {
+    setRequest(event.currentTarget.value);
+  };
+  const handleNumbChange = event => {
+    setExpenses(event.currentTarget.value);
+  };
+
+  const onClear = event => {
+    setExpenses('');
+    setRequest('');
+  };
 
   return (
     <div className={s.exptabs}>
@@ -64,6 +78,8 @@ export default function ExpInTable({ children }) {
             </div>
             <div className={s.expininput}>
               <input
+                value={request}
+                onChange={handleNameChange}
                 className={s.expinplace}
                 type="text"
                 placeholder="Описание товара"
@@ -82,7 +98,13 @@ export default function ExpInTable({ children }) {
                 <option value="">Образование</option>
                 <option value="">Прочее</option>
               </select>
-              <input className={s.expinplace} type="text" placeholder="0,00" />
+              <input
+                value={expenses}
+                onChange={handleNumbChange}
+                className={s.expinplace}
+                type="number"
+                placeholder="0,00"
+              />
               <Icons
                 name="calculator"
                 width={20}
@@ -99,6 +121,7 @@ export default function ExpInTable({ children }) {
                 active={false}
                 bordered={true}
                 name="clean"
+                onClick={onClear}
               >
                 Очистить
               </ButtonBasic>
