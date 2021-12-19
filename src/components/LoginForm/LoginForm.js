@@ -6,7 +6,7 @@ import { useState } from 'react';
 // import GoogleLogin from 'react-google-login';
 // ====== Google login ======
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/reducers/authReducer';
+// import { login } from '../../redux/reducers/authReducer';
 import { registerUser, loginUser } from '../../redux/auth/authOperations';
 
 import styles from './LoginForm.module.scss';
@@ -16,6 +16,7 @@ import ButtonBasic from '../ButtonBasic/ButtonBasic';
 export default function LoginForm() {
   const [isEnterActive, setIsEnterActive] = useState(true);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 

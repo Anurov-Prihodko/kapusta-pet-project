@@ -11,6 +11,7 @@ import { getIsChecksCurrentUser } from './redux/auth/authSelectors';
 
 export default function App() {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const isChecksCurrentUser = useSelector(getIsChecksCurrentUser); //?
 
   useEffect(() => {

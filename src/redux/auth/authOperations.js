@@ -1,6 +1,6 @@
 import kapustaAuthAPI from '../../services/kapustaAuthAPI';
 
-import axios from 'axios';
+// import axios from 'axios';
 import { authToken } from '../../services/authToken';
 const { createAsyncThunk } = require('@reduxjs/toolkit');
 
