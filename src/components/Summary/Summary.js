@@ -41,7 +41,7 @@ const Summary = ({ year, type }) => {
     const table = tableForYear.map((item, index) => {
       return { month: index, sum: item.sum };
     });
-    console.log(table);
+    // console.log(table);
     setSummaryData(table);
   }, []);
 
