@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import s from './Main.module.scss';
 import Icons from '../../Icons';
 import LoginForm from '../LoginForm/LoginForm';
@@ -6,7 +6,7 @@ import Cole from '../Cole';
 import JampCabb from '../JumpingCabbage';
 
 export default function Main() {
-  const user = useSelector(state => state.auth.user);
+  // const user = useSelector(state => state.auth.user);
 
   return (
     <div className={s.main__container}>
