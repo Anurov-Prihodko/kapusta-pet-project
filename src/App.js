@@ -1,30 +1,50 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
+import axios from 'axios';
+import { decode } from 'jsonwebtoken';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Container from './components/Container';
-import LoginView from './views/LoginView';
+import { getUserToken } from './redux/auth/authSelectors';
 import HomeView from './views/HomeView';
+import LoginView from './views/LoginView';
 import ReportView from './views/ReportView';
 
-import { getCurrentUser } from './redux/auth/authOperations';
-import { getIsChecksCurrentUser } from './redux/auth/authSelectors';
+const getIsAuthenitcated = token => {
+  try {
+    const { exp } = decode(token);
+    return exp * 1000 > Date.now();
+  } catch {
+    return false;
+  }
+};
+
 
 export default function App() {
-  const dispatch = useDispatch();
-  // eslint-disable-next-line no-unused-vars
-  const isChecksCurrentUser = useSelector(getIsChecksCurrentUser); //?
+  const authToken = useSelector(getUserToken);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    getIsAuthenitcated(authToken),
+  );
 
   useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
+    const authenticated = getIsAuthenitcated(authToken);
+    setIsAuthenticated(authenticated);
+    axios.defaults.headers.common.Authorization = authenticated
+      ? `Bearer ${authToken}`
+      : undefined;
+  }, [authToken]);
+
+  if (!isAuthenticated) {
+    return <LoginView />;
+  }
 
   return (
     <Container>
-      <LoginView />
-      <div className="border__test"></div>
-      <HomeView />
-      <div className="border__test"></div>
-      <ReportView />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/reports" element={<ReportView />} />
+        </Routes>
+      </BrowserRouter>
     </Container>
   );
 }

@@ -1,12 +1,13 @@
-import './Reports.scss';
+import { Link } from 'react-router-dom';
 import Icons from '../../Icons';
+import './Reports.scss';
 
 export default function Reports() {
   return (
     <div className={'reports'}>
-      <a href={'#'} className={'reports_link'}>
+      <Link to="/reports" className={'reports_link'}>
         Перейти к отчетам
-      </a>
+      </Link>
       <Icons name="bar_chart" className={'reports_icon'} />
     </div>
   );
