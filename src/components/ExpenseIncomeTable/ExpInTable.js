@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
+import { BASE_URL } from '../../services/kapustaAPIConstants';
 // import HomeTable from '../HomeTable';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
@@ -13,6 +15,7 @@ export default function ExpInTable({ children }) {
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
+  const [category, setCategory] = useState('');
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -21,9 +24,33 @@ export default function ExpInTable({ children }) {
     setExpenses(event.currentTarget.value);
   };
 
+  const changeSelect = event => {
+    setCategory(event.currentTarget.value);
+  };
+
   const onClear = event => {
     setExpenses('');
     setRequest('');
+    setCategory('');
+  };
+
+  const handleSubmit = event => {
+    axios
+      .post(`${BASE_URL}/transactions/expense`, {
+        sum: `${expenses}`,
+        transactionName: `${request}`,
+        category: `${category}`,
+        income: false,
+      })
+      .then(function (response) {
+        setExpenses('');
+        setRequest('');
+        setCategory('');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    event.preventDefault();
   };
 
   return (
@@ -84,19 +111,23 @@ export default function ExpInTable({ children }) {
                 type="text"
                 placeholder="Описание товара"
               />
-              <select className={s.expinplace}>
-                <option value="">Категория товара</option>
-                <option value="">Транспорт</option>
-                <option value="">Продукты</option>
-                <option value="">Здоровье</option>
-                <option value="">Алкоголь</option>
-                <option value="">Развлечения</option>
-                <option value="">Всё для дома</option>
-                <option value="">Техника</option>
-                <option value="">Коммуналка, связь</option>
-                <option value="">Спорт, хобби</option>
-                <option value="">Образование</option>
-                <option value="">Прочее</option>
+              <select
+                value={category}
+                onChange={changeSelect}
+                className={s.expinplace}
+              >
+                <option>Категория товара</option>
+                <option>Транспорт</option>
+                <option>Продукты</option>
+                <option>Здоровье</option>
+                <option>Алкоголь</option>
+                <option>Развлечения</option>
+                <option>Всё для дома</option>
+                <option>Техника</option>
+                <option>Коммуналка, связь</option>
+                <option>Спорт, хобби</option>
+                <option>Образование</option>
+                <option>Прочее</option>
               </select>
               <input
                 value={expenses}
@@ -113,7 +144,12 @@ export default function ExpInTable({ children }) {
               />
             </div>
             <div className={s.btnGroup}>
-              <ButtonBasic type="submit" active={true} name="enter">
+              <ButtonBasic
+                type="submit"
+                active={true}
+                name="enter"
+                onClick={handleSubmit}
+              >
                 Ввод
               </ButtonBasic>
               <ButtonBasic
