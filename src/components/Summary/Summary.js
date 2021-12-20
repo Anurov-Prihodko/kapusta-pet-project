@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import axios from 'axios';
 import s from './Summary.module.css';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
