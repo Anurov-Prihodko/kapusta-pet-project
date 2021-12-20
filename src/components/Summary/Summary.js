@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import axios from 'axios';
+import axios from 'axios';
 import s from './Summary.module.css';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
@@ -14,7 +14,6 @@ import {
 } from '../../redux/summary/summarySelectors';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
-
 const Summary = (/*{ year, category, token }*/) => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
@@ -22,24 +21,22 @@ const Summary = (/*{ year, category, token }*/) => {
   const incomes = useSelector(getSummaryIncomes);
   const dispatch = useDispatch();
 
-  // const token = useSelector(state => state.auth.token);
+  const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
     if (year) {
-      //axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      //console.log('token2=', axios.defaults.headers.common.Authorization);
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       dispatch(getTransactionsAnnual(year));
     }
-  }, [dispatch, year]);
+  }, [dispatch, token, year]);
 
-  let summaryData = [{ month: 2, sum: 99999.99 }];
+  let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
   if (table) {
     summaryData = table.map((item, index) => {
       return { month: index, sum: item.sum };
     });
   }
-
 
   return (
     <div className={s.summary__container}>

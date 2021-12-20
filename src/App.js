@@ -18,7 +18,6 @@ const getIsAuthenitcated = token => {
   }
 };
 
-
 export default function App() {
   const authToken = useSelector(getUserToken);
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -34,7 +33,11 @@ export default function App() {
   }, [authToken]);
 
   if (!isAuthenticated) {
-    return <LoginView />;
+    return (
+      <Container>
+        <LoginView />
+      </Container>
+    );
   }
 
   return (
