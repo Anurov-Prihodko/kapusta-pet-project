@@ -24,6 +24,7 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm(); //validation from 'react-hook-form'
 
   const toggleEnterActiveBtn = () => {
@@ -64,10 +65,12 @@ export default function LoginForm() {
   // };
   //////////////////////////////////////
 
-  const onLoginFormSubmit = data => {
-    if (isEnterActive) dispatch(loginUser(data));
+  const onLoginFormSubmit = async data => {
+    if (isEnterActive) await dispatch(loginUser(data));
 
-    if (isRegisterActive) dispatch(registerUser(data));
+    if (isRegisterActive) await dispatch(registerUser(data));
+
+    reset();
   };
 
   // ====== Google login ======

@@ -14,6 +14,7 @@ import {
 } from '../../redux/summary/summarySelectors';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
+
 const Summary = (/*{ year, category, token }*/) => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
@@ -38,6 +39,7 @@ const Summary = (/*{ year, category, token }*/) => {
       return { month: index, sum: item.sum };
     });
   }
+
 
   return (
     <div className={s.summary__container}>
