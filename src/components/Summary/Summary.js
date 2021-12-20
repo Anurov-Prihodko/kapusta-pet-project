@@ -1,55 +1,43 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import axios from 'axios';
 import s from './Summary.module.css';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
 //import { exampleSummary } from './exampleSummary';
 
-/*
-Component Summary expects props in form:
-  {
-      data: [
-         {
-             month: <a number 0..11>,
-             sum: <a number>
-        },
-        {...}
-      ],
-  }
-*/
-const Summary = ({ year, type }) => {
-  const [summaryData, setSummaryData] = useState([]);
+import {
+  getSummaryYear,
+  getSummaryCategory,
+  getSummaryExpenses,
+  getSummaryIncomes,
+} from '../../redux/summary/summarySelectors';
+import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  async function dataForSummary() {
-    /*this login is only for test. it is needed to create token*/
-    const BASE_URL = 'https://kapusta-team-project-back-end.herokuapp.com';
-    axios.defaults.baseURL = BASE_URL;
-    const loginData = {
-      email: 'ivans@inbox.com',
-      password: '123456',
-    };
-    const { data: login } = await axios.post(`/api/users/signin`, loginData);
-    //console.log(login);
-    axios.defaults.headers.common.Authorization = `Bearer ${login.data.token}`;
-    /*end of test part*/
+const Summary = (/*{ year, category, token }*/) => {
+  const year = useSelector(getSummaryYear);
+  const category = useSelector(getSummaryCategory);
+  const expenses = useSelector(getSummaryExpenses);
+  const incomes = useSelector(getSummaryIncomes);
+  const dispatch = useDispatch();
 
-    const { data: trans } = await axios.get(`/api/transactions/annual/${year}`);
-    const tableForYear =
-      type === 'incomes'
-        ? trans.data.incomesForYear
-        : trans.data.expensesForYear;
-    const table = tableForYear.map((item, index) => {
+  // const token = useSelector(state => state.auth.token);
+
+  useEffect(() => {
+    if (year) {
+      //axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      //console.log('token2=', axios.defaults.headers.common.Authorization);
+      dispatch(getTransactionsAnnual(year));
+    }
+  }, [dispatch, year]);
+
+  let summaryData = [{ month: 2, sum: 99999.99 }];
+  const table = category === 'incomes' ? incomes : expenses;
+  if (table) {
+    summaryData = table.map((item, index) => {
       return { month: index, sum: item.sum };
     });
-    // console.log(table);
-
-    // setSummaryData(table);
   }
-
-  // useEffect(() => {
-  //   dataForSummary();
-  // }, [dataForSummary]);
 
   return (
     <div className={s.summary__container}>
@@ -71,5 +59,14 @@ const Summary = ({ year, type }) => {
     </div>
   );
 };
+
+/*
+const mapStateToProps = state => ({
+  year: state.summary.summaryYear,
+  category: state.summary.category,
+  token: state.auth.token,
+});
+const Summary = connect(mapStateToProps)(Summary2);
+*/
 
 export { Summary };
