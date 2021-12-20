@@ -32,7 +32,7 @@ const Summary = (/*{ year, category, token }*/) => {
     }
   }, [dispatch, year]);
 
-  let summaryData = [{ month: 2, sum: 99999.99 }];
+  let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
   if (table) {
     summaryData = table.map((item, index) => {

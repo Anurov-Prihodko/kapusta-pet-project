@@ -3,8 +3,8 @@ import { getTransactionsAnnual } from '../summary/summaryOperations';
 
 const initialState = {
   transactionsAnnual: null,
-  summaryYear: 2021,
-  category: 'incomes' /*"expenses" or "incomes"*/,
+  summaryYear: null,
+  category: null, /*"expenses" or "incomes"*/
   loading: false,
   error: null,
 };
