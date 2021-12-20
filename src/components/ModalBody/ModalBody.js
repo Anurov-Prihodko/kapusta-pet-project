@@ -18,20 +18,25 @@ export default function ModalBody({ children, onClose }) {
   useEffect(() => {
     const button = document.getElementById('button-close');
     const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('buttons');
 
     btnNo.addEventListener('click', onClose);
     button.addEventListener('click', onClose);
     return () => {
       btnNo.removeEventListener('click', onClose);
       button.removeEventListener('click', onClose);
+      btnYes.removeEventListener('click', onClose);
     };
   }, [onClose]);
 
   const toggleEnterActiveBtn = () => {
+    const btnYes = document.getElementById('buttons');
     setIsEnterActive(true);
     setIsRegisterActive(false);
 
     dispatch(logOutUser(userEmail));
+    btnYes.addEventListener('click', onClose);
+    onClose();
   };
 
   const toggleRegisterActiveBtn = () => {
@@ -49,10 +54,11 @@ export default function ModalBody({ children, onClose }) {
 
       <p className={s.text}>{children}</p>
       <div className={s.buttons}>
-        <div className={s.button__yes}>
+        <div className={s.button__yes} id="buttons">
           <ButtonBasic
             type="submit"
             shadow
+            id="btnYes"
             active={isEnterActive}
             name="yes"
             onClick={toggleEnterActiveBtn}
