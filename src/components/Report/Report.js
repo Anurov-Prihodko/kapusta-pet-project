@@ -1,19 +1,18 @@
-import { useMediaQuery } from 'react-responsive';
 import { useSelector } from 'react-redux';
-
-import MainReport from '../MainReport';
-import Wrapper from '../Wrapper';
+import { useMediaQuery } from 'react-responsive';
+import {
+  getExpensesTotalSum, getIncomesTotalSum
+} from '../../redux/reports/reportsSelectors';
 import Balance from '../Balance';
-import { ReturnHome } from '../ReturnHome';
-import { MonthSelector } from '../MonthSelector';
 import { IncomesOutcomesMonthly } from '../IncomesOutcomesMonthly';
+import MainReport from '../MainReport';
+import { MonthSelector } from '../MonthSelector';
 import ReportIncomeExpenses from '../ReportIncomeExpenses';
+import { ReturnHome } from '../ReturnHome';
+import Wrapper from '../Wrapper';
 import s from './Report.module.scss';
 
-import {
-  getIncomesTotalSum,
-  getExpensesTotalSum,
-} from '../../redux/reports/reportsSelectors';
+
 
 export default function Report() {
   const incomesTotalSum = useSelector(getIncomesTotalSum);
@@ -30,7 +29,7 @@ export default function Report() {
           <div className={s.balance_segment}>
             <div className={s.control_line}>
               <div className={s.return_home_div}>
-                <ReturnHome whereto="home" text="Вернуться на главную" />
+                <ReturnHome>Вернуться на главную</ReturnHome>
               </div>
               {mobile && (
                 <>

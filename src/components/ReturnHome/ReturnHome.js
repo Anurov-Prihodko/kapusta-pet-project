@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import Icons from '../../Icons';
 import s from './ReturnHome.module.css';
 
-const ReturnHome = ({ whereto, text }) => {
+const ReturnHome = ({ children }) => {
   return (
     <div className={s.container}>
-      <a href={whereto} className={s.href}>
+      <Link to="/" className={s.href}>
         <Icons
           name="arrow-left"
           color="#FF751D"
@@ -12,8 +13,8 @@ const ReturnHome = ({ whereto, text }) => {
           height="12"
           className={s.icon}
         />
-        <span className={s.text}>{text}</span>
-      </a>
+        <span className={s.text}>{children}</span>
+      </Link>
     </div>
   );
 };
