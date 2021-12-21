@@ -5,6 +5,7 @@ import { getTransactionsExpenseMonth } from '../../redux/transactions/transactio
 import contactsAPI from '../../services/transactionsAPI';
 import './HomeTable.scss';
 import Icons from '../../Icons';
+import { newRefresh } from '../../redux/summary/summarySlice';
 
 const shortid = require('shortid'); // потом заменить _id с бека
 
@@ -21,6 +22,14 @@ const dateFormatter = date => {
 
 export default function HomeTable() {
   const transactionsIncomeMonth = useSelector(getTransactionsExpenseMonth);
+
+  const dispatch = useDispatch();
+
+  function refreshSummary() {
+    setInterval(() => {
+      dispatch(newRefresh());
+    }, 3000);
+  }
 
   // const dispatch = useDispatch();
   return (
@@ -57,6 +66,7 @@ export default function HomeTable() {
                         onClick={() => {
                           contactsAPI.deleteTransactionById(_id);
                           // dispatch(removeExspenseById(_id));
+                          refreshSummary();
                         }}
                       >
                         <Icons name="delete" className={'table-body_delete'} />
