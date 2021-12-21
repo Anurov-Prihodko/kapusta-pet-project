@@ -295,9 +295,11 @@ export default function ExpInTable({ children }) {
           />
         </div>
         {/* <div>Здесь мобильная таблица расходов</div> */}
-        {/* <div className={s.expbtnblock}>
-          <button className={s.expmobBtn}>Расход</button>
-          <button className={s.expmobBtn}>Доход</button>
+        {/* <div className={s.spaceforbuttons}>
+          <div className={s.expbtnblock}>
+            <button className={s.expmobBtn}>Расход</button>
+            <button className={s.expmobBtn}>Доход</button>
+          </div>
         </div> */}
       </section>
     </div>

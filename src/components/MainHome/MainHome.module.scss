@@ -9,20 +9,19 @@
 
   .main {
     padding-top: 225px;
-    background-repeat: no-repeat;
-    background-position: bottom 0px left 35px;
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+    @media screen and (min-width: 1280px) {
+      display: block;
+      padding-top: 300px;
+    }
   }
 
   @media screen and (min-width: 768px) {
     width: 768px;
     .hero {
       padding-top: 578px;
-    }
-
-    .main {
-      padding-top: 800px;
-      background-image: url(../../image/table-2cole.png);
-      background-position: bottom 64px right 88px;
     }
   }
 
@@ -32,11 +31,44 @@
     .hero {
       padding-top: 582.5px;
     }
-
-    .main {
-      padding-top: 268px;
-      background-image: url(../../image/coles.png);
-      background-position: bottom 38px left 10px;
-    }
   }
+}
+
+/* стили для анимации летающей капусты */
+
+.flayanimation {
+  display: none;
+  @media screen and (min-width: 1280px) {
+    display: block;
+    // border: 1px solid red;
+    position: absolute;
+    bottom: -100px;
+    right: 0;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+  }
+}
+
+/* стили для анимации прыгающей капусты */
+
+.kapustaflay {
+  display: none;
+  @media screen and (min-width: 768px) {
+    position: relative;
+    display: block;
+    height: 658px;
+  }
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
+}
+
+.anim {
+  position: absolute;
+  left: 498px;
+  bottom: 64px;
+  display: flex;
+  justify-content: space-between;
+  width: 184px;
 }
