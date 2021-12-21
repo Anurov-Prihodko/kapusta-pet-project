@@ -25,12 +25,22 @@ async function fetchCurrentUser() {
 
   return data;
 } //?
+async function setBalance(balance)  {
+  const response = await axios.post('/users/balance', balance);
+  return response;
+};
 
+async function getBalance () {
+  const response = await axios.get('/users/balance');
+  return response;
+};
 const kapustaAuthAPI = {
   postUserRegisterData,
   postUserLoginData,
   deleteUserLoginData,
   fetchCurrentUser,
+  setBalance,
+  getBalance
 };
 
 export default kapustaAuthAPI;

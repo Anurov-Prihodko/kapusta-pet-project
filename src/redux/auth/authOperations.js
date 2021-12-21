@@ -66,5 +66,27 @@ const getCurrentUser = createAsyncThunk(
     // }
   },
 );
+const setBalance = createAsyncThunk(
+  'auth/setBalance',
+  async (balance, { rejectWithValue }) => {
+    try {
+      const { data } = await kapustaAuthAPI.setBalance(balance);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
-export { registerUser, loginUser, logOutUser, getCurrentUser };
+const getBalance = createAsyncThunk(
+  'auth/getBalance',
+  async (_, { rejectWithValue }) => {
+  try {
+    const { data } = await kapustaAuthAPI.getBalance();
+    return data;
+  } catch (error) {
+    return rejectWithValue(error.message);
+  }
+});
+
+export { registerUser, loginUser, logOutUser, getCurrentUser, setBalance, getBalance  };

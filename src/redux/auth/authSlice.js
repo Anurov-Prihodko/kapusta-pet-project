@@ -3,13 +3,15 @@ import {
   registerUser,
   loginUser,
     logOutUser,
+    setBalance,
+  getBalance
 } from '../auth/authOperations';
 
 const initialState = {
   user: {
     email: null,
     password: null,
-    balanse: null,
+    balanse: 0,
     balanceHasBeenSet: false
   },
 
@@ -37,6 +39,12 @@ const authSlice = createSlice({
         password: null,
       };
       state.token = null;
+    },
+    [setBalance.fulfilled](state, { payload }) {
+      state.balance = payload.balance;
+    },
+    [getBalance.fulfilled](state, { payload }) {
+      state.balance = payload.balance;
     },
   },
 });
