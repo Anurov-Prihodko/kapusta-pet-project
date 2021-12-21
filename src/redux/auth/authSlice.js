@@ -1,20 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  registerUser,
-  loginUser,
-    logOutUser,
-} from '../auth/authOperations';
+import { registerUser, loginUser, logOutUser } from '../auth/authOperations';
 
 const initialState = {
   user: {
     email: null,
-    password: null,
     balanse: null,
-    balanceHasBeenSet: false
+    balanceHasBeenSet: false,
   },
 
   token: null,
-  isLoggedIn: false,
 };
 
 const authSlice = createSlice({
@@ -22,7 +16,7 @@ const authSlice = createSlice({
   initialState,
   extraReducers: {
     [registerUser.fulfilled](state, action) {
-      state.user = action.payload;
+      state.user.email = action.payload.email;
       state.token = action.payload.token;
     },
     [loginUser.fulfilled](state, action) {
@@ -34,7 +28,6 @@ const authSlice = createSlice({
     [logOutUser.fulfilled](state, action) {
       state.user = {
         email: null,
-        password: null,
       };
       state.token = null;
     },
