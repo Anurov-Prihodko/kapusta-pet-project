@@ -37,34 +37,6 @@ export default function LoginForm() {
     setIsRegisterActive(true);
   };
 
-  ///////////////////////////////////////
-  // const onLoginFormSubmit = async data => {
-  //   setError(null);
-
-  //   const endpoint = isEnterActive ? '/api/users/signin' : '/api/users/signup';
-
-  //   const response = await fetch(
-  //     `https://kapusta-team-project-back-end.herokuapp.com${endpoint}`,
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(data),
-  //     },
-  //   );
-  //   const json = await response.json();
-  //   if (!response.ok) {
-  //     setError(json.message);
-  //     return;
-  //   }
-
-  //   if (isEnterActive) {
-  //     dispatch(login(json.data));
-  //   }
-  // };
-  //////////////////////////////////////
-
   const onLoginFormSubmit = async data => {
     if (isEnterActive) await dispatch(loginUser(data));
 
