@@ -1,6 +1,5 @@
 import kapustaAuthAPI from '../../services/kapustaAuthAPI';
 
-// import axios from 'axios';
 import { authToken } from '../../services/authToken';
 const { createAsyncThunk } = require('@reduxjs/toolkit');
 
@@ -47,24 +46,4 @@ const logOutUser = createAsyncThunk(
   },
 );
 
-const getCurrentUser = createAsyncThunk(
-  'auth/getCurrentUser',
-  async (_, { rejectWithValue, getState }) => {
-    const state = getState();
-    const persistedToken = state.auth.token;
-
-    if (persistedToken === null) {
-      return rejectWithValue();
-    }
-
-    authToken.set(persistedToken);
-    // try {
-    //   const currentUser = await kapustaAuthAPI.fetchCurrentUser();
-    //   return currentUser;
-    // } catch (err) {
-    //   return rejectWithValue(err.message);
-    // }
-  },
-);
-
-export { registerUser, loginUser, logOutUser, getCurrentUser };
+export { registerUser, loginUser, logOutUser };
