@@ -23,40 +23,6 @@ import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
 registerLocale('ru', ru);
 
-/*
-Component Summary requires the following additions to this file:
-
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  changeSummaryYear,
-  changeCategory,
-} from '../../redux/summary/summarySlice';
-import {
-  getSummaryYear,
-  getSummaryCategory,
-} from '../../redux/summary/summarySelectors';
-
-  const prevCategory = useSelector(getSummaryCategory);
-
-  function onChangeTime(date) {
-    dispatch(changeSummaryYear(date.getFullYear()));
-    if (!prevCategory) {
-      dispatch(changeCategory('expenses'));
-    }
-  }
-
-  function onCategoryExpenses() {
-    dispatch(changeCategory('expenses'));
-    dispatch(changeSummaryYear(startDate.getFullYear()));
-  }
-
-  function onCategoryIncomes() {
-    dispatch(changeCategory('incomes'));
-    dispatch(changeSummaryYear(startDate.getFullYear()));
-  }
-
-*/
-
 export default function ExpInTable({ children }) {
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState('');
@@ -64,6 +30,9 @@ export default function ExpInTable({ children }) {
   const [category, setCategory] = useState('');
   const [income, setIncome] = useState(false);
   const [search, setSearch] = useState('pending');
+
+  const token = useSelector(state => state.auth.token);
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
   const dispatch = useDispatch();
 
