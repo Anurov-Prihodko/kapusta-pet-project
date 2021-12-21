@@ -10,7 +10,7 @@ import {
   YAxis,
 } from 'recharts';
 
-import styles from './ReportIncomeExpenses.module.scss';
+import styles from './ReportChart.module.scss';
 
 export default function ReportChartMobile({ data }) {
   const renderBarLabel = ({ x, y, width, value }) => (
