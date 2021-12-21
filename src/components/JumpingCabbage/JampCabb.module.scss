@@ -1,31 +1,31 @@
-.kapustaflay {
-  position: relative;
-  display: block;
-  height: 514px;
-  @media screen and (min-width: 768px) {
-    height: 442px;
-  }
-  @media screen and (min-width: 1280px) {
-    height: 268px;
-  }
-}
+// .kapustaflay {
+//   position: relative;
+//   display: block;
+//   height: 514px;
+//   @media screen and (min-width: 768px) {
+//     height: 442px;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     height: 268px;
+//   }
+// }
 
-.anim {
-  position: absolute;
-  left: 35px;
-  bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  width: 184px;
-  @media screen and (min-width: 768px) {
-    left: 102px;
-    bottom: 56px;
-  }
-  @media screen and (min-width: 1280px) {
-    left: 230px;
-    bottom: 50px;
-  }
-}
+// .anim {
+//   position: absolute;
+//   left: 35px;
+//   bottom: 10px;
+//   display: flex;
+//   justify-content: space-between;
+//   width: 184px;
+//   @media screen and (min-width: 768px) {
+//     left: 102px;
+//     bottom: 56px;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     left: 230px;
+//     bottom: 50px;
+//   }
+// }
 
 .animbox {
   display: flex;
