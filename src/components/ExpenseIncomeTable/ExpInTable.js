@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getExpenseByDate } from '../../redux/transactions/transactionsOperations';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,6 +9,7 @@ import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
 import { BASE_URL } from '../../services/kapustaAPIConstants';
 // import HomeTable from '../HomeTable';
+import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
 registerLocale('ru', ru);
@@ -16,6 +19,15 @@ export default function ExpInTable({ children }) {
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
+  const [income, setIncome] = useState(false);
+  const [search, setSearch] = useState('pending');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getExpenseByDate(dateRequest(startDate)));
+    setSearch('pending');
+  }, [dispatch, search, startDate]);
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -43,9 +55,8 @@ export default function ExpInTable({ children }) {
         income: false,
       })
       .then(function (response) {
-        setExpenses('');
-        setRequest('');
-        setCategory('');
+        onClear();
+        setSearch('fullfild');
       })
       .catch(function (error) {
         console.log(error);
@@ -80,8 +91,22 @@ export default function ExpInTable({ children }) {
           </label>
         </div> */}
         <div className={s.expintab}>
-          <button className={s.tabtitle}>РАСХОД</button>
-          <button className={s.tabtitle}>ДОХОД</button>
+          <button
+            className={s.tabtitle}
+            onClick={() => {
+              setIncome(false);
+            }}
+          >
+            РАСХОД
+          </button>
+          <button
+            className={s.tabtitle}
+            onClick={() => {
+              setIncome(true);
+            }}
+          >
+            ДОХОД
+          </button>
         </div>
         <div className={s.expinboard}>
           <div className={s.expinrail}>
@@ -98,7 +123,10 @@ export default function ExpInTable({ children }) {
                 id="date"
                 className={s.calendar}
                 selected={startDate}
-                onChange={date => setStartDate(date)}
+                onChange={date => {
+                  setStartDate(date);
+                  dispatch(getExpenseByDate(dateRequest(date)));
+                }}
                 dateFormat="dd.MM.yyyy"
                 locale="ru"
               />
@@ -181,7 +209,10 @@ export default function ExpInTable({ children }) {
             id="datemob"
             className={s.calendar}
             selected={startDate}
-            onChange={date => setStartDate(date)}
+            onChange={date => {
+              setStartDate(date);
+              dispatch(getExpenseByDate(dateRequest(date)));
+            }}
             dateFormat="dd.MM.yyyy"
             locale="ru"
           />
