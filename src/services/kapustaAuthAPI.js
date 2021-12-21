@@ -20,17 +20,10 @@ async function deleteUserLoginData() {
   return data;
 }
 
-async function fetchCurrentUser() {
-  const { data } = await axios.get('/users/current');
-
-  return data;
-} //?
-
 const kapustaAuthAPI = {
   postUserRegisterData,
   postUserLoginData,
   deleteUserLoginData,
-  fetchCurrentUser,
 };
 
 export default kapustaAuthAPI;
