@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-import styles from './ReportIncomeExpenses.module.scss';
+import styles from './ReportChart.module.scss';
 
 const renderBarLabel = ({ x, y, width, value }) => {
   return (

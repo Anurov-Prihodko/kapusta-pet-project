@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Icons from '../../Icons/Icons';
-import ReportChart from './ReportChart';
-import ReportChartMobile from './ReportChartMobile';
-
-import styles from './ReportIncomeExpenses.module.scss';
+import Wrapper from '../Wrapper';
+import ReportCategoryPanel from './ReportCategoryPanel/ReportCategoryPanel';
+import ReportChart from './ReportChart/ReportChart';
+import ReportChartMobile from './ReportChart/ReportChartMobile';
 
 import { getTransactionsByDate } from '../../redux/reports/reportsOperations';
 import {
@@ -37,7 +36,7 @@ const Chart = ({ chartData }) => {
 
 export default function ReportIncomeExpenses() {
   const [categoryActiveIndex, setCategoryActiveIndex] = useState(0);
-  const [reportType, setReportType] = useState('income');
+  const [reportType, setReportType] = useState('expense');
 
   const dispatch = useDispatch();
 
@@ -72,13 +71,6 @@ export default function ReportIncomeExpenses() {
     chartData = [],
     reportLabel = '';
 
-  const toggleReport = () => {
-    setCategoryActiveIndex(0);
-    reportType === 'expense'
-      ? setReportType('income')
-      : setReportType('expense');
-  };
-
   if (reportType === 'expense') {
     categoryData = categoryDataExpense;
     chartData = chartTransactionsDataExpense;
@@ -91,70 +83,17 @@ export default function ReportIncomeExpenses() {
     reportLabel = 'Доходы';
   }
 
-  const getCategoryBtnClassNames = activeIndex => {
-    const categoryBtnClassNames = [styles.categoryBtn];
-
-    if (categoryActiveIndex === activeIndex)
-      categoryBtnClassNames.push(styles.active);
-
-    return categoryBtnClassNames.join(' ');
-  };
-
   return (
-    <div className={styles.container}>
-      <div className={styles.categoryPanel}>
-        <div className={styles.toggleReport}>
-          <button
-            type="button"
-            className={styles.toggleReportBtn}
-            onClick={toggleReport}
-          >
-            <Icons
-              name="before"
-              color="#FF751D"
-              width="7"
-              height="12"
-              className={styles.toggleIcon}
-            />
-          </button>
-          <span className={styles.reportLabel}>{reportLabel}</span>
-          <button
-            type="button"
-            className={styles.toggleReportBtn}
-            onClick={toggleReport}
-          >
-            <Icons
-              name="after"
-              color="#FF751D"
-              width="7"
-              height="12"
-              className={styles.toggleIcon}
-            />
-          </button>
-        </div>
-        <ul className={styles.categoryList}>
-          {categoryData?.map(({ category, iconName, totalSum }, index) => (
-            <li key={index} className={styles.categoryItem}>
-              <span className={styles.categoryTotal}>{totalSum}.00</span>
-              <button
-                className={getCategoryBtnClassNames(index)}
-                onClick={() => setCategoryActiveIndex(index)}
-              >
-                <div className={styles.categoryIconWrap}>
-                  <Icons
-                    name={iconName}
-                    width="56"
-                    height="56"
-                    className={styles.categoryIcon}
-                  />
-                </div>
-              </button>
-              <h3 className={styles.categoryName}>{category}</h3>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <Wrapper>
+      <ReportCategoryPanel
+        categoryActiveIndex={categoryActiveIndex}
+        setCategoryActiveIndex={setCategoryActiveIndex}
+        reportType={reportType}
+        setReportType={setReportType}
+        reportLabel={reportLabel}
+        categoryData={categoryData}
+      />
       {chartData && <Chart chartData={chartData} />}
-    </div>
+    </Wrapper>
   );
 }
