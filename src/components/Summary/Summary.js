@@ -4,7 +4,6 @@ import axios from 'axios';
 import s from './Summary.module.css';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
-//import { exampleSummary } from './exampleSummary';
 
 import {
   getSummaryYear,
@@ -14,7 +13,7 @@ import {
 } from '../../redux/summary/summarySelectors';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
-const Summary = (/*{ year, category, token }*/) => {
+const Summary = () => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
   const expenses = useSelector(getSummaryExpenses);
@@ -24,11 +23,13 @@ const Summary = (/*{ year, category, token }*/) => {
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    if (year) {
+    //console.log('year=', year, ', category=', category);
+    //console.log('token=', token);
+    if (year && category && token) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       dispatch(getTransactionsAnnual(year));
     }
-  }, [dispatch, token, year]);
+  }, [dispatch, token, year, category]);
 
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
@@ -58,14 +59,5 @@ const Summary = (/*{ year, category, token }*/) => {
     </div>
   );
 };
-
-/*
-const mapStateToProps = state => ({
-  year: state.summary.summaryYear,
-  category: state.summary.category,
-  token: state.auth.token,
-});
-const Summary = connect(mapStateToProps)(Summary2);
-*/
 
 export { Summary };

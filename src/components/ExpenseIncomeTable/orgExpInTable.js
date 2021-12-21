@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  changeSummaryYear,
-  changeCategory,
-} from '../../redux/summary/summarySlice';
-import {
-  getSummaryYear,
-  getSummaryCategory,
-} from '../../redux/summary/summarySelectors';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
@@ -25,28 +16,6 @@ export default function ExpInTable({ children }) {
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
-
-  const dispatch = useDispatch();
-
-  const prevCategory = useSelector(getSummaryCategory);
-
-  function onChangeTime(date) {
-    setStartDate(date);
-    dispatch(changeSummaryYear(date.getFullYear()));
-    if (!prevCategory) {
-      dispatch(changeCategory('expenses'));
-    }
-  }
-
-  function onCategoryExpenses() {
-    dispatch(changeCategory('expenses'));
-    dispatch(changeSummaryYear(startDate.getFullYear()));
-  }
-
-  function onCategoryIncomes() {
-    dispatch(changeCategory('incomes'));
-    dispatch(changeSummaryYear(startDate.getFullYear()));
-  }
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -111,12 +80,8 @@ export default function ExpInTable({ children }) {
           </label>
         </div> */}
         <div className={s.expintab}>
-          <button className={s.tabtitle} onClick={onCategoryExpenses}>
-            РАСХОД
-          </button>
-          <button className={s.tabtitle} onClick={onCategoryIncomes}>
-            ДОХОД
-          </button>
+          <button className={s.tabtitle}>РАСХОД</button>
+          <button className={s.tabtitle}>ДОХОД</button>
         </div>
         <div className={s.expinboard}>
           <div className={s.expinrail}>
@@ -133,7 +98,7 @@ export default function ExpInTable({ children }) {
                 id="date"
                 className={s.calendar}
                 selected={startDate}
-                onChange={date => onChangeTime(date)}
+                onChange={date => setStartDate(date)}
                 dateFormat="dd.MM.yyyy"
                 locale="ru"
               />
@@ -216,7 +181,7 @@ export default function ExpInTable({ children }) {
             id="datemob"
             className={s.calendar}
             selected={startDate}
-            onChange={date => onChangeTime(date)}
+            onChange={date => setStartDate(date)}
             dateFormat="dd.MM.yyyy"
             locale="ru"
           />

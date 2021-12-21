@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import s from './HeaderHome.module.scss';
@@ -6,10 +7,16 @@ import Icons from '../../Icons';
 import LogoutBtn from '../LogoutBtn';
 import Modal from '../Modal';
 import ModalBody from '../ModalBody';
+import { nameFromEmail } from '../../utils/nameFromEmail';
 
 export default function HeaderHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const togleModal = () => setIsModalOpen(state => !state);
+
+  //const dispatch = useDispatch();
+  const userEmail = useSelector(state => state.auth.user.email);
+  const userName = userEmail ? nameFromEmail(userEmail) : 'User Name';
+  //OK console.log('email=', userEmail, ', name=', userName);
 
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
@@ -38,7 +45,7 @@ export default function HeaderHome() {
         )}
         {desctopOrLaptopSize && (
           <div className={s.header__user}>
-            <span className={s.logout__user_name}>User Name</span>
+            <span className={s.logout__user_name}>{userName}</span>
             <LogoutBtn onClick={togleModal}>Выйти</LogoutBtn>
           </div>
         )}
