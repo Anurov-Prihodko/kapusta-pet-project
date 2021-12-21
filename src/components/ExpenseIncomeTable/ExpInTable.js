@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import {
   changeSummaryYear,
   changeCategory,
+  newRefresh,
 } from '../../redux/summary/summarySlice';
 import {
   getSummaryYear,
@@ -33,6 +34,12 @@ export default function ExpInTable({ children }) {
   const dispatch = useDispatch();
 
   const prevCategory = useSelector(getSummaryCategory);
+
+  function refreshSummary() {
+    setInterval(() => {
+      dispatch(newRefresh());
+    }, 3000);
+  }
 
   function onChangeTime(date) {
     dispatch(changeSummaryYear(date.getFullYear()));
@@ -78,6 +85,7 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = event => {
+    refreshSummary();
     axios
       .post(`${BASE_URL}/transactions/expense`, {
         sum: `${expenses}`,

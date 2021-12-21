@@ -8,6 +8,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import {
   getSummaryYear,
   getSummaryCategory,
+  getSummaryRefresh,
   getSummaryExpenses,
   getSummaryIncomes,
 } from '../../redux/summary/summarySelectors';
@@ -16,6 +17,7 @@ import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 const Summary = () => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
+  const refresh = useSelector(getSummaryRefresh);
   const expenses = useSelector(getSummaryExpenses);
   const incomes = useSelector(getSummaryIncomes);
   const dispatch = useDispatch();
@@ -25,11 +27,11 @@ const Summary = () => {
   useEffect(() => {
     //console.log('year=', year, ', category=', category);
     //console.log('token=', token);
-    if (year && category && token) {
+    if (year && category && token && refresh) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       dispatch(getTransactionsAnnual(year));
     }
-  }, [dispatch, token, year, category]);
+  }, [dispatch, token, year, category, refresh]);
 
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
