@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getExpenseByDate } from '../../redux/transactions/transactionsOperations';
+import { getIncome } from '../../redux/transactions/transactionsSelectors';
+import {
+  getExpenseByDate,
+  getIncomseByDate,
+  changeIncome,
+} from '../../redux/transactions/transactionsOperations';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import {
-  changeSummaryYear,
-  changeCategory,
-  newRefresh,
-} from '../../redux/summary/summarySlice';
-import {
-  getSummaryYear,
-  getSummaryCategory,
-} from '../../redux/summary/summarySelectors';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
@@ -62,44 +58,21 @@ export default function ExpInTable({ children }) {
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
-  const [income, setIncome] = useState(false);
   const [search, setSearch] = useState('pending');
+
+  const incomeStatus = useSelector(getIncome);
 
   const dispatch = useDispatch();
 
-  const prevCategory = useSelector(getSummaryCategory);
-
-  function refreshSummary() {
-    setInterval(() => {
-      dispatch(newRefresh());
-    }, 3000);
-  }
-
-  function onChangeTime(date) {
-    dispatch(changeSummaryYear(date.getFullYear()));
-    if (!prevCategory) {
-      dispatch(changeCategory('expenses'));
-    }
-  }
-
-  function onCategoryExpenses() {
-    dispatch(changeCategory('expenses'));
-    dispatch(changeSummaryYear(startDate.getFullYear()));
-  }
-
-  function onCategoryIncomes() {
-    dispatch(changeCategory('incomes'));
-    dispatch(changeSummaryYear(startDate.getFullYear()));
-  }
+  // const utcDate = startDate.setHours(startDate.getHours() + 2);
+  // const newDate = new Date(utcDate);
+  // const isoDate = newDate.toISOString();
 
   useEffect(() => {
+    dispatch(getIncomseByDate(dateRequest(startDate)));
     dispatch(getExpenseByDate(dateRequest(startDate)));
     setSearch('pending');
-  }, [dispatch, search, startDate]);
-
-  useEffect(() => {
-    onCategoryExpenses(); //start category and year
-  }, []);
+  }, [dispatch, search, startDate, incomeStatus]);
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -119,13 +92,28 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = event => {
-    refreshSummary();
+    if (incomeStatus === true) {
+      return axios
+        .post(`${BASE_URL}/transactions/income`, {
+          sum: `${expenses}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: incomeStatus,
+        })
+        .then(function (response) {
+          onClear();
+          setSearch('fullfild');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
     axios
       .post(`${BASE_URL}/transactions/expense`, {
         sum: `${expenses}`,
         transactionName: `${request}`,
         category: `${category}`,
-        income: false,
+        income: incomeStatus,
       })
       .then(function (response) {
         onClear();
@@ -167,8 +155,7 @@ export default function ExpInTable({ children }) {
           <button
             className={s.tabtitle}
             onClick={() => {
-              setIncome(false);
-              onCategoryExpenses();
+              dispatch(changeIncome(false));
             }}
           >
             РАСХОД
@@ -176,8 +163,7 @@ export default function ExpInTable({ children }) {
           <button
             className={s.tabtitle}
             onClick={() => {
-              setIncome(true);
-              onCategoryIncomes();
+              dispatch(changeIncome(true));
             }}
           >
             ДОХОД
@@ -200,8 +186,8 @@ export default function ExpInTable({ children }) {
                 selected={startDate}
                 onChange={date => {
                   setStartDate(date);
-                  onChangeTime(date);
                   dispatch(getExpenseByDate(dateRequest(date)));
+                  dispatch(getIncomseByDate(dateRequest(startDate)));
                 }}
                 dateFormat="dd.MM.yyyy"
                 locale="ru"
@@ -287,19 +273,17 @@ export default function ExpInTable({ children }) {
             selected={startDate}
             onChange={date => {
               setStartDate(date);
-              onChangeTime(date);
               dispatch(getExpenseByDate(dateRequest(date)));
+              dispatch(getIncomseByDate(dateRequest(startDate)));
             }}
             dateFormat="dd.MM.yyyy"
             locale="ru"
           />
         </div>
         {/* <div>Здесь мобильная таблица расходов</div> */}
-        {/* <div className={s.spaceforbuttons}>
-          <div className={s.expbtnblock}>
-            <button className={s.expmobBtn}>Расход</button>
-            <button className={s.expmobBtn}>Доход</button>
-          </div>
+        {/* <div className={s.expbtnblock}>
+          <button className={s.expmobBtn}>Расход</button>
+          <button className={s.expmobBtn}>Доход</button>
         </div> */}
       </section>
     </div>

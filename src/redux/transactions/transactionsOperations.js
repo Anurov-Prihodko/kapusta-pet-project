@@ -1,37 +1,24 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 // import axios from 'axios';
 
 import transactionsAPI from '../../services/transactionsAPI';
 
-const addExpense = createAsyncThunk(
-  'transactions/addExpense',
-  async (expenseData, { rejectWithValue }) => {
-    try {
-      const expense = await transactionsAPI
-        .postExpenseData(expenseData)
-        .then(({ data }) => data);
+// const addExpense = createAsyncThunk(
+//   'transactions/addExpense',
+//   async (expenseData, { rejectWithValue }) => {
+//     try {
+//       const expense = await transactionsAPI
+//         .postExpenseData(expenseData)
+//         .then(({ data }) => data);
 
-      return expense;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  },
-);
+//       return expense;
+//     } catch (err) {
+//       return rejectWithValue(err.message);
+//     }
+//   },
+// );
 
-const addIncome = createAsyncThunk(
-  'transactions/addIncome',
-  async (incomeData, { rejectWithValue }) => {
-    try {
-      const income = await transactionsAPI
-        .postIncomeData(incomeData)
-        .then(({ data }) => data);
-
-      return income;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  },
-);
+const changeIncome = createAction('transactions/addIncome');
 
 const getExpenseByDate = createAsyncThunk(
   'transactions/getExpenseByDate',
@@ -48,13 +35,28 @@ const getExpenseByDate = createAsyncThunk(
   },
 );
 
+const getIncomseByDate = createAsyncThunk(
+  'transactions/getIncomseByDate',
+  async (date, { rejectWithValue }) => {
+    try {
+      const expense = await transactionsAPI
+        .fetchIncomeByDate(date)
+        .then(({ data }) => data);
+
+      return expense;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
 const removeExspenseById = createAsyncThunk(
   'transactions/removeExspenseById',
   async (transactionId, { rejectWithValue }) => {
     try {
-      const transaction = await transactionsAPI
-        .deleteTransactionById(transactionId)
-        .then(({ data }) => data);
+      const transaction = await transactionsAPI.deleteTransactionById(
+        transactionId,
+      );
 
       return transaction;
     } catch (err) {
@@ -63,4 +65,25 @@ const removeExspenseById = createAsyncThunk(
   },
 );
 
-export { addExpense, addIncome, getExpenseByDate, removeExspenseById };
+const removeIncomseById = createAsyncThunk(
+  'transactions/removeIncomseById',
+  async (transactionId, { rejectWithValue }) => {
+    try {
+      const transaction = await transactionsAPI.deleteTransactionById(
+        transactionId,
+      );
+
+      return transaction;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
+export {
+  changeIncome,
+  getExpenseByDate,
+  getIncomseByDate,
+  removeExspenseById,
+  removeIncomseById,
+};
