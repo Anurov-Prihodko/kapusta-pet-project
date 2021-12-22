@@ -1,11 +1,15 @@
-// import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTransactionsExpenseMonth } from '../../redux/transactions/transactionsSelectors';
-// import { removeExspenseById } from '../../redux/transactions/transactionsOperations';
-import contactsAPI from '../../services/transactionsAPI';
+import {
+  getTransactionsExpenseMonth,
+  getTransactionsIncomseMonth,
+  getIncome,
+} from '../../redux/transactions/transactionsSelectors';
+import {
+  removeExspenseById,
+  removeIncomseById,
+} from '../../redux/transactions/transactionsOperations';
 import './HomeTable.scss';
 import Icons from '../../Icons';
-import { newRefresh } from '../../redux/summary/summarySlice';
 
 const shortid = require('shortid'); // потом заменить _id с бека
 
@@ -21,17 +25,11 @@ const dateFormatter = date => {
 };
 
 export default function HomeTable() {
-  const transactionsIncomeMonth = useSelector(getTransactionsExpenseMonth);
+  const incomeStatus = useSelector(getIncome);
+  const transactionsExpenseMonth = useSelector(getTransactionsExpenseMonth);
+  const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
 
   const dispatch = useDispatch();
-
-  function refreshSummary() {
-    setInterval(() => {
-      dispatch(newRefresh());
-    }, 3000);
-  }
-
-  // const dispatch = useDispatch();
   return (
     <>
       <div className={'wrapper-table table-scroll'}>
@@ -49,32 +47,61 @@ export default function HomeTable() {
         <div className={'wrapper-body table-scroll-body'}>
           <table>
             <tbody className={'table-body'} id={'scroll'}>
-              {transactionsIncomeMonth?.map(
-                ({ _id, sum, transactionName, category, updatedAt }) => (
-                  <tr className={'table-body_row'} key={shortid.generate()}>
-                    <td className={'table-body_data'}>
-                      {dateFormatter(updatedAt)}
-                    </td>
-                    <td className={'table-body_data'}>{transactionName}</td>
-                    <td className={'table-body_data'}>{category}</td>
-                    <td className={'table-body_data'}>{sum}</td>
-                    <td className={'table-body_data'}>
-                      <button
-                        type="button"
-                        className="table-body_btn"
-                        id={_id}
-                        onClick={() => {
-                          contactsAPI.deleteTransactionById(_id);
-                          // dispatch(removeExspenseById(_id));
-                          refreshSummary();
-                        }}
-                      >
-                        <Icons name="delete" className={'table-body_delete'} />
-                      </button>
-                    </td>
-                  </tr>
-                ),
-              )}
+              {incomeStatus === true
+                ? transactionsIncomseMonth?.map(
+                    ({ _id, sum, transactionName, category, createdAt }) => (
+                      <tr className={'table-body_row'} key={shortid.generate()}>
+                        <td className={'table-body_data'}>
+                          {dateFormatter(createdAt)}
+                        </td>
+                        <td className={'table-body_data'}>{transactionName}</td>
+                        <td className={'table-body_data'}>{category}</td>
+                        <td className={'table-body_data'}>{sum}</td>
+                        <td className={'table-body_data'}>
+                          <button
+                            type="button"
+                            className="table-body_btn"
+                            id={_id}
+                            onClick={() => {
+                              dispatch(removeIncomseById(_id));
+                            }}
+                          >
+                            <Icons
+                              name="delete"
+                              className={'table-body_delete'}
+                            />
+                          </button>
+                        </td>
+                      </tr>
+                    ),
+                  )
+                : transactionsExpenseMonth?.map(
+                    ({ _id, sum, transactionName, category, createdAt }) => (
+                      <tr className={'table-body_row'} key={shortid.generate()}>
+                        <td className={'table-body_data'}>
+                          {dateFormatter(createdAt)}
+                        </td>
+                        <td className={'table-body_data'}>{transactionName}</td>
+                        <td className={'table-body_data'}>{category}</td>
+                        <td className={'table-body_data'}>{sum}</td>
+                        <td className={'table-body_data'}>
+                          <button
+                            type="button"
+                            className="table-body_btn"
+                            id={_id}
+                            onClick={() => {
+                              dispatch(removeExspenseById(_id));
+                            }}
+                          >
+                            <Icons
+                              name="delete"
+                              className={'table-body_delete'}
+                            />
+                          </button>
+                        </td>
+                      </tr>
+                    ),
+                  )}
             </tbody>
           </table>
         </div>

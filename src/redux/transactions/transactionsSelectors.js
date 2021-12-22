@@ -1,4 +1,9 @@
 const getTransactionsExpenseMonth = state =>
   state.transactions.transactionsExpenseMonth;
 
-export { getTransactionsExpenseMonth };
+const getTransactionsIncomseMonth = state =>
+  state.transactions.transactionsIncomeMonth;
+
+const getIncome = state => state.transactions.income;
+
+export { getTransactionsExpenseMonth, getIncome, getTransactionsIncomseMonth };
