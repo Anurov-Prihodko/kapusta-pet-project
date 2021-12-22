@@ -8,7 +8,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import {
   getSummaryYear,
   getSummaryCategory,
-  getSummaryRefresh,
+  // getSummaryRefresh,
   getSummaryExpenses,
   getSummaryIncomes,
 } from '../../redux/summary/summarySelectors';
@@ -17,7 +17,7 @@ import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 const Summary = () => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
-  const refresh = useSelector(getSummaryRefresh);
+  // const refresh = useSelector(getSummaryRefresh);
   const expenses = useSelector(getSummaryExpenses);
   const incomes = useSelector(getSummaryIncomes);
   const dispatch = useDispatch();
