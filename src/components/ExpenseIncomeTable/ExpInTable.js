@@ -17,12 +17,10 @@ import { BASE_URL } from '../../services/kapustaAPIConstants';
 import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
-registerLocale('ru', ru);
 
 /*
-Component Summary requires the following additions to this file:
+Component Summary requires the following additions to this file:*/
 
-import { useDispatch, useSelector } from 'react-redux';
 import {
   changeSummaryYear,
   changeCategory,
@@ -31,7 +29,19 @@ import {
   getSummaryYear,
   getSummaryCategory,
 } from '../../redux/summary/summarySelectors';
+registerLocale('ru', ru);
 
+export default function ExpInTable({ children }) {
+  const [startDate, setStartDate] = useState(new Date());
+  const [request, setRequest] = useState('');
+  const [expenses, setExpenses] = useState('');
+  const [category, setCategory] = useState('');
+  const [search, setSearch] = useState('pending');
+
+  const incomeStatus = useSelector(getIncome);
+
+  const dispatch = useDispatch();
+  ////////////////////////////////////////////////////
   const prevCategory = useSelector(getSummaryCategory);
 
   function onChangeTime(date) {
@@ -50,19 +60,7 @@ import {
     dispatch(changeCategory('incomes'));
     dispatch(changeSummaryYear(startDate.getFullYear()));
   }
-
-*/
-
-export default function ExpInTable({ children }) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [request, setRequest] = useState('');
-  const [expenses, setExpenses] = useState('');
-  const [category, setCategory] = useState('');
-  const [search, setSearch] = useState('pending');
-
-  const incomeStatus = useSelector(getIncome);
-
-  const dispatch = useDispatch();
+  ////////////////////////////////////////////////////////////////
 
   // const utcDate = startDate.setHours(startDate.getHours() + 2);
   // const newDate = new Date(utcDate);
@@ -156,6 +154,7 @@ export default function ExpInTable({ children }) {
             className={s.tabtitle}
             onClick={() => {
               dispatch(changeIncome(false));
+              onCategoryExpenses();
             }}
           >
             РАСХОД
@@ -164,6 +163,7 @@ export default function ExpInTable({ children }) {
             className={s.tabtitle}
             onClick={() => {
               dispatch(changeIncome(true));
+              onCategoryIncomes();
             }}
           >
             ДОХОД
@@ -188,6 +188,7 @@ export default function ExpInTable({ children }) {
                   setStartDate(date);
                   dispatch(getExpenseByDate(dateRequest(date)));
                   dispatch(getIncomseByDate(dateRequest(startDate)));
+                  onChangeTime(date);
                 }}
                 dateFormat="dd.MM.yyyy"
                 locale="ru"
