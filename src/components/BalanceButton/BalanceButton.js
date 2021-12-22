@@ -2,10 +2,10 @@ import './BalanceButton.scss';
 
 export default function BalanceButton({
   children = 'ПОДТВЕРДИТЬ',
-  onClick = () => null,
+  onBtnClick,
 }) {
   return (
-    <button type="button" className={'balance-btn'} onClick={onClick}>
+    <button type="button" className={'balance-btn'} onClick={onBtnClick}>
       {children}
     </button>
   );

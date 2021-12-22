@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import { getUserBalance, getBalanceHasBeenSet } from '../../redux/auth/authSelectors';
-import { setBalance, getBalance } from '../../redux/auth/authOperations';
+import { setBalance } from '../../redux/auth/authOperations';
 
 import ModalBody from '../ModalBody';
 import Modal from '../Modal';
@@ -23,13 +23,14 @@ export default function Balance() {
   setNewBalance(balance)
 }, [balance])
 
+  
   const updateBalance = e => {
     e.preventDefault();
     dispatch(setBalance({ balance: Number(newBalance) }));
   };
   
   const handleChange = e => {
-  setNewBalance(e.value)
+  setNewBalance(e.currentTarget.value)
 }
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,24 +55,25 @@ export default function Balance() {
           <label >
             <input
               value={newBalance}
-              className={'balance-value'}
+              className={!balanceHasBeenSet ? 'balance-value' : 'balance-hide'}
               type="number"
               autoComplete="off"
               name="balance"
               placeholder={'00.00 UAH'}
               onChange={handleChange}
+              disabled={balanceHasBeenSet}
             />
 
-          {mobile && <BalanceButton />}
-          {desctopOrLaptopSize && <BalanceButton />}
+            {mobile && !balanceHasBeenSet && <BalanceButton onBtnClick={updateBalance}/>}
+          {desctopOrLaptopSize && !balanceHasBeenSet && <BalanceButton onBtnClick={updateBalance }/>}
           </label>
         </form>
-        {/* <div className="bubble">
+        {!balanceHasBeenSet && <div className="bubble">
           <div className="arrow">
             <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
             <p>Ты не можешь тратить деньги пока их у тебя нет :)</p>
           </div>
-        </div> */}
+        </div>}
         {isModalOpen && (
           <Modal onClose={togleModal}>
             <ModalBody onClose={togleModal}>Вы уверены?</ModalBody>

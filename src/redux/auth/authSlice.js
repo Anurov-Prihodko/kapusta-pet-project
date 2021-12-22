@@ -11,7 +11,7 @@ const initialState = {
   user: {
     email: null,
     password: null,
-    balanse: 0,
+    balance: '',
     balanceHasBeenSet: false
   },
 
@@ -30,7 +30,7 @@ const authSlice = createSlice({
     [loginUser.fulfilled](state, action) {
       state.user.email = action.payload.user.email;
       state.token = action.payload.token;
-      state.user.balanse = action.payload.user.balance;
+      state.user.balance = action.payload.user.balance;
       state.user.balanceHasBeenSet = action.payload.user.balanceHasBeenSet;
     },
     [logOutUser.fulfilled](state, action) {
@@ -41,7 +41,8 @@ const authSlice = createSlice({
       state.token = null;
     },
     [setBalance.fulfilled](state, { payload }) {
-      state.balance = payload.balance;
+      state.user.balance = payload.balance;
+      state.user.balanceHasBeenSet = true;
     },
     [getBalance.fulfilled](state, { payload }) {
       state.balance = payload.balance;

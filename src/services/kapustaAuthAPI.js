@@ -26,7 +26,7 @@ async function fetchCurrentUser() {
   return data;
 } //?
 async function setBalance(balance)  {
-  const response = await axios.post('/users/balance', balance);
+  const response = await axios.post('/users/setBalance', balance);
   return response;
 };
 
