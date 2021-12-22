@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Container from './components/Container';
 import { getUserToken } from './redux/auth/authSelectors';
 import HeaderHome from './components/HeaderHome'
+import useGoogleAuthLogin from './utils/useGoogleAuthLogin';
 
 const LoginView = React.lazy(() => import('./views/LoginView'));
 const HomeView = React.lazy(() => import('./views/HomeView'));
@@ -21,6 +22,8 @@ const getIsAuthenitcated = token => {
 };
 
 export default function App() {
+  useGoogleAuthLogin()
+
   const authToken = useSelector(getUserToken);
   const [isAuthenticated, setIsAuthenticated] = useState(
     getIsAuthenitcated(authToken),

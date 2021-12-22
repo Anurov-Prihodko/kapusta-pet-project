@@ -31,6 +31,18 @@ const loginUser = createAsyncThunk(
   },
 );
 
+const loginUserViaGoogle = createAsyncThunk(
+  'auth/loginUserViaGoogle',
+  async ({ email, token }, { rejectWithValue }) => {
+    try {
+      authToken.set(token);
+      return { user: { email }, token };
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
 const logOutUser = createAsyncThunk(
   'auth/logOutUser',
   async (_, { rejectWithValue }) => {
@@ -46,4 +58,4 @@ const logOutUser = createAsyncThunk(
   },
 );
 
-export { registerUser, loginUser, logOutUser };
+export { registerUser, loginUser, logOutUser, loginUserViaGoogle };
