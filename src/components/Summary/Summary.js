@@ -25,8 +25,12 @@ const Summary = () => {
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    dispatch(getTransactionsAnnual(year));
+    if (token) {
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      dispatch(getTransactionsAnnual(year));
+    } else {
+      return;
+    }
   }, [dispatch, token, year, category]);
 
   let summaryData = [];
