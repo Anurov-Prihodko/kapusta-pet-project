@@ -25,13 +25,9 @@ const Summary = () => {
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    //console.log('year=', year, ', category=', category);
-    //console.log('token=', token);
-    if (year && category && token && refresh) {
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      dispatch(getTransactionsAnnual(year));
-    }
-  }, [dispatch, token, year, category, refresh]);
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    dispatch(getTransactionsAnnual(year));
+  }, [dispatch, token, year, category]);
 
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
@@ -46,7 +42,7 @@ const Summary = () => {
       <p className={s.summary__title}>Сводка</p>
       <table className={s.summary__table}>
         <tbody>
-          {summaryData.map((monthData, index) => {
+          {summaryData?.map((monthData, index) => {
             return (
               <tr key={index}>
                 <td className={s.summary__month}>{MONTHS[monthData.month]}</td>
