@@ -90,6 +90,9 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = event => {
+    if (category === '') {
+      return;
+    }
     if (incomeStatus === true) {
       return axios
         .post(`${BASE_URL}/transactions/income`, {
@@ -151,6 +154,9 @@ export default function ExpInTable({ children }) {
         </div> */}
         <div className={s.expintab}>
           <button
+            style={
+              incomeStatus === true ? { color: 'black' } : { color: '#ff751d' }
+            }
             className={s.tabtitle}
             onClick={() => {
               dispatch(changeIncome(false));
@@ -160,6 +166,9 @@ export default function ExpInTable({ children }) {
             РАСХОД
           </button>
           <button
+            style={
+              incomeStatus === false ? { color: 'black' } : { color: '#ff751d' }
+            }
             className={s.tabtitle}
             onClick={() => {
               dispatch(changeIncome(true));
@@ -186,8 +195,6 @@ export default function ExpInTable({ children }) {
                 selected={startDate}
                 onChange={date => {
                   setStartDate(date);
-                  dispatch(getExpenseByDate(dateRequest(date)));
-                  dispatch(getIncomseByDate(dateRequest(startDate)));
                   onChangeTime(date);
                 }}
                 dateFormat="dd.MM.yyyy"
@@ -202,24 +209,36 @@ export default function ExpInTable({ children }) {
                 type="text"
                 placeholder="Описание товара"
               />
-              <select
-                value={category}
-                onChange={changeSelect}
-                className={s.expinplace}
-              >
-                <option>Категория товара</option>
-                <option>Транспорт</option>
-                <option>Продукты</option>
-                <option>Здоровье</option>
-                <option>Алкоголь</option>
-                <option>Развлечения</option>
-                <option>Всё для дома</option>
-                <option>Техника</option>
-                <option>Коммуналка, связь</option>
-                <option>Спорт, хобби</option>
-                <option>Образование</option>
-                <option>Прочее</option>
-              </select>
+              {incomeStatus === false ? (
+                <select
+                  value={category}
+                  onChange={changeSelect}
+                  className={s.expinplace}
+                >
+                  <option value="">Категория товара</option>
+                  <option>Транспорт</option>
+                  <option>Продукты</option>
+                  <option>Здоровье</option>
+                  <option>Алкоголь</option>
+                  <option>Развлечения</option>
+                  <option>Всё для дома</option>
+                  <option>Техника</option>
+                  <option>Коммуналка, связь</option>
+                  <option>Спорт, хобби</option>
+                  <option>Образование</option>
+                  <option>Прочее</option>
+                </select>
+              ) : (
+                <select
+                  value={category}
+                  onChange={changeSelect}
+                  className={s.expinplace}
+                >
+                  <option value="">Категория дохода</option>
+                  <option>ЗП</option>
+                  <option>ДОП.ДОХОД</option>
+                </select>
+              )}
               <input
                 value={expenses}
                 onChange={handleNumbChange}
@@ -274,8 +293,7 @@ export default function ExpInTable({ children }) {
             selected={startDate}
             onChange={date => {
               setStartDate(date);
-              dispatch(getExpenseByDate(dateRequest(date)));
-              dispatch(getIncomseByDate(dateRequest(startDate)));
+              onChangeTime(date);
             }}
             dateFormat="dd.MM.yyyy"
             locale="ru"
