@@ -244,7 +244,7 @@ export default function ExpInTable({ children }) {
                 onChange={handleNumbChange}
                 className={s.expinplace}
                 type="number"
-                placeholder="0,00"
+                placeholder="0"
               />
               <Icons
                 name="calculator"
