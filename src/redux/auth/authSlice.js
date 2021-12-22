@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, loginUser, logOutUser } from '../auth/authOperations';
+import {
+  registerUser,
+  loginUser,
+  logOutUser,
+  loginUserViaGoogle,
+} from '../auth/authOperations';
 
 const initialState = {
   user: {
@@ -31,6 +36,10 @@ const authSlice = createSlice({
       };
       state.token = null;
     },
+    [loginUserViaGoogle.fulfilled](state, action) {
+      state.user.email = action.payload.user.email;
+      state.token = action.payload.token;
+    }
   },
 });
 

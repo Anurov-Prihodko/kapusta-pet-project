@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { decode } from 'jsonwebtoken';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Container from './components/Container';
 import { getUserToken } from './redux/auth/authSelectors';
-import HomeView from './views/HomeView';
-import LoginView from './views/LoginView';
-import ReportView from './views/ReportView';
+import HeaderHome from './components/HeaderHome'
+import useGoogleAuthLogin from './utils/useGoogleAuthLogin';
+
+const LoginView = React.lazy(() => import('./views/LoginView'));
+const HomeView = React.lazy(() => import('./views/HomeView'));
+const ReportView = React.lazy(() => import('./views/ReportView'));
 
 const getIsAuthenitcated = token => {
   try {
@@ -19,6 +22,8 @@ const getIsAuthenitcated = token => {
 };
 
 export default function App() {
+  useGoogleAuthLogin()
+
   const authToken = useSelector(getUserToken);
   const [isAuthenticated, setIsAuthenticated] = useState(
     getIsAuthenitcated(authToken),
@@ -32,22 +37,20 @@ export default function App() {
       : undefined;
   }, [authToken]);
 
-  if (!isAuthenticated) {
-    return (
-      <Container>
-        <LoginView />
-      </Container>
-    );
-  }
-
   return (
     <Container>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="/reports" element={<ReportView />} />
-        </Routes>
-      </BrowserRouter>
+      <HeaderHome/>
+      <Suspense fallback={null}>
+        {!isAuthenticated && <LoginView />}
+        {isAuthenticated && (
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomeView />} />
+              <Route path="/reports" element={<ReportView />} />
+            </Routes>
+          </BrowserRouter>
+        )}
+      </Suspense>
     </Container>
   );
 }
