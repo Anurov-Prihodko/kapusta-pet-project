@@ -31,7 +31,7 @@ const Summary = () => {
     } else {
       return;
     }
-  }, [dispatch, token, year, category]);
+  }, [dispatch, token, year, category, refresh]);
 
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
