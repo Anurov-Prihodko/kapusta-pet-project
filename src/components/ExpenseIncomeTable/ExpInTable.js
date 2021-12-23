@@ -18,15 +18,13 @@ import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
 
-/*
-Component Summary requires the following additions to this file:*/
-
 import {
   changeSummaryYear,
   changeCategory,
   newRefresh,
 } from '../../redux/summary/summarySlice';
 import {
+  // eslint-disable-next-line no-unused-vars
   getSummaryYear,
   getSummaryCategory,
 } from '../../redux/summary/summarySelectors';
