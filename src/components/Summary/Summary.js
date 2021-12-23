@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import s from './Summary.module.css';
+import s from './Summary.module.scss';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
 
