@@ -6,22 +6,21 @@ import {
   getIncomseByDate,
   changeIncome,
 } from '../../redux/transactions/transactionsOperations';
-import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
-import { BASE_URL } from '../../services/kapustaAPIConstants';
-// import HomeTable from '../HomeTable';
+
 import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
+import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 
 import {
   changeSummaryYear,
   changeCategory,
-  newRefresh,
+  // newRefresh,
 } from '../../redux/summary/summarySlice';
 import {
   // eslint-disable-next-line no-unused-vars
@@ -60,11 +59,11 @@ export default function ExpInTable({ children }) {
     dispatch(changeSummaryYear(startDate.getFullYear()));
   }
 
-  function refreshSummary() {
-    setInterval(() => {
-      dispatch(newRefresh());
-    }, 3000);
-  }
+  // function refreshSummary() {
+  //   setInterval(() => {
+  //     dispatch(newRefresh());
+  //   }, 3000);
+  // }
   ////////////////////////////////////////////////////////////////
 
   // const utcDate = startDate.setHours(startDate.getHours() + 2);
@@ -95,69 +94,39 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = event => {
-    refreshSummary();
+    event.preventDefault();
+    // refreshSummary();
     if (category === '') {
       return;
     }
     if (incomeStatus === true) {
-      return axios
-        .post(`${BASE_URL}/transactions/income`, {
+      dispatch(
+        newIncomeData({
           sum: `${expenses}`,
           transactionName: `${request}`,
           category: `${category}`,
-          income: incomeStatus,
-        })
-        .then(function (response) {
-          onClear();
-          setSearch('fullfild');
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          income: true,
+        }),
+      );
+      onClear();
+      setSearch('fullfild');
+      return;
     }
-    axios
-      .post(`${BASE_URL}/transactions/expense`, {
+    dispatch(
+      newExpenseData({
         sum: `${expenses}`,
         transactionName: `${request}`,
         category: `${category}`,
-        income: incomeStatus,
-      })
-      .then(function (response) {
-        onClear();
-        setSearch('fullfild');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    event.preventDefault();
+        income: false,
+      }),
+    );
+    onClear();
+    setSearch('fullfild');
   };
 
   return (
     <div className={s.exptabs}>
       <section className={s.expinmain}>
-        {/* <div className={s.expintab}>
-          <input
-            className={s.tabinput}
-            type="radio"
-            name="inset"
-            value=""
-            id="tab_1"
-            // checked консоль бьет ошибку что нет обработчика события
-          />
-          <label className={s.tabtitle} data-for="tab_1">
-            <span>РАСХОД</span>
-          </label>
-          <input
-            className={s.tabinput}
-            type="radio"
-            name="inset"
-            value=""
-            id="tab_2"
-          />
-          <label className={s.tabtitle} data-for="tab_2">
-            <span>ДОХОД</span>
-          </label>
-        </div> */}
         <div className={s.expintab}>
           <button
             style={

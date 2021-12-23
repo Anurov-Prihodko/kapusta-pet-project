@@ -1,5 +1,5 @@
 import kapustaAuthAPI from '../../services/kapustaAuthAPI';
-
+import contactsAPI from '../../services/transactionsAPI';
 import { authToken } from '../../services/authToken';
 const { createAsyncThunk } = require('@reduxjs/toolkit');
 
@@ -58,19 +58,49 @@ const logOutUser = createAsyncThunk(
   },
 );
 
-
 const setBalance = createAsyncThunk(
   'auth/setBalance',
   async (newBalance, { rejectWithValue }) => {
     try {
-      const balance = kapustaAuthAPI.setBalance(newBalance)
+      const balance = kapustaAuthAPI.setBalance(newBalance);
 
-      return balance
+      return balance;
     } catch (err) {
       return rejectWithValue(err.message);
     }
-  }
-)
+  },
+);
 
-export { registerUser, loginUser, logOutUser, loginUserViaGoogle, setBalance };
+const newExpenseData = createAsyncThunk(
+  'auth/newExpenseData',
+  async (transactionData, { rejectWithValue }) => {
+    try {
+      const balance = contactsAPI.postExpenseData(transactionData);
+      return balance;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
+const newIncomeData = createAsyncThunk(
+  'auth/newIncomeData',
+  async (transactionData, { rejectWithValue }) => {
+    try {
+      const balance = contactsAPI.postIncomeData(transactionData);
+      return balance;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export {
+  registerUser,
+  loginUser,
+  logOutUser,
+  loginUserViaGoogle,
+  setBalance,
+  newExpenseData,
+  newIncomeData,
+};

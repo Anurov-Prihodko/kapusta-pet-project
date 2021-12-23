@@ -3,15 +3,15 @@ import { BASE_URL } from './kapustaAPIConstants';
 
 axios.defaults.baseURL = BASE_URL;
 
-// async function postExpenseData(expenseData) {
-//   const { data } = await axios.post('/transactions/expense', expenseData);
-//   return data;
-// }
+async function postExpenseData(expenseData) {
+  const { data } = await axios.post('/transactions/expense', expenseData);
+  return data;
+}
 
-// async function postIncomeData(incomeData) {
-//   const { data } = await axios.post('/transactions/income', incomeData);
-//   return data;
-// }
+async function postIncomeData(incomeData) {
+  const { data } = await axios.post('/transactions/income', incomeData);
+  return data;
+}
 
 async function deleteTransactionById(transactionId) {
   const { code } = await axios.delete(`/transactions/${transactionId}`);
@@ -39,8 +39,8 @@ async function fetchAllTransactionsByYear(year) {
 }
 
 const contactsAPI = {
-  // postExpenseData,
-  // postIncomeData,
+  postExpenseData,
+  postIncomeData,
   deleteTransactionById,
   fetchIncomeByDate,
   fetchExpenseByDate,
