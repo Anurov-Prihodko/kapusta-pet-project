@@ -12,6 +12,11 @@ import {
   getSummaryExpenses,
   getSummaryIncomes,
 } from '../../redux/summary/summarySelectors';
+import {
+  changeSummaryYear,
+  changeCategory,
+  //newRefresh,
+} from '../../redux/summary/summarySlice';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
 const Summary = () => {
@@ -25,7 +30,14 @@ const Summary = () => {
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    if (token) {
+    //default parameters for the first render
+    dispatch(changeSummaryYear(new Date().getFullYear()));
+    dispatch(changeCategory('expenses'));
+    //dispatch(newRefresh());
+  }, []);
+
+  useEffect(() => {
+    if (token && year) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       dispatch(getTransactionsAnnual(year));
     } else {
