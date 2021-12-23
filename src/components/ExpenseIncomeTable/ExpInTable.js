@@ -91,7 +91,7 @@ export default function ExpInTable({ children }) {
     // transactionsIncomseMonth,
   ]);
 
-  useEffect(() => {});
+  const formatInputValue = inputValue => Number(inputValue).toFixed(2);
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -119,7 +119,7 @@ export default function ExpInTable({ children }) {
     if (incomeStatus === true) {
       dispatch(
         newIncomeData({
-          sum: `${expenses}`,
+          sum: `${formatInputValue(expenses)}`,
           transactionName: `${request}`,
           category: `${category}`,
           income: true,
@@ -127,7 +127,7 @@ export default function ExpInTable({ children }) {
       );
       dispatch(
         changeIncomeTransaction({
-          sum: `${expenses}`,
+          sum: `${formatInputValue(expenses)}`,
           transactionName: `${request}`,
           category: `${category}`,
           income: true,
@@ -140,7 +140,7 @@ export default function ExpInTable({ children }) {
     }
     dispatch(
       newExpenseData({
-        sum: `${expenses}`,
+        sum: `${formatInputValue(expenses)}`,
         transactionName: `${request}`,
         category: `${category}`,
         income: false,
@@ -148,7 +148,7 @@ export default function ExpInTable({ children }) {
     );
     dispatch(
       changeExpenseTransaction({
-        sum: `${expenses}`,
+        sum: `${formatInputValue(expenses)}`,
         transactionName: `${request}`,
         category: `${category}`,
         income: false,

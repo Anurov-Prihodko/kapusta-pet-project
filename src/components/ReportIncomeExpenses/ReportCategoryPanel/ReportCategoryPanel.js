@@ -60,7 +60,7 @@ export default function ReportCategoryPanel({
       <ul className={styles.categoryList}>
         {categoryData?.map(({ category, iconName, totalSum }, index) => (
           <li key={index} className={styles.categoryItem}>
-            <span className={styles.categoryTotal}>{totalSum}.00</span>
+            <span className={styles.categoryTotal}>{totalSum.toFixed(2)}</span>
             <button
               className={getCategoryBtnClassNames(index)}
               onClick={() => setCategoryActiveIndex(index)}
