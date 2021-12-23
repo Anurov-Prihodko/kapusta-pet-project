@@ -19,6 +19,22 @@ const initialState = {
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
+  reducers: {
+    changeExpenseTransaction: (state, { payload }) => {
+      console.log(payload);
+      state.transactionsExpenseMonth = [
+        ...state.transactionsExpenseMonth,
+        payload,
+      ];
+    },
+    changeIncomeTransaction: (state, { payload }) => {
+      console.log([state.transactionsIncomeMonth, payload]);
+      state.transactionsIncomeMonth = [
+        ...state.transactionsIncomeMonth,
+        payload,
+      ];
+    },
+  },
 
   extraReducers: {
     /* Expense */
@@ -68,3 +84,6 @@ const transactionsSlice = createSlice({
 });
 
 export default transactionsSlice.reducer;
+
+export const { changeExpenseTransaction, changeIncomeTransaction } =
+  transactionsSlice.actions;

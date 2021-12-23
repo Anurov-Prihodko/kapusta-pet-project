@@ -27,6 +27,11 @@ import {
   getSummaryYear,
   getSummaryCategory,
 } from '../../redux/summary/summarySelectors';
+import {
+  changeExpenseTransaction,
+  changeIncomeTransaction,
+} from '../../redux/transactions/transactionsSlice';
+
 registerLocale('ru', ru);
 
 export default function ExpInTable({ children }) {
@@ -35,6 +40,8 @@ export default function ExpInTable({ children }) {
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
   const [search, setSearch] = useState('pending');
+
+  const transactionDate = startDate.toISOString();
 
   const incomeStatus = useSelector(getIncome);
 
@@ -74,8 +81,17 @@ export default function ExpInTable({ children }) {
     dispatch(getIncomseByDate(dateRequest(startDate)));
     dispatch(getExpenseByDate(dateRequest(startDate)));
     dispatch(changeSummaryYear(startDate.getFullYear()));
-    setSearch('pending');
-  }, [dispatch, search, startDate, incomeStatus]);
+    // setSearch('pending');
+  }, [
+    dispatch,
+    search,
+    startDate,
+    incomeStatus,
+    // transactionsExpenseMonth,
+    // transactionsIncomseMonth,
+  ]);
+
+  useEffect(() => {});
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -109,6 +125,15 @@ export default function ExpInTable({ children }) {
           income: true,
         }),
       );
+      dispatch(
+        changeIncomeTransaction({
+          sum: `${expenses}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: true,
+          createdAt: transactionDate,
+        }),
+      );
       onClear();
       setSearch('fullfild');
       return;
@@ -119,6 +144,15 @@ export default function ExpInTable({ children }) {
         transactionName: `${request}`,
         category: `${category}`,
         income: false,
+      }),
+    );
+    dispatch(
+      changeExpenseTransaction({
+        sum: `${expenses}`,
+        transactionName: `${request}`,
+        category: `${category}`,
+        income: false,
+        createdAt: transactionDate,
       }),
     );
     onClear();

@@ -33,6 +33,14 @@ export default function HomeTable() {
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   dispatch(getExpenseByDate());
+  // }, [transactionsExpenseMonth]);
+
+  // useEffect(() => {
+  //   dispatch(getIncomseByDate());
+  // }, [transactionsIncomseMonth]);
+
   const onRemoveExspense = id => {
     dispatch(removeExspenseById(id));
     dispatch(getTransactionsAnnual(2021));
