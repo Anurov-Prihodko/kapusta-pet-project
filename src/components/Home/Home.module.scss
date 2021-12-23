@@ -4,23 +4,25 @@
   .home_container {
     position: absolute;
     top: 0;
-    left: 110px;
+    // left: 110px;// убился искать эту разметку!!!!!
+    left: 19px;
   }
 
   .reports {
     position: absolute;
-    top: 30px;
+    top: 94px;
     left: 83px;
   }
 
   .balance {
     position: absolute;
-    top: 94px;
+    top: 150px;
     left: 35px;
   }
 
   @media screen and (min-width: 768px) {
     .home_container {
+      position: absolute;
       top: 142px;
       left: 51px;
     }
@@ -38,6 +40,7 @@
 
   @media screen and (min-width: 1280px) {
     .home_container {
+      position: absolute;
       top: 93px;
       left: 110px;
     }
