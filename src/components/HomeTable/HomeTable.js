@@ -8,6 +8,7 @@ import {
   removeExspenseById,
   removeIncomseById,
 } from '../../redux/transactions/transactionsOperations';
+import { newRefresh } from '../../redux/summary/summarySlice';
 import './HomeTable.scss';
 import Icons from '../../Icons';
 
@@ -30,6 +31,13 @@ export default function HomeTable() {
   const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
 
   const dispatch = useDispatch();
+
+  function refreshSummary() {
+    setInterval(() => {
+      dispatch(newRefresh());
+    }, 3000);
+  }
+
   return (
     <>
       <div className={'wrapper-table table-scroll'}>
@@ -64,6 +72,7 @@ export default function HomeTable() {
                             id={_id}
                             onClick={() => {
                               dispatch(removeIncomseById(_id));
+                              refreshSummary();
                             }}
                           >
                             <Icons
@@ -91,6 +100,7 @@ export default function HomeTable() {
                             id={_id}
                             onClick={() => {
                               dispatch(removeExspenseById(_id));
+                              refreshSummary();
                             }}
                           >
                             <Icons

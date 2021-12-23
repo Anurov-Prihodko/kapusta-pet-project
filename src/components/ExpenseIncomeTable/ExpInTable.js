@@ -24,6 +24,7 @@ Component Summary requires the following additions to this file:*/
 import {
   changeSummaryYear,
   changeCategory,
+  newRefresh,
 } from '../../redux/summary/summarySlice';
 import {
   getSummaryYear,
@@ -60,6 +61,12 @@ export default function ExpInTable({ children }) {
     dispatch(changeCategory('incomes'));
     dispatch(changeSummaryYear(startDate.getFullYear()));
   }
+
+  function refreshSummary() {
+    setInterval(() => {
+      dispatch(newRefresh());
+    }, 3000);
+  }
   ////////////////////////////////////////////////////////////////
 
   // const utcDate = startDate.setHours(startDate.getHours() + 2);
@@ -90,6 +97,7 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = event => {
+    refreshSummary();
     if (category === '') {
       return;
     }
