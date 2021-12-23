@@ -14,6 +14,11 @@ import {
 } from '../../redux/summary/summarySelectors';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
+import {
+  getTransactionsExpenseMonth,
+  getTransactionsIncomseMonth,
+} from '../../redux/transactions/transactionsSelectors';
+
 const Summary = () => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
@@ -24,6 +29,9 @@ const Summary = () => {
 
   const token = useSelector(state => state.auth.token);
 
+  const transactionsExpenseMonth = useSelector(getTransactionsExpenseMonth);
+  const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
+
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -31,7 +39,14 @@ const Summary = () => {
     } else {
       return;
     }
-  }, [dispatch, token, year, category]);
+  }, [
+    dispatch,
+    token,
+    year,
+    category,
+    transactionsExpenseMonth,
+    transactionsIncomseMonth,
+  ]);
 
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
