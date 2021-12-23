@@ -4,6 +4,10 @@ import axios from 'axios';
 import s from './Summary.module.scss';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
+import {
+  getTransactionsExpenseMonth,
+  getTransactionsIncomseMonth,
+} from '../../redux/transactions/transactionsSelectors';
 
 import {
   getSummaryYear,
@@ -22,6 +26,9 @@ const Summary = () => {
   const incomes = useSelector(getSummaryIncomes);
   const dispatch = useDispatch();
 
+  const transactionsExpenseMonth = useSelector(getTransactionsExpenseMonth);
+  const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
+
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
@@ -31,7 +38,14 @@ const Summary = () => {
     } else {
       return;
     }
-  }, [dispatch, token, year, category]);
+  }, [
+    dispatch,
+    token,
+    year,
+    category,
+    transactionsExpenseMonth,
+    transactionsIncomseMonth,
+  ]);
 
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;

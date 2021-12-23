@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import { registerLocale } from 'react-datepicker';
+
 import { getIncome } from '../../redux/transactions/transactionsSelectors';
 import {
   getExpenseByDate,
   getIncomseByDate,
   changeIncome,
 } from '../../redux/transactions/transactionsOperations';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
-
 import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
