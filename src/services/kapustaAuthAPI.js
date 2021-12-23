@@ -20,10 +20,18 @@ async function deleteUserLoginData() {
   return data;
 }
 
+async function setBalance(newBalance) {
+
+  const { data } = await axios.post('/users/setBalance', newBalance)
+  
+  return data.balance
+}
+
 const kapustaAuthAPI = {
   postUserRegisterData,
   postUserLoginData,
   deleteUserLoginData,
+  setBalance
 };
 
 export default kapustaAuthAPI;
