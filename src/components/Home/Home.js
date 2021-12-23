@@ -1,5 +1,5 @@
 import s from './Home.module.scss';
-import Wrapper from '../Wrapper';
+// import Wrapper from '../Wrapper';
 import HomeTable from '../HomeTable';
 import MainHome from '../MainHome';
 import { Summary } from '../Summary';
