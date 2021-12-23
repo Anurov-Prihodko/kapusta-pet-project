@@ -73,6 +73,7 @@ export default function ExpInTable({ children }) {
   useEffect(() => {
     dispatch(getIncomseByDate(dateRequest(startDate)));
     dispatch(getExpenseByDate(dateRequest(startDate)));
+    dispatch(changeSummaryYear(startDate.getFullYear()));
     setSearch('pending');
   }, [dispatch, search, startDate, incomeStatus]);
 

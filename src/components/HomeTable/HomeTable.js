@@ -8,9 +8,10 @@ import {
   removeExspenseById,
   removeIncomseById,
 } from '../../redux/transactions/transactionsOperations';
-import { newRefresh } from '../../redux/summary/summarySlice';
+// import { newRefresh } from '../../redux/summary/summarySlice';
 import './HomeTable.scss';
 import Icons from '../../Icons';
+import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
 const shortid = require('shortid'); // потом заменить _id с бека
 
@@ -32,11 +33,20 @@ export default function HomeTable() {
 
   const dispatch = useDispatch();
 
-  function refreshSummary() {
-    setInterval(() => {
-      dispatch(newRefresh());
-    }, 3000);
-  }
+  const onRemoveExspense = id => {
+    dispatch(removeExspenseById(id));
+    dispatch(getTransactionsAnnual(2021));
+  };
+
+  const onRemoveIncomse = id => {
+    dispatch(removeIncomseById(id));
+    dispatch(getTransactionsAnnual(2021));
+  };
+  // function refreshSummary() {
+  //   setInterval(() => {
+  //     dispatch(newRefresh());
+  //   }, 3000);
+  // }
 
   return (
     <>
@@ -70,10 +80,7 @@ export default function HomeTable() {
                             type="button"
                             className="table-body_btn"
                             id={_id}
-                            onClick={() => {
-                              dispatch(removeIncomseById(_id));
-                              refreshSummary();
-                            }}
+                            onClick={() => onRemoveIncomse(_id)}
                           >
                             <Icons
                               name="delete"
@@ -98,10 +105,7 @@ export default function HomeTable() {
                             type="button"
                             className="table-body_btn"
                             id={_id}
-                            onClick={() => {
-                              dispatch(removeExspenseById(_id));
-                              refreshSummary();
-                            }}
+                            onClick={() => onRemoveExspense(_id)}
                           >
                             <Icons
                               name="delete"
