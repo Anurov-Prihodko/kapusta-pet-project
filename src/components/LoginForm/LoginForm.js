@@ -134,7 +134,7 @@ export default function LoginForm() {
             Пароль:
           </span>
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Пароль"
             className={styles.input}

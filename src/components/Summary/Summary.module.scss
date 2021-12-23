@@ -1,0 +1,62 @@
+.summary__container {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .summary__container {
+    height: 372px;
+    display: block;
+    background-color: #f5f6fb;
+    border-radius: 20px;
+    width: 240px;
+  }
+
+  .summary__title {
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .summary__table {
+    width: 244px;
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+
+  .summary__month {
+    padding-left: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .summary__sum {
+    text-align: right;
+    padding-right: 20px;
+  }
+
+  .summary__table,
+  .summary__month,
+  .summary__sum {
+    border: 2px solid #ffffff;
+    border-collapse: collapse;
+  }
+
+  .summary__month,
+  .summary__sum {
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #52555f;
+  }
+}

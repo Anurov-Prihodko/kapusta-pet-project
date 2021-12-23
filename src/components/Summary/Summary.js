@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import s from './Summary.module.css';
+import s from './Summary.module.scss';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
 
@@ -25,11 +25,11 @@ const Summary = () => {
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    //console.log('year=', year, ', category=', category);
-    //console.log('token=', token);
-    if (year && category && token && refresh) {
+    if (token) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       dispatch(getTransactionsAnnual(year));
+    } else {
+      return;
     }
   }, [dispatch, token, year, category, refresh]);
 
@@ -46,7 +46,7 @@ const Summary = () => {
       <p className={s.summary__title}>Сводка</p>
       <table className={s.summary__table}>
         <tbody>
-          {summaryData.map((monthData, index) => {
+          {summaryData?.map((monthData, index) => {
             return (
               <tr key={index}>
                 <td className={s.summary__month}>{MONTHS[monthData.month]}</td>

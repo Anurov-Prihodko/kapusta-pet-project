@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Wrapper from '../Wrapper';
 import ReportCategoryPanel from './ReportCategoryPanel/ReportCategoryPanel';
 import ReportChart from './ReportChart/ReportChart';
 import ReportChartMobile from './ReportChart/ReportChartMobile';
+import styles from './ReportIncomeExpenses.module.scss';
 
 import { getTransactionsByDate } from '../../redux/reports/reportsOperations';
 import {
@@ -84,7 +84,7 @@ export default function ReportIncomeExpenses() {
   }
 
   return (
-    <Wrapper>
+    <div className={styles.container}>
       <ReportCategoryPanel
         categoryActiveIndex={categoryActiveIndex}
         setCategoryActiveIndex={setCategoryActiveIndex}
@@ -94,6 +94,6 @@ export default function ReportIncomeExpenses() {
         categoryData={categoryData}
       />
       {chartData && <Chart chartData={chartData} />}
-    </Wrapper>
+    </div>
   );
 }

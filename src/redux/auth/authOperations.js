@@ -31,6 +31,18 @@ const loginUser = createAsyncThunk(
   },
 );
 
+const loginUserViaGoogle = createAsyncThunk(
+  'auth/loginUserViaGoogle',
+  async ({ email, token }, { rejectWithValue }) => {
+    try {
+      authToken.set(token);
+      return { user: { email }, token };
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
 const logOutUser = createAsyncThunk(
   'auth/logOutUser',
   async (_, { rejectWithValue }) => {
@@ -46,6 +58,7 @@ const logOutUser = createAsyncThunk(
   },
 );
 
+
 const setBalance = createAsyncThunk(
   'auth/setBalance',
   async (newBalance, { rejectWithValue }) => {
@@ -59,4 +72,5 @@ const setBalance = createAsyncThunk(
   }
 )
 
-export { registerUser, loginUser, logOutUser, setBalance };
+export { registerUser, loginUser, logOutUser, loginUserViaGoogle, setBalance };
+

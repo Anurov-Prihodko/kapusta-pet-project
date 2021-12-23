@@ -17,21 +17,30 @@ import { BASE_URL } from '../../services/kapustaAPIConstants';
 import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
-registerLocale('ru', ru);
 
-/*
-Component Summary requires the following additions to this file:
-
-import { useDispatch, useSelector } from 'react-redux';
 import {
   changeSummaryYear,
   changeCategory,
+  newRefresh,
 } from '../../redux/summary/summarySlice';
 import {
+  // eslint-disable-next-line no-unused-vars
   getSummaryYear,
   getSummaryCategory,
 } from '../../redux/summary/summarySelectors';
+registerLocale('ru', ru);
 
+export default function ExpInTable({ children }) {
+  const [startDate, setStartDate] = useState(new Date());
+  const [request, setRequest] = useState('');
+  const [expenses, setExpenses] = useState('');
+  const [category, setCategory] = useState('');
+  const [search, setSearch] = useState('pending');
+
+  const incomeStatus = useSelector(getIncome);
+
+  const dispatch = useDispatch();
+  ////////////////////////////////////////////////////
   const prevCategory = useSelector(getSummaryCategory);
 
   function onChangeTime(date) {
@@ -51,18 +60,12 @@ import {
     dispatch(changeSummaryYear(startDate.getFullYear()));
   }
 
-*/
-
-export default function ExpInTable({ children }) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [request, setRequest] = useState('');
-  const [expenses, setExpenses] = useState('');
-  const [category, setCategory] = useState('');
-  const [search, setSearch] = useState('pending');
-
-  const incomeStatus = useSelector(getIncome);
-
-  const dispatch = useDispatch();
+  function refreshSummary() {
+    setInterval(() => {
+      dispatch(newRefresh());
+    }, 3000);
+  }
+  ////////////////////////////////////////////////////////////////
 
   // const utcDate = startDate.setHours(startDate.getHours() + 2);
   // const newDate = new Date(utcDate);
@@ -92,6 +95,10 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = event => {
+    refreshSummary();
+    if (category === '') {
+      return;
+    }
     if (incomeStatus === true) {
       return axios
         .post(`${BASE_URL}/transactions/income`, {
@@ -153,17 +160,25 @@ export default function ExpInTable({ children }) {
         </div> */}
         <div className={s.expintab}>
           <button
+            style={
+              incomeStatus === true ? { color: 'black' } : { color: '#ff751d' }
+            }
             className={s.tabtitle}
             onClick={() => {
               dispatch(changeIncome(false));
+              onCategoryExpenses();
             }}
           >
             РАСХОД
           </button>
           <button
+            style={
+              incomeStatus === false ? { color: 'black' } : { color: '#ff751d' }
+            }
             className={s.tabtitle}
             onClick={() => {
               dispatch(changeIncome(true));
+              onCategoryIncomes();
             }}
           >
             ДОХОД
@@ -186,8 +201,7 @@ export default function ExpInTable({ children }) {
                 selected={startDate}
                 onChange={date => {
                   setStartDate(date);
-                  dispatch(getExpenseByDate(dateRequest(date)));
-                  dispatch(getIncomseByDate(dateRequest(startDate)));
+                  onChangeTime(date);
                 }}
                 dateFormat="dd.MM.yyyy"
                 locale="ru"
@@ -201,30 +215,42 @@ export default function ExpInTable({ children }) {
                 type="text"
                 placeholder="Описание товара"
               />
-              <select
-                value={category}
-                onChange={changeSelect}
-                className={s.expinplace}
-              >
-                <option>Категория товара</option>
-                <option>Транспорт</option>
-                <option>Продукты</option>
-                <option>Здоровье</option>
-                <option>Алкоголь</option>
-                <option>Развлечения</option>
-                <option>Всё для дома</option>
-                <option>Техника</option>
-                <option>Коммуналка, связь</option>
-                <option>Спорт, хобби</option>
-                <option>Образование</option>
-                <option>Прочее</option>
-              </select>
+              {incomeStatus === false ? (
+                <select
+                  value={category}
+                  onChange={changeSelect}
+                  className={s.expinplace}
+                >
+                  <option value="">Категория товара</option>
+                  <option>Транспорт</option>
+                  <option>Продукты</option>
+                  <option>Здоровье</option>
+                  <option>Алкоголь</option>
+                  <option>Развлечения</option>
+                  <option>Всё для дома</option>
+                  <option>Техника</option>
+                  <option>Коммуналка, связь</option>
+                  <option>Спорт, хобби</option>
+                  <option>Образование</option>
+                  <option>Прочее</option>
+                </select>
+              ) : (
+                <select
+                  value={category}
+                  onChange={changeSelect}
+                  className={s.expinplace}
+                >
+                  <option value="">Категория дохода</option>
+                  <option>ЗП</option>
+                  <option>ДОП.ДОХОД</option>
+                </select>
+              )}
               <input
                 value={expenses}
                 onChange={handleNumbChange}
                 className={s.expinplace}
                 type="number"
-                placeholder="0,00"
+                placeholder="0"
               />
               <Icons
                 name="calculator"
@@ -273,13 +299,13 @@ export default function ExpInTable({ children }) {
             selected={startDate}
             onChange={date => {
               setStartDate(date);
-              dispatch(getExpenseByDate(dateRequest(date)));
-              dispatch(getIncomseByDate(dateRequest(startDate)));
+              onChangeTime(date);
             }}
             dateFormat="dd.MM.yyyy"
             locale="ru"
           />
         </div>
+        {children}
         {/* <div>Здесь мобильная таблица расходов</div> */}
         {/* <div className={s.expbtnblock}>
           <button className={s.expmobBtn}>Расход</button>

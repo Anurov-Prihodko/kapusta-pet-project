@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import s from './HeaderHome.module.scss';
@@ -15,7 +15,7 @@ export default function HeaderHome() {
 
   //const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.user.email);
-  const userName = userEmail ? nameFromEmail(userEmail) : 'User Name';
+  const userName = userEmail ? nameFromEmail(userEmail) : null;
   //OK console.log('email=', userEmail, ', name=', userName);
 
   useEffect(() => {
@@ -34,22 +34,24 @@ export default function HeaderHome() {
     <div className={s.header}>
       <Icons name="logo" className={s.header__logo} />
 
-      <div className={s.login__container}>
-        <div className={s.header__logout}>
-          <Icons name="U" width="8 " height="14" />
-        </div>
-        {mobile && (
-          <LogoutBtn onClick={togleModal}>
-            <Icons name="logout-1" width="16" height="16" />
-          </LogoutBtn>
-        )}
-        {desctopOrLaptopSize && (
-          <div className={s.header__user}>
-            <span className={s.logout__user_name}>{userName}</span>
-            <LogoutBtn onClick={togleModal}>Выйти</LogoutBtn>
+      {userName && (
+        <div className={s.login__container}>
+          <div className={s.header__logout}>
+            <Icons name="U" width="8 " height="14" />
           </div>
-        )}
-      </div>
+          {mobile && (
+            <LogoutBtn onClick={togleModal}>
+              <Icons name="logout-1" width="16" height="16" />
+            </LogoutBtn>
+          )}
+          {desctopOrLaptopSize && (
+            <div className={s.header__user}>
+              <span className={s.logout__user_name}>{userName}</span>
+              <LogoutBtn onClick={togleModal}>Выйти</LogoutBtn>
+            </div>
+          )}
+        </div>
+      )}
 
       {isModalOpen && (
         <Modal onClose={togleModal}>
