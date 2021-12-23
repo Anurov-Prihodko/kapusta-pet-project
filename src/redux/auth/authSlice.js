@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, loginUser, logOutUser } from '../auth/authOperations';
+import { registerUser, loginUser, logOutUser, setBalance } from '../auth/authOperations';
 
 const initialState = {
   user: {
     email: null,
-    balanse: null,
+    balance: null,
     balanceHasBeenSet: false,
   },
 
@@ -22,7 +22,7 @@ const authSlice = createSlice({
     [loginUser.fulfilled](state, action) {
       state.user.email = action.payload.user.email;
       state.token = action.payload.token;
-      state.user.balanse = action.payload.user.balance;
+      state.user.balance = action.payload.user.balance;
       state.user.balanceHasBeenSet = action.payload.user.balanceHasBeenSet;
     },
     [logOutUser.fulfilled](state, action) {
@@ -31,6 +31,10 @@ const authSlice = createSlice({
       };
       state.token = null;
     },
+    [setBalance.fulfilled](state, action) {
+      state.user.balance = action.payload
+      state.user.balanceHasBeenSet = true
+    }
   },
 });
 

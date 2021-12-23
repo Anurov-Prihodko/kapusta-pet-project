@@ -46,4 +46,17 @@ const logOutUser = createAsyncThunk(
   },
 );
 
-export { registerUser, loginUser, logOutUser };
+const setBalance = createAsyncThunk(
+  'auth/setBalance',
+  async (newBalance, { rejectWithValue }) => {
+    try {
+      const balance = kapustaAuthAPI.setBalance(newBalance)
+
+      return balance
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+)
+
+export { registerUser, loginUser, logOutUser, setBalance };
