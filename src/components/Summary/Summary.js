@@ -17,11 +17,6 @@ import {
 } from '../../redux/summary/summarySelectors';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
-import {
-  getTransactionsExpenseMonth,
-  getTransactionsIncomseMonth,
-} from '../../redux/transactions/transactionsSelectors';
-
 const Summary = () => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
@@ -33,9 +28,6 @@ const Summary = () => {
   const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
 
   const token = useSelector(state => state.auth.token);
-
-  const transactionsExpenseMonth = useSelector(getTransactionsExpenseMonth);
-  const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
 
   useEffect(() => {
     if (token) {
@@ -51,8 +43,6 @@ const Summary = () => {
     category,
     transactionsExpenseMonth,
     transactionsIncomseMonth,
-    year,
-    category,
   ]);
 
   let summaryData = [];
