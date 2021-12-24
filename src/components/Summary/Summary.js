@@ -45,6 +45,10 @@ const Summary = () => {
     transactionsIncomseMonth,
   ]);
 
+  // useEffect(() => {
+  //   dispatch(getTransactionsAnnual(year));
+  // }, [year, transactionsExpenseMonth, transactionsIncomseMonth, dispatch]);
+
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
   if (table) {

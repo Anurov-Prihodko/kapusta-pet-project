@@ -112,7 +112,6 @@ export default function ExpInTable({ children }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // refreshSummary();
     if (category === '') {
       return;
     }
@@ -138,25 +137,28 @@ export default function ExpInTable({ children }) {
       setSearch('fullfild');
       return;
     }
-    dispatch(
-      newExpenseData({
-        sum: `${formatInputValue(expenses)}`,
-        transactionName: `${request}`,
-        category: `${category}`,
-        income: false,
-      }),
-    );
-    dispatch(
-      changeExpenseTransaction({
-        sum: `${formatInputValue(expenses)}`,
-        transactionName: `${request}`,
-        category: `${category}`,
-        income: false,
-        createdAt: transactionDate,
-      }),
-    );
-    onClear();
-    setSearch('fullfild');
+    if (!incomeStatus === true) {
+      dispatch(
+        newExpenseData({
+          sum: `${formatInputValue(expenses)}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: false,
+        }),
+      );
+      dispatch(
+        changeExpenseTransaction({
+          sum: `${formatInputValue(expenses)}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: false,
+          createdAt: transactionDate,
+        }),
+      );
+      onClear();
+      setSearch('fullfild');
+      return;
+    }
   };
 
   return (
