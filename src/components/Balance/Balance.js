@@ -49,7 +49,7 @@ export default function Balance() {
           <label>
             <input
               disabled={balanceHasBeenSet}
-              value={newBalance}
+              value={newBalance.toFixed(2)}
               className={'balance-value'}
               type="number"
               autoComplete="off"

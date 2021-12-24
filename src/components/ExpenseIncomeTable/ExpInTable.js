@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DatePicker from 'react-datepicker';
-import { registerLocale } from 'react-datepicker';
-
 import { getIncome } from '../../redux/transactions/transactionsSelectors';
 import {
   getExpenseByDate,
   getIncomseByDate,
   changeIncome,
 } from '../../redux/transactions/transactionsOperations';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
+
 import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
@@ -20,8 +20,13 @@ import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 import {
   changeSummaryYear,
   changeCategory,
+  // newRefresh,
 } from '../../redux/summary/summarySlice';
-import { getSummaryCategory } from '../../redux/summary/summarySelectors';
+import {
+  // eslint-disable-next-line no-unused-vars
+  getSummaryYear,
+  getSummaryCategory,
+} from '../../redux/summary/summarySelectors';
 import {
   changeExpenseTransaction,
   changeIncomeTransaction,
@@ -61,6 +66,11 @@ export default function ExpInTable({ children }) {
     dispatch(changeSummaryYear(startDate.getFullYear()));
   }
 
+  // function refreshSummary() {
+  //   setInterval(() => {
+  //     dispatch(newRefresh());
+  //   }, 3000);
+  // }
   ////////////////////////////////////////////////////////////////
 
   // const utcDate = startDate.setHours(startDate.getHours() + 2);
@@ -71,7 +81,17 @@ export default function ExpInTable({ children }) {
     dispatch(getIncomseByDate(dateRequest(startDate)));
     dispatch(getExpenseByDate(dateRequest(startDate)));
     dispatch(changeSummaryYear(startDate.getFullYear()));
-  }, [dispatch, search, startDate, incomeStatus]);
+    // setSearch('pending');
+  }, [
+    dispatch,
+    search,
+    startDate,
+    incomeStatus,
+    // transactionsExpenseMonth,
+    // transactionsIncomseMonth,
+  ]);
+
+  const formatInputValue = inputValue => Number(inputValue).toFixed(2);
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -92,51 +112,51 @@ export default function ExpInTable({ children }) {
 
   const handleSubmit = event => {
     event.preventDefault();
+    // refreshSummary();
     if (category === '') {
       return;
     }
     if (incomeStatus === true) {
       dispatch(
+        newIncomeData({
+          sum: `${formatInputValue(expenses)}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: true,
+        }),
+      );
+      dispatch(
         changeIncomeTransaction({
-          sum: `${expenses}`,
+          sum: `${formatInputValue(expenses)}`,
           transactionName: `${request}`,
           category: `${category}`,
           income: true,
           createdAt: transactionDate,
-        }),
-      );
-      dispatch(
-        newIncomeData({
-          sum: `${expenses}`,
-          transactionName: `${request}`,
-          category: `${category}`,
-          income: true,
         }),
       );
       onClear();
       setSearch('fullfild');
       return;
-    } else {
-      dispatch(
-        changeExpenseTransaction({
-          sum: `${expenses}`,
-          transactionName: `${request}`,
-          category: `${category}`,
-          income: false,
-          createdAt: transactionDate,
-        }),
-      );
-      dispatch(
-        newExpenseData({
-          sum: `${expenses}`,
-          transactionName: `${request}`,
-          category: `${category}`,
-          income: false,
-        }),
-      );
-      onClear();
-      setSearch('fullfild');
     }
+    dispatch(
+      newExpenseData({
+        sum: `${formatInputValue(expenses)}`,
+        transactionName: `${request}`,
+        category: `${category}`,
+        income: false,
+      }),
+    );
+    dispatch(
+      changeExpenseTransaction({
+        sum: `${formatInputValue(expenses)}`,
+        transactionName: `${request}`,
+        category: `${category}`,
+        income: false,
+        createdAt: transactionDate,
+      }),
+    );
+    onClear();
+    setSearch('fullfild');
   };
 
   return (
@@ -289,74 +309,12 @@ export default function ExpInTable({ children }) {
             locale="ru"
           />
         </div>
-        {/* здесь мобильный инпут и */}
-        <div className={s.spaceforbuttons}>
-          <div className={s.mobileinput}>
-            <div className={s.mobtop}>
-              <input
-                className={s.mtopin}
-                type="text"
-                placeholder="Описание товара"
-              />
-              <select className={s.mtopin}>
-                <option>Категория товара</option>
-                <option>Транспорт</option>
-                <option>Продукты</option>
-                <option>Здоровье</option>
-                <option>Алкоголь</option>
-                <option>Развлечения</option>
-                <option>Всё для дома</option>
-                <option>Техника</option>
-                <option>Коммуналка, связь</option>
-                <option>Спорт, хобби</option>
-                <option>Образование</option>
-                <option>Прочее</option>
-              </select>
-            </div>
-            <div className={s.mtopbottom}>
-              <input
-                className={s.mtopin}
-                type="number"
-                placeholder="0.00 UAH"
-              />
-              <Icons
-                name="calculator"
-                width={20}
-                height={20}
-                className={s.mtopincalc}
-              />
-            </div>
-          </div>
-          <div className={s.btnmobinput}>
-            <ButtonBasic
-              type="submit"
-              active={true}
-              shadow={true}
-              name="enter"
-              // onClick={handleSubmit}
-            >
-              Ввод
-            </ButtonBasic>
-            <ButtonBasic
-              type="submit"
-              active={false}
-              shadow={true}
-              name="clean"
-              // onClick={onClear}
-            >
-              Очистить
-            </ButtonBasic>
-          </div>
-
-          {/* <MobileInput /> */}
-
-          <div className={s.expbtnblock}>
-            <button className={s.expmobBtn}>Расход</button>
-            <button className={s.expmobBtn}>Доход</button>
-          </div>
-        </div>
-        {/* Здесь мобильная таблица расходов */}
         {children}
+        {/* <div>Здесь мобильная таблица расходов</div> */}
+        {/* <div className={s.expbtnblock}>
+          <button className={s.expmobBtn}>Расход</button>
+          <button className={s.expmobBtn}>Доход</button>
+        </div> */}
       </section>
     </div>
   );
