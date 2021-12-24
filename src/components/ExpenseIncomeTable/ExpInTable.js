@@ -20,13 +20,8 @@ import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 import {
   changeSummaryYear,
   changeCategory,
-  // newRefresh,
 } from '../../redux/summary/summarySlice';
-import {
-  // eslint-disable-next-line no-unused-vars
-  getSummaryYear,
-  getSummaryCategory,
-} from '../../redux/summary/summarySelectors';
+import { getSummaryCategory } from '../../redux/summary/summarySelectors';
 import {
   changeExpenseTransaction,
   changeIncomeTransaction,
@@ -66,11 +61,6 @@ export default function ExpInTable({ children }) {
     dispatch(changeSummaryYear(startDate.getFullYear()));
   }
 
-  // function refreshSummary() {
-  //   setInterval(() => {
-  //     dispatch(newRefresh());
-  //   }, 3000);
-  // }
   ////////////////////////////////////////////////////////////////
 
   // const utcDate = startDate.setHours(startDate.getHours() + 2);
@@ -81,17 +71,7 @@ export default function ExpInTable({ children }) {
     dispatch(getIncomseByDate(dateRequest(startDate)));
     dispatch(getExpenseByDate(dateRequest(startDate)));
     dispatch(changeSummaryYear(startDate.getFullYear()));
-    // setSearch('pending');
-  }, [
-    dispatch,
-    search,
-    startDate,
-    incomeStatus,
-    // transactionsExpenseMonth,
-    // transactionsIncomseMonth,
-  ]);
-
-  useEffect(() => {});
+  }, [dispatch, search, startDate, incomeStatus]);
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -112,19 +92,10 @@ export default function ExpInTable({ children }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // refreshSummary();
     if (category === '') {
       return;
     }
     if (incomeStatus === true) {
-      dispatch(
-        newIncomeData({
-          sum: `${expenses}`,
-          transactionName: `${request}`,
-          category: `${category}`,
-          income: true,
-        }),
-      );
       dispatch(
         changeIncomeTransaction({
           sum: `${expenses}`,
@@ -134,29 +105,38 @@ export default function ExpInTable({ children }) {
           createdAt: transactionDate,
         }),
       );
+      dispatch(
+        newIncomeData({
+          sum: `${expenses}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: true,
+        }),
+      );
       onClear();
       setSearch('fullfild');
       return;
+    } else {
+      dispatch(
+        changeExpenseTransaction({
+          sum: `${expenses}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: false,
+          createdAt: transactionDate,
+        }),
+      );
+      dispatch(
+        newExpenseData({
+          sum: `${expenses}`,
+          transactionName: `${request}`,
+          category: `${category}`,
+          income: false,
+        }),
+      );
+      onClear();
+      setSearch('fullfild');
     }
-    dispatch(
-      newExpenseData({
-        sum: `${expenses}`,
-        transactionName: `${request}`,
-        category: `${category}`,
-        income: false,
-      }),
-    );
-    dispatch(
-      changeExpenseTransaction({
-        sum: `${expenses}`,
-        transactionName: `${request}`,
-        category: `${category}`,
-        income: false,
-        createdAt: transactionDate,
-      }),
-    );
-    onClear();
-    setSearch('fullfild');
   };
 
   return (

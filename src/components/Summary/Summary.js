@@ -12,7 +12,6 @@ import {
 import {
   getSummaryYear,
   getSummaryCategory,
-  // getSummaryRefresh,
   getSummaryExpenses,
   getSummaryIncomes,
 } from '../../redux/summary/summarySelectors';
@@ -21,7 +20,6 @@ import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 const Summary = () => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
-  // const refresh = useSelector(getSummaryRefresh);
   const expenses = useSelector(getSummaryExpenses);
   const incomes = useSelector(getSummaryIncomes);
   const dispatch = useDispatch();
@@ -41,10 +39,9 @@ const Summary = () => {
   }, [
     dispatch,
     token,
-    year,
-    category,
     transactionsExpenseMonth,
     transactionsIncomseMonth,
+    year,
   ]);
 
   let summaryData = [];

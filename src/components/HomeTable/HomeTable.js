@@ -8,11 +8,10 @@ import {
   removeExspenseById,
   removeIncomseById,
 } from '../../redux/transactions/transactionsOperations';
-// import { newRefresh } from '../../redux/summary/summarySlice';
 import './HomeTable.scss';
 import Icons from '../../Icons';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
-
+import { getSummaryYear } from '../../redux/summary/summarySelectors';
 const shortid = require('shortid'); // потом заменить _id с бека
 
 const tableHead = ['ДАТА', 'ОПИСАНИЕ', 'КАТЕГОРИЯ', 'СУММА'];
@@ -28,33 +27,21 @@ const dateFormatter = date => {
 
 export default function HomeTable() {
   const incomeStatus = useSelector(getIncome);
+  const year = useSelector(getSummaryYear);
   const transactionsExpenseMonth = useSelector(getTransactionsExpenseMonth);
   const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getExpenseByDate());
-  // }, [transactionsExpenseMonth]);
-
-  // useEffect(() => {
-  //   dispatch(getIncomseByDate());
-  // }, [transactionsIncomseMonth]);
-
   const onRemoveExspense = id => {
     dispatch(removeExspenseById(id));
-    dispatch(getTransactionsAnnual(2021));
+    dispatch(getTransactionsAnnual(year));
   };
 
   const onRemoveIncomse = id => {
     dispatch(removeIncomseById(id));
-    dispatch(getTransactionsAnnual(2021));
+    dispatch(getTransactionsAnnual(year));
   };
-  // function refreshSummary() {
-  //   setInterval(() => {
-  //     dispatch(newRefresh());
-  //   }, 3000);
-  // }
 
   return (
     <>

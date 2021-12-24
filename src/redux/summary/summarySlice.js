@@ -5,7 +5,6 @@ const initialState = {
   transactionsAnnual: null,
   summaryYear: null,
   category: null /*"expenses" or "incomes"*/,
-  // refresh: 1 /*incremented*/,
   loading: false,
   error: null,
 };
@@ -20,9 +19,6 @@ const summarySlice = createSlice({
     changeCategory: (state, { payload }) => {
       state.category = payload;
     },
-    // newRefresh: (state, { payload }) => {
-    //   state.refresh = state.refresh + 1;
-    // },
   },
   extraReducers: {
     [getTransactionsAnnual.pending](state) {
@@ -41,7 +37,6 @@ const summarySlice = createSlice({
   },
 });
 
-export const { changeSummaryYear, changeCategory, newRefresh } =
-  summarySlice.actions;
+export const { changeSummaryYear, changeCategory } = summarySlice.actions;
 
 export default summarySlice.reducer;
