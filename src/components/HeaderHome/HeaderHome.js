@@ -16,6 +16,7 @@ export default function HeaderHome() {
   //const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.user.email);
   const userName = userEmail ? nameFromEmail(userEmail) : null;
+  const userLetter = userName ? userName[0] : 'U';
   //OK console.log('email=', userEmail, ', name=', userName);
 
   useEffect(() => {
@@ -37,7 +38,8 @@ export default function HeaderHome() {
       {userName && (
         <div className={s.login__container}>
           <div className={s.header__logout}>
-            <Icons name="U" width="8 " height="14" />
+            {/*<Icons name='U' width="8 " height="14" />*/}
+            <p>{userLetter}</p>
           </div>
           {mobile && (
             <LogoutBtn onClick={togleModal}>

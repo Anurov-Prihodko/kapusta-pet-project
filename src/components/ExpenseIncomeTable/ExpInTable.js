@@ -20,7 +20,7 @@ import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 import {
   changeSummaryYear,
   changeCategory,
-  // newRefresh,
+  newRefresh,
 } from '../../redux/summary/summarySlice';
 import {
   // eslint-disable-next-line no-unused-vars
@@ -57,6 +57,10 @@ export default function ExpInTable({ children }) {
   function onCategoryIncomes() {
     dispatch(changeCategory('incomes'));
     dispatch(changeSummaryYear(startDate.getFullYear()));
+  }
+
+  function refreshSummary() {
+    dispatch(newRefresh());
   }
 
   // function refreshSummary() {
@@ -110,6 +114,7 @@ export default function ExpInTable({ children }) {
       );
       onClear();
       setSearch('fullfild');
+      refreshSummary();
       return;
     }
     dispatch(
@@ -122,6 +127,7 @@ export default function ExpInTable({ children }) {
     );
     onClear();
     setSearch('fullfild');
+    refreshSummary();
   };
 
   return (

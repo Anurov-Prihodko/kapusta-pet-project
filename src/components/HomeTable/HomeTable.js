@@ -33,9 +33,7 @@ export default function HomeTable() {
   const dispatch = useDispatch();
 
   function refreshSummary() {
-    setInterval(() => {
-      dispatch(newRefresh());
-    }, 3000);
+    dispatch(newRefresh());
   }
 
   return (
