@@ -42,6 +42,7 @@ const Summary = () => {
     transactionsExpenseMonth,
     transactionsIncomseMonth,
     year,
+    category,
   ]);
 
   let summaryData = [];
