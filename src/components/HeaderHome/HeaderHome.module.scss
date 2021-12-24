@@ -2,8 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 320px;
   padding: 12px 0 12px 19px;
+  background-color: #ffffff;
+  // border: 1px solid red; //
+  position: fixed;
+  width: 320px;
+  top: 0px;
+  z-index: 777;
 
   .login__container {
     display: inline-flex;
@@ -33,13 +38,7 @@
   }
 
   @media screen and (min-width: 768px) {
-    max-width: 768px;
-    // .logout__btn {
-    //   color: #52555f;
-    //   font-size: 12px;
-    //   line-height: 1.16;
-    //   letter-spacing: 0.04em;
-    // }
+    width: 768px;
 
     .logout__user_name {
       position: relative;
@@ -66,7 +65,7 @@
   }
 
   @media screen and (min-width: 1280px) {
-    max-width: 1280px;
+    width: 1280px;
   }
 }
 

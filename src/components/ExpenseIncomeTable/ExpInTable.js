@@ -289,12 +289,74 @@ export default function ExpInTable({ children }) {
             locale="ru"
           />
         </div>
+        {/* здесь мобильный инпут и */}
+        <div className={s.spaceforbuttons}>
+          <div className={s.mobileinput}>
+            <div className={s.mobtop}>
+              <input
+                className={s.mtopin}
+                type="text"
+                placeholder="Описание товара"
+              />
+              <select className={s.mtopin}>
+                <option>Категория товара</option>
+                <option>Транспорт</option>
+                <option>Продукты</option>
+                <option>Здоровье</option>
+                <option>Алкоголь</option>
+                <option>Развлечения</option>
+                <option>Всё для дома</option>
+                <option>Техника</option>
+                <option>Коммуналка, связь</option>
+                <option>Спорт, хобби</option>
+                <option>Образование</option>
+                <option>Прочее</option>
+              </select>
+            </div>
+            <div className={s.mtopbottom}>
+              <input
+                className={s.mtopin}
+                type="number"
+                placeholder="0.00 UAH"
+              />
+              <Icons
+                name="calculator"
+                width={20}
+                height={20}
+                className={s.mtopincalc}
+              />
+            </div>
+          </div>
+          <div className={s.btnmobinput}>
+            <ButtonBasic
+              type="submit"
+              active={true}
+              shadow={true}
+              name="enter"
+              // onClick={handleSubmit}
+            >
+              Ввод
+            </ButtonBasic>
+            <ButtonBasic
+              type="submit"
+              active={false}
+              shadow={true}
+              name="clean"
+              // onClick={onClear}
+            >
+              Очистить
+            </ButtonBasic>
+          </div>
+
+          {/* <MobileInput /> */}
+
+          <div className={s.expbtnblock}>
+            <button className={s.expmobBtn}>Расход</button>
+            <button className={s.expmobBtn}>Доход</button>
+          </div>
+        </div>
+        {/* Здесь мобильная таблица расходов */}
         {children}
-        {/* <div>Здесь мобильная таблица расходов</div> */}
-        {/* <div className={s.expbtnblock}>
-          <button className={s.expmobBtn}>Расход</button>
-          <button className={s.expmobBtn}>Доход</button>
-        </div> */}
       </section>
     </div>
   );
