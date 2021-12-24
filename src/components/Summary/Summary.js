@@ -4,11 +4,14 @@ import axios from 'axios';
 import s from './Summary.module.scss';
 import { MONTHS } from '../../utils/months';
 import { formatNumber } from '../../utils/formatNumber';
+import {
+  getTransactionsExpenseMonth,
+  getTransactionsIncomseMonth,
+} from '../../redux/transactions/transactionsSelectors';
 
 import {
   getSummaryYear,
   getSummaryCategory,
-  // getSummaryRefresh,
   getSummaryExpenses,
   getSummaryIncomes,
 } from '../../redux/summary/summarySelectors';
@@ -17,10 +20,12 @@ import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 const Summary = () => {
   const year = useSelector(getSummaryYear);
   const category = useSelector(getSummaryCategory);
-  // const refresh = useSelector(getSummaryRefresh);
   const expenses = useSelector(getSummaryExpenses);
   const incomes = useSelector(getSummaryIncomes);
   const dispatch = useDispatch();
+
+  const transactionsExpenseMonth = useSelector(getTransactionsExpenseMonth);
+  const transactionsIncomseMonth = useSelector(getTransactionsIncomseMonth);
 
   const token = useSelector(state => state.auth.token);
 
@@ -31,7 +36,14 @@ const Summary = () => {
     } else {
       return;
     }
-  }, [dispatch, token, year, category]);
+  }, [
+    dispatch,
+    token,
+    year,
+    category,
+    transactionsExpenseMonth,
+    transactionsIncomseMonth,
+  ]);
 
   let summaryData = [];
   const table = category === 'incomes' ? incomes : expenses;
