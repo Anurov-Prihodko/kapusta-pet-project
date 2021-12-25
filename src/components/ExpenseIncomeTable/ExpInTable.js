@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncome } from '../../redux/transactions/transactionsSelectors';
@@ -39,9 +40,10 @@ export default function ExpInTable({ children }) {
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
-  const [search, setSearch] = useState('pending');
 
-  const transactionDate = startDate.toISOString();
+  const utcDate = startDate.setHours(startDate.getHours() + 2);
+  const newDate = new Date(utcDate);
+  const transactionDate = newDate.toISOString();
 
   const incomeStatus = useSelector(getIncome);
 
@@ -73,23 +75,14 @@ export default function ExpInTable({ children }) {
   // }
   ////////////////////////////////////////////////////////////////
 
-  // const utcDate = startDate.setHours(startDate.getHours() + 2);
-  // const newDate = new Date(utcDate);
-  // const isoDate = newDate.toISOString();
-
   useEffect(() => {
-    dispatch(getIncomseByDate(dateRequest(startDate)));
-    dispatch(getExpenseByDate(dateRequest(startDate)));
     dispatch(changeSummaryYear(startDate.getFullYear()));
     // setSearch('pending');
-  }, [
-    dispatch,
-    search,
-    startDate,
-    incomeStatus,
-    // transactionsExpenseMonth,
-    // transactionsIncomseMonth,
-  ]);
+  }, []);
+
+  useEffect(() => {
+    dispatch(getExpenseByDate(dateRequest(startDate)));
+  }, []);
 
   const formatInputValue = inputValue => Number(inputValue).toFixed(2);
 
@@ -110,13 +103,13 @@ export default function ExpInTable({ children }) {
     setCategory('');
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     if (category === '') {
       return;
     }
     if (incomeStatus === true) {
-      dispatch(
+      await dispatch(
         newIncomeData({
           sum: `${formatInputValue(expenses)}`,
           transactionName: `${request}`,
@@ -133,12 +126,12 @@ export default function ExpInTable({ children }) {
           createdAt: transactionDate,
         }),
       );
+      dispatch(getIncomseByDate(dateRequest(startDate)));
       onClear();
-      setSearch('fullfild');
       return;
     }
     if (!incomeStatus === true) {
-      dispatch(
+      await dispatch(
         newExpenseData({
           sum: `${formatInputValue(expenses)}`,
           transactionName: `${request}`,
@@ -155,8 +148,8 @@ export default function ExpInTable({ children }) {
           createdAt: transactionDate,
         }),
       );
+      dispatch(getExpenseByDate(dateRequest(startDate)));
       onClear();
-      setSearch('fullfild');
       return;
     }
   };
@@ -171,6 +164,7 @@ export default function ExpInTable({ children }) {
             }
             className={s.tabtitle}
             onClick={() => {
+              dispatch(getExpenseByDate(dateRequest(startDate)));
               dispatch(changeIncome(false));
               onCategoryExpenses();
             }}
@@ -183,6 +177,7 @@ export default function ExpInTable({ children }) {
             }
             className={s.tabtitle}
             onClick={() => {
+              dispatch(getIncomseByDate(dateRequest(startDate)));
               dispatch(changeIncome(true));
               onCategoryIncomes();
             }}
