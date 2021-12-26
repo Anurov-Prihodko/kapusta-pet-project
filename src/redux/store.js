@@ -16,6 +16,7 @@ import reportsReducer from './reports/reportsSlice';
 import summaryReducer from './summary/summarySlice';
 import authReducer from './auth/authSlice';
 import transactionsSlice from './transactions/transactionsSlice';
+import categoriesSlice from './categories/categoriesSlice';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -38,6 +39,7 @@ const store = configureStore({
     reports: reportsReducer,
     summary: summaryReducer,
     transactions: transactionsSlice,
+    categories: categoriesSlice,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

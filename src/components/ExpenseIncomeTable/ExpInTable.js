@@ -7,15 +7,19 @@ import {
   getIncomseByDate,
   changeIncome,
 } from '../../redux/transactions/transactionsOperations';
+import {
+  getAllExpenseCategories,
+  addCategory,
+  removeCategoryById,
+} from '../../redux/categories/categoriesOperations';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
-
-import dateRequest from '../../services/dateRequest';
 import Icons from '../../Icons';
 import s from './ExpInTable.module.scss';
+import dateRequest from '../../services/dateRequest';
 import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 
 import {
@@ -28,6 +32,7 @@ import {
   getSummaryYear,
   getSummaryCategory,
 } from '../../redux/summary/summarySelectors';
+import { getAllCategories } from '../../redux/categories/categoriesSelectors';
 import {
   changeExpenseTransaction,
   changeIncomeTransaction,
@@ -40,6 +45,8 @@ export default function ExpInTable({ children }) {
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
+  const [newCategory, setNewCategory] = useState('');
+  const [activeBtn, setActiveBtn] = useState(false);
 
   const utcDate = startDate.setHours(startDate.getHours() + 2);
   const newDate = new Date(utcDate);
@@ -48,8 +55,11 @@ export default function ExpInTable({ children }) {
   const incomeStatus = useSelector(getIncome);
 
   const dispatch = useDispatch();
+
   ////////////////////////////////////////////////////
   const prevCategory = useSelector(getSummaryCategory);
+
+  const expenseCategories = useSelector(getAllCategories);
 
   function onChangeTime(date) {
     dispatch(changeSummaryYear(date.getFullYear()));
@@ -76,6 +86,7 @@ export default function ExpInTable({ children }) {
   ////////////////////////////////////////////////////////////////
 
   useEffect(() => {
+    dispatch(getAllExpenseCategories());
     dispatch(changeSummaryYear(startDate.getFullYear()));
     // setSearch('pending');
   }, []);
@@ -89,6 +100,10 @@ export default function ExpInTable({ children }) {
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
   };
+  const handleNewCategory = event => {
+    setNewCategory(event.currentTarget.value);
+  };
+
   const handleNumbChange = event => {
     setExpenses(event.currentTarget.value);
   };
@@ -101,6 +116,36 @@ export default function ExpInTable({ children }) {
     setExpenses('');
     setRequest('');
     setCategory('');
+  };
+
+  const addCatagory = event => {
+    setActiveBtn(!activeBtn);
+  };
+
+  const addNewCatagory = event => {
+    if (newCategory === '') {
+      return setActiveBtn(false);
+    }
+    dispatch(
+      addCategory({
+        category: newCategory,
+        income: false,
+        iconName: 'prochee',
+      }),
+    );
+    setActiveBtn(false);
+    setNewCategory('');
+  };
+
+  const deleteNewCatagory = event => {
+    if (newCategory === '') {
+      return setActiveBtn(false);
+    }
+    const curCategory = expenseCategories.find(
+      item => item.category === newCategory,
+    );
+    dispatch(removeCategoryById(curCategory._id));
+    setActiveBtn(false);
   };
 
   const handleSubmit = async event => {
@@ -217,13 +262,17 @@ export default function ExpInTable({ children }) {
                 placeholder="Описание товара"
               />
               {incomeStatus === false ? (
-                <select
-                  value={category}
-                  onChange={changeSelect}
-                  className={s.expinplace}
-                >
-                  <option value="">Категория товара</option>
-                  <option>Транспорт</option>
+                <>
+                  <select
+                    value={category}
+                    onChange={changeSelect}
+                    className={s.expinplace}
+                  >
+                    <option value="">Категория товара</option>
+                    {expenseCategories.map(item => (
+                      <option key={item.category}>{item.category}</option>
+                    ))}
+                    {/* <option>Транспорт</option>
                   <option>Продукты</option>
                   <option>Здоровье</option>
                   <option>Алкоголь</option>
@@ -233,8 +282,57 @@ export default function ExpInTable({ children }) {
                   <option>Коммуналка, связь</option>
                   <option>Спорт, хобби</option>
                   <option>Образование</option>
-                  <option>Прочее</option>
-                </select>
+                <option>Прочее</option> */}
+                  </select>
+                  <button
+                    type="click"
+                    onClick={addCatagory}
+                    className={s.btn_plus_category}
+                  >
+                    {activeBtn ? (
+                      <Icons
+                        name="minus"
+                        width={14}
+                        height={14}
+                        color={'#52555f'}
+                      />
+                    ) : (
+                      <Icons
+                        name="plus"
+                        width={14}
+                        height={14}
+                        color={'#52555f'}
+                      />
+                    )}
+                  </button>
+                  {activeBtn && (
+                    <div className={s.add_categoty}>
+                      <input
+                        type="text"
+                        value={newCategory}
+                        onChange={handleNewCategory}
+                        className={s.add_categoty_input}
+                        placeholder="Название категории"
+                      />
+                      <div>
+                        <button
+                          type="click"
+                          onClick={addNewCatagory}
+                          className={s.btn_new_category}
+                        >
+                          Добавить
+                        </button>
+                        <button
+                          type="click"
+                          onClick={deleteNewCatagory}
+                          className={s.btn_new_category}
+                        >
+                          Удалить
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               ) : (
                 <select
                   value={category}
