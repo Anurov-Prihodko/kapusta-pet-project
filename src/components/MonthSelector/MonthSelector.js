@@ -45,7 +45,7 @@ const MonthSelector = () => {
     <div className={s.selector_container}>
       <p className={s.selector_title}>Текущий период:</p>
       <div className={s.selector_line}>
-        <div className={s.href} onClick={previousMonth}>
+        <button className={s.selector_toggle_btn} onClick={previousMonth}>
           <Icons
             name="before"
             color="#FF751D"
@@ -53,12 +53,13 @@ const MonthSelector = () => {
             height="12"
             className={s.icon}
           />
+        </button>
+        <div className={s.label}>
+          <span className={s.month}>{MONTHS[month]}</span>
+          <span className={s.year}>{year}</span>
         </div>
 
-        <p className={s.month}>{MONTHS[month]}</p>
-        <p className={s.year}>{year}</p>
-
-        <div className={s.href} onClick={nextMonth}>
+        <button className={s.selector_toggle_btn} onClick={nextMonth}>
           <Icons
             name="after"
             color="#FF751D"
@@ -66,7 +67,7 @@ const MonthSelector = () => {
             height="12"
             className={s.icon}
           />
-        </div>
+        </button>
       </div>
     </div>
   );
