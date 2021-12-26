@@ -17,7 +17,7 @@ const MonthSelector = () => {
   useEffect(() => {
     dispatch(changeReportYear(year));
     dispatch(changeReportMonth(month + 1));
-  }, [dispatch, month, year]);
+  }, []);
 
   function previousMonth() {
     if (month === 0) {
@@ -25,7 +25,7 @@ const MonthSelector = () => {
       setMonth(11);
 
       dispatch(changeReportYear(year - 1));
-      dispatch(changeReportMonth('12'));
+      dispatch(changeReportMonth(12));
     } else {
       setMonth(month - 1);
 
@@ -38,12 +38,12 @@ const MonthSelector = () => {
       setYear(year + 1);
       setMonth(0);
 
-      dispatch(changeReportYear(String(year + 1)));
-      dispatch(changeReportMonth('1'));
+      dispatch(changeReportYear(year + 1));
+      dispatch(changeReportMonth(1));
     } else {
       setMonth(month + 1);
 
-      dispatch(changeReportMonth(String(month + 1)));
+      dispatch(changeReportMonth(month + 1));
     }
   }
 
