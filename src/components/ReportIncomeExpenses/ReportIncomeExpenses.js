@@ -10,8 +10,7 @@ import { getTransactionsByDate } from '../../redux/reports/reportsOperations';
 import {
   getCategoryDataExpense,
   getCategoryDataIncome,
-  getReportMonth,
-  getReportYear,
+  getReportDate,
 } from '../../redux/reports/reportsSelectors';
 
 const Chart = ({ chartData }) => {
@@ -40,20 +39,14 @@ export default function ReportIncomeExpenses() {
 
   const dispatch = useDispatch();
 
-  const reportMonth = useSelector(getReportMonth);
-  const reportYear = useSelector(getReportYear);
+  const reportDate = useSelector(getReportDate);
 
   const categoryDataExpense = useSelector(getCategoryDataExpense);
   const categoryDataIncome = useSelector(getCategoryDataIncome);
 
   useEffect(() => {
-    let reportDate;
-
-    if (reportMonth && reportYear) {
-      reportDate = `${reportMonth}-${reportYear}`;
-      dispatch(getTransactionsByDate(reportDate));
-    }
-  }, [dispatch, reportMonth, reportYear]);
+    if (reportDate) dispatch(getTransactionsByDate(reportDate));
+  }, [dispatch, reportDate]);
 
   let chartTransactionsDataExpense;
   if (categoryDataExpense) {

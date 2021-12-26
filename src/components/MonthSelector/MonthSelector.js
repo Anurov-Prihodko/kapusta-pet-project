@@ -3,10 +3,7 @@ import Icons from '../../Icons';
 import s from './MonthSelector.module.css';
 import { MONTHS } from '../../utils/months';
 import { useDispatch } from 'react-redux';
-import {
-  changeReportMonth,
-  changeReportYear,
-} from '../../redux/reports/reportsSlice';
+import { changeReportDate } from '../../redux/reports/reportsSlice';
 
 const MonthSelector = () => {
   const now = new Date();
@@ -15,8 +12,7 @@ const MonthSelector = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(changeReportYear(year));
-    dispatch(changeReportMonth(month + 1));
+    dispatch(changeReportDate(`${month + 1}-${year}`));
   }, []);
 
   function previousMonth() {
@@ -24,12 +20,11 @@ const MonthSelector = () => {
       setYear(year - 1);
       setMonth(11);
 
-      dispatch(changeReportYear(year - 1));
-      dispatch(changeReportMonth(12));
+      dispatch(changeReportDate(`${12}-${year - 1}`));
     } else {
       setMonth(month - 1);
 
-      dispatch(changeReportMonth(month - 1));
+      dispatch(changeReportDate(`${month}-${year}`));
     }
   }
 
@@ -38,12 +33,11 @@ const MonthSelector = () => {
       setYear(year + 1);
       setMonth(0);
 
-      dispatch(changeReportYear(year + 1));
-      dispatch(changeReportMonth(1));
+      dispatch(changeReportDate(`${1}-${year + 1}`));
     } else {
       setMonth(month + 1);
 
-      dispatch(changeReportMonth(month + 1));
+      dispatch(changeReportDate(`${month + 2}-${year}`));
     }
   }
 
