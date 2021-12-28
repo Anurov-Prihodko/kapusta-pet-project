@@ -11,6 +11,8 @@ import {
   getCategoryDataExpense,
   getCategoryDataIncome,
   getReportDate,
+  getTransactionsAllLoading,
+  getTransactionsAllError,
 } from '../../redux/reports/reportsSelectors';
 
 const Chart = ({ chartData }) => {
@@ -43,6 +45,8 @@ export default function ReportIncomeExpenses() {
 
   const categoryDataExpense = useSelector(getCategoryDataExpense);
   const categoryDataIncome = useSelector(getCategoryDataIncome);
+  const isTransactionsLoading = useSelector(getTransactionsAllLoading);
+  const isTransactionsError = useSelector(getTransactionsAllError);
 
   useEffect(() => {
     if (reportDate) dispatch(getTransactionsByDate(reportDate));
@@ -75,6 +79,16 @@ export default function ReportIncomeExpenses() {
     chartData = chartTransactionsDataIncome;
     reportLabel = 'Доходы';
   }
+
+  if (isTransactionsLoading)
+    return <p className={styles.notification}>Загружается...</p>;
+
+  if (isTransactionsError)
+    return (
+      <p className={styles.notification}>
+        Извините, что-то пошло не так... Попробуйте ещё раз позже
+      </p>
+    );
 
   return (
     <div className={styles.container}>
