@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncome } from '../../redux/transactions/transactionsSelectors';
@@ -25,10 +24,8 @@ import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 import {
   changeSummaryYear,
   changeCategory,
-  // newRefresh,
 } from '../../redux/summary/summarySlice';
 import {
-  // eslint-disable-next-line no-unused-vars
   getSummaryYear,
   getSummaryCategory,
 } from '../../redux/summary/summarySelectors';
@@ -37,6 +34,7 @@ import {
   changeExpenseTransaction,
   changeIncomeTransaction,
 } from '../../redux/transactions/transactionsSlice';
+import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
 registerLocale('ru', ru);
 
@@ -53,7 +51,7 @@ export default function ExpInTable({ children }) {
   const transactionDate = newDate.toISOString();
 
   const incomeStatus = useSelector(getIncome);
-
+  const year = useSelector(getSummaryYear);
   const dispatch = useDispatch();
 
   ////////////////////////////////////////////////////
@@ -78,17 +76,11 @@ export default function ExpInTable({ children }) {
     dispatch(changeSummaryYear(startDate.getFullYear()));
   }
 
-  // function refreshSummary() {
-  //   setInterval(() => {
-  //     dispatch(newRefresh());
-  //   }, 3000);
-  // }
   ////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     dispatch(getAllExpenseCategories());
     dispatch(changeSummaryYear(startDate.getFullYear()));
-    // setSearch('pending');
   }, []);
 
   useEffect(() => {
@@ -150,6 +142,7 @@ export default function ExpInTable({ children }) {
 
   const handleSubmit = async event => {
     event.preventDefault();
+
     if (category === '') {
       return;
     }
@@ -173,6 +166,7 @@ export default function ExpInTable({ children }) {
       );
       dispatch(getIncomseByDate(dateRequest(startDate)));
       onClear();
+      dispatch(getTransactionsAnnual(year));
       return;
     }
     if (!incomeStatus === true) {
@@ -195,8 +189,23 @@ export default function ExpInTable({ children }) {
       );
       dispatch(getExpenseByDate(dateRequest(startDate)));
       onClear();
+      dispatch(getTransactionsAnnual(year));
       return;
     }
+  };
+
+  const getIncomeList = () => {
+    dispatch(getIncomseByDate(dateRequest(startDate)));
+    dispatch(changeIncome(true));
+    onCategoryIncomes();
+    dispatch(getTransactionsAnnual(year));
+  };
+
+  const getExpenseList = () => {
+    dispatch(getExpenseByDate(dateRequest(startDate)));
+    dispatch(changeIncome(false));
+    onCategoryExpenses();
+    dispatch(getTransactionsAnnual(year));
   };
 
   return (
@@ -208,11 +217,12 @@ export default function ExpInTable({ children }) {
               incomeStatus === true ? { color: 'black' } : { color: '#ff751d' }
             }
             className={s.tabtitle}
-            onClick={() => {
-              dispatch(getExpenseByDate(dateRequest(startDate)));
-              dispatch(changeIncome(false));
-              onCategoryExpenses();
-            }}
+            onClick={getExpenseList}
+            // onClick={() => {
+            //   dispatch(getExpenseByDate(dateRequest(startDate)));
+            //   dispatch(changeIncome(false));
+            //   onCategoryExpenses();
+            // }}
           >
             РАСХОД
           </button>
@@ -221,11 +231,12 @@ export default function ExpInTable({ children }) {
               incomeStatus === false ? { color: 'black' } : { color: '#ff751d' }
             }
             className={s.tabtitle}
-            onClick={() => {
-              dispatch(getIncomseByDate(dateRequest(startDate)));
-              dispatch(changeIncome(true));
-              onCategoryIncomes();
-            }}
+            onClick={getIncomeList}
+            // onClick={() => {
+            //   dispatch(getIncomseByDate(dateRequest(startDate)));
+            //   dispatch(changeIncome(true));
+            //   onCategoryIncomes();
+            // }}
           >
             ДОХОД
           </button>
@@ -272,17 +283,6 @@ export default function ExpInTable({ children }) {
                     {expenseCategories.map(item => (
                       <option key={item.category}>{item.category}</option>
                     ))}
-                    {/* <option>Транспорт</option>
-                  <option>Продукты</option>
-                  <option>Здоровье</option>
-                  <option>Алкоголь</option>
-                  <option>Развлечения</option>
-                  <option>Всё для дома</option>
-                  <option>Техника</option>
-                  <option>Коммуналка, связь</option>
-                  <option>Спорт, хобби</option>
-                  <option>Образование</option>
-                <option>Прочее</option> */}
                   </select>
                   <button
                     type="click"
