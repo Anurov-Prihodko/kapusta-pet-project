@@ -57,8 +57,11 @@
 
       window.onload = function () {
         let loadTime = new Date();
+        // console.log('loadTime: ', loadTime);
         let unloadTime = new Date(JSON.parse(window.localStorage.unloadTime));
+        // console.log('unloadTime: ', unloadTime);
         let refreshTime = loadTime.getTime() - unloadTime.getTime();
+        // console.log(refreshTime);
 
         if (refreshTime > 3000) {
           //3000 milliseconds
