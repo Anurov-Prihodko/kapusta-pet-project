@@ -10,8 +10,9 @@ import { getTransactionsByDate } from '../../redux/reports/reportsOperations';
 import {
   getCategoryDataExpense,
   getCategoryDataIncome,
-  getReportMonth,
-  getReportYear,
+  getReportDate,
+  getTransactionsAllLoading,
+  getTransactionsAllError,
 } from '../../redux/reports/reportsSelectors';
 
 const Chart = ({ chartData }) => {
@@ -40,20 +41,16 @@ export default function ReportIncomeExpenses() {
 
   const dispatch = useDispatch();
 
-  const reportMonth = useSelector(getReportMonth);
-  const reportYear = useSelector(getReportYear);
+  const reportDate = useSelector(getReportDate);
 
   const categoryDataExpense = useSelector(getCategoryDataExpense);
   const categoryDataIncome = useSelector(getCategoryDataIncome);
+  const isTransactionsLoading = useSelector(getTransactionsAllLoading);
+  const isTransactionsError = useSelector(getTransactionsAllError);
 
   useEffect(() => {
-    let reportDate;
-
-    if (reportMonth && reportYear) {
-      reportDate = `${reportMonth}-${reportYear}`;
-      dispatch(getTransactionsByDate(reportDate));
-    }
-  }, [dispatch, reportMonth, reportYear]);
+    if (reportDate) dispatch(getTransactionsByDate(reportDate));
+  }, [dispatch, reportDate]);
 
   let chartTransactionsDataExpense;
   if (categoryDataExpense) {
@@ -82,6 +79,16 @@ export default function ReportIncomeExpenses() {
     chartData = chartTransactionsDataIncome;
     reportLabel = 'Доходы';
   }
+
+  if (isTransactionsLoading)
+    return <p className={styles.notification}>Загружается...</p>;
+
+  if (isTransactionsError)
+    return (
+      <p className={styles.notification}>
+        Извините, что-то пошло не так... Попробуйте ещё раз позже
+      </p>
+    );
 
   return (
     <div className={styles.container}>

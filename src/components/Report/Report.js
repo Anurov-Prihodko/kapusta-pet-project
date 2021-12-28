@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import {
-  getExpensesTotalSum, getIncomesTotalSum
+  getExpensesTotalSum,
+  getIncomesTotalSum,
 } from '../../redux/reports/reportsSelectors';
 import Balance from '../Balance';
 import { IncomesOutcomesMonthly } from '../IncomesOutcomesMonthly';
@@ -11,8 +12,6 @@ import ReportIncomeExpenses from '../ReportIncomeExpenses';
 import { ReturnHome } from '../ReturnHome';
 import Wrapper from '../Wrapper';
 import s from './Report.module.scss';
-
-
 
 export default function Report() {
   const incomesTotalSum = useSelector(getIncomesTotalSum);

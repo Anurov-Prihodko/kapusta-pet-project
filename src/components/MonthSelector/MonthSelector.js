@@ -3,10 +3,7 @@ import Icons from '../../Icons';
 import s from './MonthSelector.module.css';
 import { MONTHS } from '../../utils/months';
 import { useDispatch } from 'react-redux';
-import {
-  changeReportMonth,
-  changeReportYear,
-} from '../../redux/reports/reportsSlice';
+import { changeReportDate } from '../../redux/reports/reportsSlice';
 
 const MonthSelector = () => {
   const now = new Date();
@@ -15,21 +12,19 @@ const MonthSelector = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(changeReportYear(year));
-    dispatch(changeReportMonth(month + 1));
-  }, [dispatch, month, year]);
+    dispatch(changeReportDate(`${month + 1}-${year}`));
+  }, []);
 
   function previousMonth() {
     if (month === 0) {
       setYear(year - 1);
       setMonth(11);
 
-      dispatch(changeReportYear(year - 1));
-      dispatch(changeReportMonth('12'));
+      dispatch(changeReportDate(`${12}-${year - 1}`));
     } else {
       setMonth(month - 1);
 
-      dispatch(changeReportMonth(month - 1));
+      dispatch(changeReportDate(`${month}-${year}`));
     }
   }
 
@@ -38,12 +33,11 @@ const MonthSelector = () => {
       setYear(year + 1);
       setMonth(0);
 
-      dispatch(changeReportYear(String(year + 1)));
-      dispatch(changeReportMonth('1'));
+      dispatch(changeReportDate(`${1}-${year + 1}`));
     } else {
       setMonth(month + 1);
 
-      dispatch(changeReportMonth(String(month + 1)));
+      dispatch(changeReportDate(`${month + 2}-${year}`));
     }
   }
 
@@ -51,7 +45,7 @@ const MonthSelector = () => {
     <div className={s.selector_container}>
       <p className={s.selector_title}>Текущий период:</p>
       <div className={s.selector_line}>
-        <div className={s.href} onClick={previousMonth}>
+        <button className={s.selector_toggle_btn} onClick={previousMonth}>
           <Icons
             name="before"
             color="#FF751D"
@@ -59,12 +53,13 @@ const MonthSelector = () => {
             height="12"
             className={s.icon}
           />
+        </button>
+        <div className={s.label}>
+          <span className={s.month}>{MONTHS[month]}</span>
+          <span className={s.year}>{year}</span>
         </div>
 
-        <p className={s.month}>{MONTHS[month]}</p>
-        <p className={s.year}>{year}</p>
-
-        <div className={s.href} onClick={nextMonth}>
+        <button className={s.selector_toggle_btn} onClick={nextMonth}>
           <Icons
             name="after"
             color="#FF751D"
@@ -72,7 +67,7 @@ const MonthSelector = () => {
             height="12"
             className={s.icon}
           />
-        </div>
+        </button>
       </div>
     </div>
   );

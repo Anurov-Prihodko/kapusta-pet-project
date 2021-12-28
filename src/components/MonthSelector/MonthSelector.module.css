@@ -2,7 +2,8 @@
 }
 
 .selector_title {
-  font-family: Roboto;
+  margin-bottom: 5px;
+
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -16,22 +17,32 @@
   justify-content: space-around;
 }
 
+.selector_toggle_btn {
+  padding: 0 10px;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 110px;
+}
+
 .month,
 .year {
-  font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.02em;
 }
+
 .month {
-  padding-left: 6px;
-  width: 72px;
-  text-align: right;
-}
-.year {
-  padding-left: 6px;
-  padding-right: 6px;
-  width: 44px;
+  margin-right: 5px;
 }
