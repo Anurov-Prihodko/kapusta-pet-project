@@ -3,6 +3,34 @@
   width: 100%;
 }
 
+.btn_plus_category {
+  border: none;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.add_categoty {
+  display: flex;
+  position: absolute;
+  top: -55px;
+  left: 193px;
+}
+
+.add_categoty_input {
+  padding-left: 10px;
+  background-color: rgba(255, 255, 255);
+  border-top-left-radius: 15px;
+  border: none;
+  height: 50px;
+}
+.btn_new_category {
+  text-align: center;
+  padding-right: 10px;
+  border-top-right-radius: 15px;
+  height: 25px;
+  border: none;
+  background-color: rgba(255, 255, 255);
+}
 .expinmain {
   display: block;
   // position: relative;
