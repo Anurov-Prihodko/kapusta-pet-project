@@ -16,7 +16,7 @@ export default function HeaderHome() {
   //const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.user.email);
   const userName = userEmail ? nameFromEmail(userEmail) : null;
-  //OK console.log('email=', userEmail, ', name=', userName);
+  // console.log('email=', userEmail, ', name=', userName);
 
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
@@ -33,8 +33,7 @@ export default function HeaderHome() {
   return (
     <div className={s.header}>
       <Icons name="logo" className={s.header__logo} />
-
-      {userName && (
+      {userName && userEmail ? (
         <div className={s.login__container}>
           <div className={s.header__logout}>
             <Icons name="U" width="8 " height="14" />
@@ -51,7 +50,7 @@ export default function HeaderHome() {
             </div>
           )}
         </div>
-      )}
+      ) : null}
 
       {isModalOpen && (
         <Modal onClose={togleModal}>
