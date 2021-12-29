@@ -35,27 +35,10 @@ const transactionsSlice = createSlice({
   },
 
   extraReducers: {
-    /* Expense */
-    // [addExpense.pending](state) {
-    //   state.expense = null;
-    // },
-    // [addExpense.fulfilled](state, action) {
-    //   state.expense = action.payload;
-    // },
-    // [addExpense.rejected](state, action) {
-    //   state.expense = null;
-    // },
-    /* Income */
-    // [changeIncome.pending](state) {
-    //   state.income = false;
-    // },
+  
     [changeIncome](state, action) {
       state.income = action.payload;
     },
-    // [changeIncome.rejected](state, action) {
-    //   state.income = false;
-    // },
-    /* getExpenseByDate */
     [getExpenseByDate.pending](state) {
       state.transactionsExpenseMonth = null;
     },
