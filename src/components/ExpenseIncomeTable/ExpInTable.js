@@ -146,7 +146,7 @@ export default function ExpInTable({ children }) {
     if (category === '') {
       return;
     }
-    if (incomeStatus === true) {
+    if (incomeStatus) {
       await dispatch(
         newIncomeData({
           sum: `${formatInputValue(expenses)}`,
@@ -155,21 +155,22 @@ export default function ExpInTable({ children }) {
           income: true,
         }),
       );
-      dispatch(
-        changeIncomeTransaction({
-          sum: `${formatInputValue(expenses)}`,
-          transactionName: `${request}`,
-          category: `${category}`,
-          income: true,
-          createdAt: transactionDate,
-        }),
-      );
-      dispatch(getIncomseByDate(dateRequest(startDate)));
+      // dispatch(
+      //   changeIncomeTransaction({
+      //     sum: `${formatInputValue(expenses)}`,
+      //     transactionName: `${request}`,
+      //     category: `${category}`,
+      //     income: true,
+      //     createdAt: transactionDate,
+      //   }),
+      // );
+      await dispatch(getTransactionsAnnual(year));
+      // await dispatch(getIncomseByDate(dateRequest(startDate)));
       onClear();
-      dispatch(getTransactionsAnnual(year));
+
       return;
     }
-    if (!incomeStatus === true) {
+    if (!incomeStatus) {
       await dispatch(
         newExpenseData({
           sum: `${formatInputValue(expenses)}`,
@@ -178,18 +179,19 @@ export default function ExpInTable({ children }) {
           income: false,
         }),
       );
-      dispatch(
-        changeExpenseTransaction({
-          sum: `${formatInputValue(expenses)}`,
-          transactionName: `${request}`,
-          category: `${category}`,
-          income: false,
-          createdAt: transactionDate,
-        }),
-      );
-      dispatch(getExpenseByDate(dateRequest(startDate)));
+      // dispatch(
+      //   changeExpenseTransaction({
+      //     sum: `${formatInputValue(expenses)}`,
+      //     transactionName: `${request}`,
+      //     category: `${category}`,
+      //     income: false,
+      //     createdAt: transactionDate,
+      //   }),
+      // );
+      await dispatch(getTransactionsAnnual(year));
+      // await dispatch(getExpenseByDate(dateRequest(startDate)));
       onClear();
-      dispatch(getTransactionsAnnual(year));
+
       return;
     }
   };
@@ -218,11 +220,6 @@ export default function ExpInTable({ children }) {
             }
             className={s.tabtitle}
             onClick={getExpenseList}
-            // onClick={() => {
-            //   dispatch(getExpenseByDate(dateRequest(startDate)));
-            //   dispatch(changeIncome(false));
-            //   onCategoryExpenses();
-            // }}
           >
             РАСХОД
           </button>
@@ -232,11 +229,6 @@ export default function ExpInTable({ children }) {
             }
             className={s.tabtitle}
             onClick={getIncomeList}
-            // onClick={() => {
-            //   dispatch(getIncomseByDate(dateRequest(startDate)));
-            //   dispatch(changeIncome(true));
-            //   onCategoryIncomes();
-            // }}
           >
             ДОХОД
           </button>
