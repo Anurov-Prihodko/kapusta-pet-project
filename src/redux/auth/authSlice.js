@@ -8,6 +8,10 @@ import {
   setBalance,
 } from '../auth/authOperations';
 import { newExpenseData, newIncomeData } from '../auth/authOperations';
+import {
+  removeExspenseById,
+  removeIncomseById,
+} from '../transactions/transactionsOperations';
 
 const initialState = {
   user: {
@@ -53,6 +57,15 @@ const authSlice = createSlice({
     [loginUserViaGoogle.fulfilled](state, action) {
       state.user.email = action.payload.user.email;
       state.token = action.payload.token;
+    },
+
+    [removeExspenseById.fulfilled](state, action) {
+      // console.log(action.payload)
+      state.user.balance = action.payload.balance
+    },
+    [removeIncomseById.fulfilled](state, action) {
+      // console.log(action.payload)
+      state.user.balance = action.payload.balance
     },
   },
 });

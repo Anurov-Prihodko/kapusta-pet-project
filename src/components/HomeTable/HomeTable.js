@@ -33,19 +33,13 @@ export default function HomeTable() {
 
   const dispatch = useDispatch();
 
-  const onRemoveExspense = id => {
-    // if (incomeStatus) {
-    //   return;
-    // }
-    dispatch(removeExspenseById(id));
+  const onRemoveExspense = async id => {
+    await dispatch(removeExspenseById(id));
     dispatch(getTransactionsAnnual(year));
   };
 
-  const onRemoveIncomse = id => {
-    // if (!incomeStatus) {
-    //   return;
-    // }
-    dispatch(removeIncomseById(id));
+  const onRemoveIncomse = async id => {
+    await dispatch(removeIncomseById(id));
     dispatch(getTransactionsAnnual(year));
   };
 

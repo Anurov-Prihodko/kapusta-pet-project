@@ -14,8 +14,9 @@ async function postIncomeData(incomeData) {
 }
 
 async function deleteTransactionById(transactionId) {
-  const { code } = await axios.delete(`/transactions/${transactionId}`);
-  return code;
+
+  const { data } = await axios.delete(`/transactions/${transactionId}`);
+  return data;
 }
 
 async function fetchIncomeByDate(date) {
