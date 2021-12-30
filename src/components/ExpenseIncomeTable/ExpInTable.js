@@ -30,10 +30,6 @@ import {
   getSummaryCategory,
 } from '../../redux/summary/summarySelectors';
 import { getAllCategories } from '../../redux/categories/categoriesSelectors';
-import {
-  changeExpenseTransaction,
-  changeIncomeTransaction,
-} from '../../redux/transactions/transactionsSlice';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
 registerLocale('ru', ru);
@@ -81,11 +77,11 @@ export default function ExpInTable({ children }) {
   useEffect(() => {
     dispatch(getAllExpenseCategories());
     dispatch(changeSummaryYear(startDate.getFullYear()));
-  }, []);
+  }, [startDate, dispatch]);
 
   useEffect(() => {
     dispatch(getExpenseByDate(dateRequest(startDate)));
-  }, []);
+  }, [startDate, dispatch]);
 
   const formatInputValue = inputValue => Number(inputValue).toFixed(2);
 
@@ -155,17 +151,8 @@ export default function ExpInTable({ children }) {
           income: true,
         }),
       );
-      // dispatch(
-      //   changeIncomeTransaction({
-      //     sum: `${formatInputValue(expenses)}`,
-      //     transactionName: `${request}`,
-      //     category: `${category}`,
-      //     income: true,
-      //     createdAt: transactionDate,
-      //   }),
-      // );
-      await dispatch(getTransactionsAnnual(year));
-      // await dispatch(getIncomseByDate(dateRequest(startDate)));
+      dispatch(getTransactionsAnnual(year));
+      dispatch(getIncomseByDate(dateRequest(startDate)));
       onClear();
 
       return;
@@ -179,17 +166,8 @@ export default function ExpInTable({ children }) {
           income: false,
         }),
       );
-      // dispatch(
-      //   changeExpenseTransaction({
-      //     sum: `${formatInputValue(expenses)}`,
-      //     transactionName: `${request}`,
-      //     category: `${category}`,
-      //     income: false,
-      //     createdAt: transactionDate,
-      //   }),
-      // );
-      await dispatch(getTransactionsAnnual(year));
-      // await dispatch(getExpenseByDate(dateRequest(startDate)));
+      dispatch(getTransactionsAnnual(year));
+      dispatch(getExpenseByDate(dateRequest(startDate)));
       onClear();
 
       return;
@@ -272,9 +250,11 @@ export default function ExpInTable({ children }) {
                     className={s.expinplace}
                   >
                     <option value="">Категория товара</option>
-                    {expenseCategories.map(item => (
-                      <option key={item.category}>{item.category}</option>
-                    ))}
+                    {expenseCategories
+                      .filter(item => item.income === false)
+                      .map(item => (
+                        <option key={item.category}>{item.category}</option>
+                      ))}
                   </select>
                   <button
                     type="click"
@@ -331,9 +311,12 @@ export default function ExpInTable({ children }) {
                   onChange={changeSelect}
                   className={s.expinplace}
                 >
-                  <option value="">Категория дохода</option>
-                  <option>ЗП</option>
-                  <option>ДОП.ДОХОД</option>
+                  <option value="">Категория товара</option>
+                  {expenseCategories
+                    .filter(item => item.income === true)
+                    .map(item => (
+                      <option key={item.category}>{item.category}</option>
+                    ))}
                 </select>
               )}
               <input
