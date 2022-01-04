@@ -19,23 +19,8 @@ const initialState = {
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
-  reducers: {
-    changeExpenseTransaction: (state, { payload }) => {
-      state.transactionsExpenseMonth = [
-        ...state.transactionsExpenseMonth,
-        payload,
-      ];
-    },
-    changeIncomeTransaction: (state, { payload }) => {
-      state.transactionsIncomeMonth = [
-        ...state.transactionsIncomeMonth,
-        payload,
-      ];
-    },
-  },
 
   extraReducers: {
-  
     [changeIncome](state, action) {
       state.income = action.payload;
     },
