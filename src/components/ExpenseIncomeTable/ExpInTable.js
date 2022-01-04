@@ -36,27 +36,28 @@ registerLocale('ru', ru);
 
 export default function ExpInTable({ children }) {
   // === Bugfix dataPicker
-  const dateMoment = new Date();
+
   // === End Bugfix dataPicker
 
-  const [startDate, setStartDate] = useState(dateMoment);
+  const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
   const [newCategory, setNewCategory] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
 
-  // === Зачем это?
+  // === Нужно для бека, чтобы передавать данные задним числом
   const utcDate = startDate.setHours(startDate.getHours() + 2);
   const newDate = new Date(utcDate);
   const transactionDate = newDate.toISOString();
-  // === End Зачем это?
+  // === End
 
   const incomeStatus = useSelector(getIncome);
   const year = useSelector(getSummaryYear);
   const dispatch = useDispatch();
 
   ////////////////////////////////////////////////////
+
   const prevCategory = useSelector(getSummaryCategory);
 
   const expenseCategories = useSelector(getAllCategories);
