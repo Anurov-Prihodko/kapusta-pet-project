@@ -35,16 +35,22 @@ import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 registerLocale('ru', ru);
 
 export default function ExpInTable({ children }) {
-  const [startDate, setStartDate] = useState(new Date());
+  // === Bugfix dataPicker
+  const dateMoment = new Date();
+  // === End Bugfix dataPicker
+
+  const [startDate, setStartDate] = useState(dateMoment);
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
   const [category, setCategory] = useState('');
   const [newCategory, setNewCategory] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
 
+  // === Зачем это?
   const utcDate = startDate.setHours(startDate.getHours() + 2);
   const newDate = new Date(utcDate);
   const transactionDate = newDate.toISOString();
+  // === End Зачем это?
 
   const incomeStatus = useSelector(getIncome);
   const year = useSelector(getSummaryYear);
@@ -80,7 +86,7 @@ export default function ExpInTable({ children }) {
   }, [startDate, dispatch]);
 
   useEffect(() => {
-    dispatch(getExpenseByDate(dateRequest(startDate)));
+    dispatch(getExpenseByDate(dateRequest(startDate))); // Два раза вызывается new Date()
   }, [startDate, dispatch]);
 
   const formatInputValue = inputValue => Number(inputValue).toFixed(2);
