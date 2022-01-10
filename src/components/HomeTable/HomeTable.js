@@ -65,7 +65,7 @@ export default function HomeTable() {
                     ({ _id, sum, transactionName, category, createdAt }) => (
                       <tr className={'table-body_row'} key={shortid.generate()}>
                         <td className={'table-body_data'}>
-                          {dateFormatter(createdAt)}
+                          {createdAt.split('-').join('.')}
                         </td>
                         <td className={'table-body_data'}>{transactionName}</td>
                         <td className={'table-body_data'}>{category}</td>
@@ -90,7 +90,7 @@ export default function HomeTable() {
                     ({ _id, sum, transactionName, category, createdAt }) => (
                       <tr className={'table-body_row'} key={shortid.generate()}>
                         <td className={'table-body_data'}>
-                          {dateFormatter(createdAt)}
+                          {createdAt.split('-').join('.')}
                         </td>
                         <td className={'table-body_data'}>{transactionName}</td>
                         <td className={'table-body_data'}>{category}</td>

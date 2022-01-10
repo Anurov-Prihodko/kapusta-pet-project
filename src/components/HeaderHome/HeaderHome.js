@@ -8,10 +8,14 @@ import LogoutBtn from '../LogoutBtn';
 import Modal from '../Modal';
 import ModalBody from '../ModalBody';
 import { nameFromEmail } from '../../utils/nameFromEmail';
+import { getUserToken } from '../../redux/auth/authSelectors';
 
 export default function HeaderHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const authToken = useSelector(getUserToken);
   const togleModal = () => setIsModalOpen(state => !state);
+
+  console.log(authToken);
 
   //const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.user.email);
@@ -33,7 +37,7 @@ export default function HeaderHome() {
   return (
     <div className={s.header}>
       <Icons name="logo" className={s.header__logo} />
-      {userName && userEmail ? (
+      {authToken ? (
         <div className={s.login__container}>
           <div className={s.header__logout}>
             <Icons name="U" width="8 " height="14" />

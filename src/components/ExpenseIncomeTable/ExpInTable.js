@@ -35,10 +35,6 @@ import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 registerLocale('ru', ru);
 
 export default function ExpInTable({ children }) {
-  // === Bugfix dataPicker
-
-  // === End Bugfix dataPicker
-
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState('');
   const [expenses, setExpenses] = useState('');
@@ -46,11 +42,19 @@ export default function ExpInTable({ children }) {
   const [newCategory, setNewCategory] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
 
-  // === Нужно для бека, чтобы передавать данные задним числом
-  const utcDate = startDate.setHours(startDate.getHours() + 2);
-  const newDate = new Date(utcDate);
-  const transactionDate = newDate.toISOString();
-  // === End
+  const dateFormatter = date => {
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    };
+    const normalDate = new Date(date)
+      .toLocaleString('Ru-ru', options)
+      .split('.')
+      .join('-');
+
+    return normalDate;
+  };
 
   const incomeStatus = useSelector(getIncome);
   const year = useSelector(getSummaryYear);
@@ -100,6 +104,15 @@ export default function ExpInTable({ children }) {
   };
 
   const handleNumbChange = event => {
+    if (expenses.includes('.')) {
+      if (expenses.split('.')[1].length > 1) {
+        alert('Слишком много символов после точки!');
+        setExpenses('');
+        return;
+      }
+      setExpenses(event.currentTarget.value);
+    }
+
     setExpenses(event.currentTarget.value);
   };
 
@@ -156,6 +169,7 @@ export default function ExpInTable({ children }) {
           transactionName: `${request}`,
           category: `${category}`,
           income: true,
+          createdAt: dateFormatter(startDate),
         }),
       );
       dispatch(getTransactionsAnnual(year));
@@ -171,6 +185,7 @@ export default function ExpInTable({ children }) {
           transactionName: `${request}`,
           category: `${category}`,
           income: false,
+          createdAt: dateFormatter(startDate),
         }),
       );
       dispatch(getTransactionsAnnual(year));
@@ -332,6 +347,8 @@ export default function ExpInTable({ children }) {
                 className={s.expinplace}
                 type="number"
                 placeholder="0"
+                // step="0.01"
+                // pattern="^\d*(\.\d{0,2})?$"
               />
               <Icons
                 name="calculator"

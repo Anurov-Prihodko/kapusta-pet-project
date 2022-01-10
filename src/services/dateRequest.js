@@ -1,7 +1,12 @@
 export default function dateRequest(date) {
   const tm = date;
 
-  const month = tm.getMonth() + 1;
+  let month = tm.getMonth() + 1;
+
+  if (month < 10) {
+    month = ('0' + month).slice(-2);
+  }
+
   const year = tm.getFullYear();
   const resTxt = month + '-' + year;
 
