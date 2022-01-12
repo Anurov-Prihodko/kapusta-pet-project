@@ -11,8 +11,18 @@ const MonthSelector = () => {
   const [year, setYear] = useState(now.getFullYear());
   const dispatch = useDispatch();
 
+  const currentDate = (month, year) => {
+    let m = month + 1;
+
+    if (m < 10) {
+      m = ('0' + m).slice(-2);
+    }
+    return m + '-' + year;
+  };
+
   useEffect(() => {
-    dispatch(changeReportDate(`${month + 1}-${year}`));
+    dispatch(changeReportDate(currentDate(month, year)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function previousMonth() {
@@ -24,6 +34,10 @@ const MonthSelector = () => {
     } else {
       setMonth(month - 1);
 
+      if (month < 10) {
+        dispatch(changeReportDate(`0${month}-${year}`));
+        return;
+      }
       dispatch(changeReportDate(`${month}-${year}`));
     }
   }
@@ -33,10 +47,14 @@ const MonthSelector = () => {
       setYear(year + 1);
       setMonth(0);
 
-      dispatch(changeReportDate(`${1}-${year + 1}`));
+      dispatch(changeReportDate(`0${1}-${year + 1}`));
     } else {
       setMonth(month + 1);
 
+      if (month < 8) {
+        dispatch(changeReportDate(`0${month + 2}-${year}`));
+        return;
+      }
       dispatch(changeReportDate(`${month + 2}-${year}`));
     }
   }

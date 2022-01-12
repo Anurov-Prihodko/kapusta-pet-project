@@ -16,14 +16,14 @@ const shortid = require('shortid'); // потом заменить _id с бек
 
 const tableHead = ['ДАТА', 'ОПИСАНИЕ', 'КАТЕГОРИЯ', 'СУММА'];
 
-const dateFormatter = date => {
-  const options = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-  };
-  return new Date(date).toLocaleString('Ru-ru', options);
-};
+// const dateFormatter = date => {
+//   const options = {
+//     year: 'numeric',
+//     month: 'numeric',
+//     day: 'numeric',
+//   };
+//   return new Date(date).toLocaleString('Ru-ru', options);
+// };
 
 export default function HomeTable() {
   const incomeStatus = useSelector(getIncome);
