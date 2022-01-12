@@ -91,7 +91,8 @@ export default function ExpInTable({ children }) {
   }, [startDate, dispatch]);
 
   useEffect(() => {
-    dispatch(getExpenseByDate(dateRequest(startDate))); // Два раза вызывается new Date()
+    dispatch(getExpenseByDate(dateRequest(startDate)));
+    dispatch(getIncomseByDate(dateRequest(startDate)));
   }, [startDate, dispatch]);
 
   const formatInputValue = inputValue => Number(inputValue).toFixed(2);
