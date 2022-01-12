@@ -134,13 +134,23 @@ export default function ExpInTable({ children }) {
     if (newCategory === '') {
       return setActiveBtn(false);
     }
-    dispatch(
-      addCategory({
-        category: newCategory,
-        income: false,
-        iconName: 'prochee',
-      }),
-    );
+    if (incomeStatus) {
+      dispatch(
+        addCategory({
+          category: newCategory,
+          income: true,
+          iconName: 'prochee',
+        }),
+      );
+    }
+    if (!incomeStatus)
+      dispatch(
+        addCategory({
+          category: newCategory,
+          income: false,
+          iconName: 'prochee',
+        }),
+      );
     setActiveBtn(false);
     setNewCategory('');
   };
@@ -328,18 +338,68 @@ export default function ExpInTable({ children }) {
                   )}
                 </>
               ) : (
-                <select
-                  value={category}
-                  onChange={changeSelect}
-                  className={s.expinplace}
-                >
-                  <option value="">Категория товара</option>
-                  {expenseCategories
-                    .filter(item => item.income === true)
-                    .map(item => (
-                      <option key={item.category}>{item.category}</option>
-                    ))}
-                </select>
+                <>
+                  <select
+                    value={category}
+                    onChange={changeSelect}
+                    className={s.expinplace}
+                  >
+                    <option value="">Категория товара</option>
+                    {expenseCategories
+                      .filter(item => item.income === true)
+                      .map(item => (
+                        <option key={item.category}>{item.category}</option>
+                      ))}
+                  </select>
+                  <button
+                    type="click"
+                    onClick={addCatagory}
+                    className={s.btn_plus_category}
+                  >
+                    {activeBtn ? (
+                      <Icons
+                        name="minus"
+                        width={14}
+                        height={14}
+                        color={'#52555f'}
+                      />
+                    ) : (
+                      <Icons
+                        name="plus"
+                        width={14}
+                        height={14}
+                        color={'#52555f'}
+                      />
+                    )}
+                  </button>
+                  {activeBtn && (
+                    <div className={s.add_categoty}>
+                      <input
+                        type="text"
+                        value={newCategory}
+                        onChange={handleNewCategory}
+                        className={s.add_categoty_input}
+                        placeholder="Название категории"
+                      />
+                      <div>
+                        <button
+                          type="click"
+                          onClick={addNewCatagory}
+                          className={s.btn_new_category}
+                        >
+                          Добавить
+                        </button>
+                        <button
+                          type="click"
+                          onClick={deleteNewCatagory}
+                          className={s.btn_new_category}
+                        >
+                          Удалить
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
               <input
                 value={expenses}
