@@ -17,6 +17,8 @@ import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import ButtonBasic from '../ButtonBasic/ButtonBasic';
 import Icons from '../../Icons';
+import Modal from '../Modal'; // -->Модалка на инпут для мобилки
+import MobileInput from '../MobileInput';
 import s from './ExpInTable.module.scss';
 import dateRequest from '../../services/dateRequest';
 import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
@@ -41,6 +43,10 @@ export default function ExpInTable({ children }) {
   const [category, setCategory] = useState('');
   const [newCategory, setNewCategory] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
+
+  // === Модалка на инпут для мобилки
+  const [isInputOpen, setIsInputOpen] = useState(false);
+  const togleInput = () => setIsInputOpen(state => !state);
 
   const dateFormatter = date => {
     const options = {
@@ -244,10 +250,11 @@ export default function ExpInTable({ children }) {
             ДОХОД
           </button>
         </div>
+        {/* Доска отчётов и инпутов */}
         <div className={s.expinboard}>
           <div className={s.expinrail}>
             <div className={s.calendarblock}>
-              <label data-for="date">
+              <label htmlFor="date">
                 <Icons
                   name="calendar"
                   width={20}
@@ -444,7 +451,7 @@ export default function ExpInTable({ children }) {
       </section>
       <section className={s.expinmainmobile}>
         <div className={s.calendarmob}>
-          <label data-for="datemob">
+          <label htmlFor="datemob">
             <Icons
               name="calendar"
               width={20}
@@ -466,11 +473,19 @@ export default function ExpInTable({ children }) {
         </div>
         {children}
         {/* <div>Здесь мобильная таблица расходов</div> */}
-        {/* <div className={s.expbtnblock}>
-          <button className={s.expmobBtn}>Расход</button>
+        <div className={s.expbtnblock}>
+          <button className={s.expmobBtn} onClick={togleInput}>
+            Расход
+          </button>
           <button className={s.expmobBtn}>Доход</button>
-        </div> */}
+        </div>
       </section>
+      {/* Модалка на инпут для мобилки */}
+      {isInputOpen && (
+        <Modal onClose={togleInput}>
+          <MobileInput />
+        </Modal>
+      )}
     </div>
   );
 }
