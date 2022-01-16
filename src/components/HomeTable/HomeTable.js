@@ -16,15 +16,6 @@ const shortid = require('shortid'); // потом заменить _id с бек
 
 const tableHead = ['ДАТА', 'ОПИСАНИЕ', 'КАТЕГОРИЯ', 'СУММА'];
 
-// const dateFormatter = date => {
-//   const options = {
-//     year: 'numeric',
-//     month: 'numeric',
-//     day: 'numeric',
-//   };
-//   return new Date(date).toLocaleString('Ru-ru', options);
-// };
-
 export default function HomeTable() {
   const incomeStatus = useSelector(getIncome);
   const year = useSelector(getSummaryYear);
@@ -69,7 +60,9 @@ export default function HomeTable() {
                         </td>
                         <td className={'table-body_data'}>{transactionName}</td>
                         <td className={'table-body_data'}>{category}</td>
-                        <td className={'table-body_data'}>{sum}</td>
+                        <td
+                          className={'table-body_data income-sum'}
+                        >{`${sum} грн.`}</td>
                         <td className={'table-body_data'}>
                           <button
                             type="button"
@@ -94,7 +87,9 @@ export default function HomeTable() {
                         </td>
                         <td className={'table-body_data'}>{transactionName}</td>
                         <td className={'table-body_data'}>{category}</td>
-                        <td className={'table-body_data'}>{sum}</td>
+                        <td
+                          className={'table-body_data expense-sum'}
+                        >{`- ${sum} грн.`}</td>
                         <td className={'table-body_data'}>
                           <button
                             type="button"
