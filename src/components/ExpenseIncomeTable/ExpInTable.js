@@ -408,8 +408,6 @@ export default function ExpInTable({ children }) {
                 className={s.expinplace}
                 type="number"
                 placeholder="0"
-                // step="0.01"
-                // pattern="^\d*(\.\d{0,2})?$"
               />
               <Icons
                 name="calculator"

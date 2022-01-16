@@ -143,9 +143,6 @@ input {
   border-left: 2px solid #f5f6fb;
   width: 166px;
   text-align: left;
-  @media screen and (min-width: 1280px) {
-    width: 184px;
-  }
 }
 
 .expinplace:nth-child(3) {
