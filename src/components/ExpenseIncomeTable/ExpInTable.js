@@ -233,7 +233,9 @@ export default function ExpInTable({ children }) {
         <div className={s.expintab}>
           <button
             style={
-              incomeStatus === true ? { color: 'black' } : { color: '#ff751d' }
+              incomeStatus === true
+                ? { color: 'black', background: '#fafbfd' }
+                : { color: '#ff751d', background: '#fefefe' }
             }
             className={s.tabtitle}
             onClick={getExpenseList}
@@ -242,7 +244,9 @@ export default function ExpInTable({ children }) {
           </button>
           <button
             style={
-              incomeStatus === false ? { color: 'black' } : { color: '#ff751d' }
+              incomeStatus === false
+                ? { color: 'black', background: '#fafbfd' }
+                : { color: '#ff751d', background: '#fefefe' }
             }
             className={s.tabtitle}
             onClick={getIncomeList}
@@ -471,13 +475,34 @@ export default function ExpInTable({ children }) {
             locale="ru"
           />
         </div>
+        <button className={s.plusbutton} onClick={togleInput}>
+          +
+        </button>
         {children}
         {/* <div>Здесь мобильная таблица расходов</div> */}
         <div className={s.expbtnblock}>
-          <button className={s.expmobBtn} onClick={togleInput}>
+          <button
+            style={
+              incomeStatus === false
+                ? { color: 'white', background: '#ff751d' }
+                : { color: '#000000', background: '#f5f6fb' }
+            }
+            className={s.expmobBtn}
+            onClick={getExpenseList}
+          >
             Расход
           </button>
-          <button className={s.expmobBtn}>Доход</button>
+          <button
+            style={
+              incomeStatus === true
+                ? { color: 'white', background: '#ff751d' }
+                : { color: '#000000', background: '#f5f6fb' }
+            }
+            className={s.expmobBtn}
+            onClick={getIncomeList}
+          >
+            Доход
+          </button>
         </div>
       </section>
       {/* Модалка на инпут для мобилки */}
