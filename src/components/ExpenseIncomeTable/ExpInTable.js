@@ -258,7 +258,7 @@ export default function ExpInTable({ children }) {
         <div className={s.expinboard}>
           <div className={s.expinrail}>
             <div className={s.calendarblock}>
-              <label data-for="date" for="date">
+              <label data-for="date" htmlFor="date">
                 <Icons
                   name="calendar"
                   width={20}

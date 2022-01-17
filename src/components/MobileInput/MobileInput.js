@@ -9,13 +9,20 @@ import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 import {
   getExpenseByDate,
   getIncomseByDate,
+  // eslint-disable-next-line no-unused-vars
+  changeIncome,
 } from '../../redux/transactions/transactionsOperations';
-import { getSummaryYear } from '../../redux/summary/summarySelectors';
+import {
+  getSummaryYear,
+  // eslint-disable-next-line no-unused-vars
+  getSummaryCategory,
+} from '../../redux/summary/summarySelectors';
 import dateRequest from '../../services/dateRequest';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
 export default function MobileInput() {
-  const [startDate] = useState(new Date());
+  // eslint-disable-next-line no-unused-vars
+  const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState('');
   const [category, setCategory] = useState('');
   const [expenses, setExpenses] = useState('');
