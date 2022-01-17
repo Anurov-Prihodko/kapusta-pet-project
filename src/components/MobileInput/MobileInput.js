@@ -19,6 +19,7 @@ import {
 } from '../../redux/summary/summarySelectors';
 import dateRequest from '../../services/dateRequest';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
+import { formatInputValue } from '../../utils/formatInputValue';
 
 export default function MobileInput() {
   // eslint-disable-next-line no-unused-vars
@@ -50,10 +51,10 @@ export default function MobileInput() {
     return normalDate;
   };
 
-  const formatInputValue = inputValue => {
-    const interValue = Number(inputValue).toFixed(2);
-    return Number(interValue);
-  };
+  // const formatInputValue = inputValue => {
+  //   const interValue = Number(inputValue).toFixed(2);
+  //   return Number(interValue);
+  // };
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);

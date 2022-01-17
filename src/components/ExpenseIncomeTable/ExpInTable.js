@@ -33,6 +33,7 @@ import {
 } from '../../redux/summary/summarySelectors';
 import { getAllCategories } from '../../redux/categories/categoriesSelectors';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
+import { formatInputValue } from '../../utils/formatInputValue';
 
 registerLocale('ru', ru);
 
@@ -101,11 +102,10 @@ export default function ExpInTable({ children }) {
     dispatch(getIncomseByDate(dateRequest(startDate)));
   }, [startDate, dispatch]);
 
-  const formatInputValue = inputValue => Number(inputValue).toFixed(2);
-
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
   };
+
   const handleNewCategory = event => {
     setNewCategory(event.currentTarget.value);
   };
@@ -174,7 +174,6 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = async event => {
-    // console.log(Number(formatInputValue(expenses)));
     event.preventDefault();
 
     if (category === '') {
@@ -183,7 +182,7 @@ export default function ExpInTable({ children }) {
     if (incomeStatus) {
       await dispatch(
         newIncomeData({
-          sum: Number(formatInputValue(expenses)),
+          sum: formatInputValue(expenses),
           transactionName: `${request}`,
           category: `${category}`,
           income: true,
@@ -199,7 +198,7 @@ export default function ExpInTable({ children }) {
     if (!incomeStatus) {
       await dispatch(
         newExpenseData({
-          sum: Number(formatInputValue(expenses)),
+          sum: formatInputValue(expenses),
           transactionName: `${request}`,
           category: `${category}`,
           income: false,
