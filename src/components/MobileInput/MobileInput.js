@@ -50,7 +50,10 @@ export default function MobileInput() {
     return normalDate;
   };
 
-  const formatInputValue = inputValue => Number(inputValue).toFixed(2);
+  const formatInputValue = inputValue => {
+    const interValue = Number(inputValue).toFixed(2);
+    return Number(interValue);
+  };
 
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
@@ -88,7 +91,7 @@ export default function MobileInput() {
     if (incomeStatus) {
       await dispatch(
         newIncomeData({
-          sum: `${formatInputValue(expenses)}`,
+          sum: formatInputValue(expenses),
           transactionName: `${request}`,
           category: `${category}`,
           income: true,
@@ -103,7 +106,7 @@ export default function MobileInput() {
     if (!incomeStatus) {
       await dispatch(
         newExpenseData({
-          sum: `${formatInputValue(expenses)}`,
+          sum: formatInputValue(expenses),
           transactionName: `${request}`,
           category: `${category}`,
           income: false,

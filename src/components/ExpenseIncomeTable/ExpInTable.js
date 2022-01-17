@@ -174,6 +174,7 @@ export default function ExpInTable({ children }) {
   };
 
   const handleSubmit = async event => {
+    // console.log(Number(formatInputValue(expenses)));
     event.preventDefault();
 
     if (category === '') {
@@ -182,7 +183,7 @@ export default function ExpInTable({ children }) {
     if (incomeStatus) {
       await dispatch(
         newIncomeData({
-          sum: `${formatInputValue(expenses)}`,
+          sum: Number(formatInputValue(expenses)),
           transactionName: `${request}`,
           category: `${category}`,
           income: true,
@@ -198,7 +199,7 @@ export default function ExpInTable({ children }) {
     if (!incomeStatus) {
       await dispatch(
         newExpenseData({
-          sum: `${formatInputValue(expenses)}`,
+          sum: Number(formatInputValue(expenses)),
           transactionName: `${request}`,
           category: `${category}`,
           income: false,
