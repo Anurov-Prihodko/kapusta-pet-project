@@ -258,7 +258,7 @@ export default function ExpInTable({ children }) {
         <div className={s.expinboard}>
           <div className={s.expinrail}>
             <div className={s.calendarblock}>
-              <label htmlFor="date">
+              <label data-for="date" for="date">
                 <Icons
                   name="calendar"
                   width={20}
@@ -419,8 +419,6 @@ export default function ExpInTable({ children }) {
                 className={s.expinplace}
                 type="number"
                 placeholder="0"
-                // step="0.01"
-                // pattern="^\d*(\.\d{0,2})?$"
               />
               <Icons
                 name="calculator"
