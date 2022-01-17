@@ -9,17 +9,13 @@ import { newExpenseData, newIncomeData } from '../../redux/auth/authOperations';
 import {
   getExpenseByDate,
   getIncomseByDate,
-  changeIncome,
 } from '../../redux/transactions/transactionsOperations';
-import {
-  getSummaryYear,
-  getSummaryCategory,
-} from '../../redux/summary/summarySelectors';
+import { getSummaryYear } from '../../redux/summary/summarySelectors';
 import dateRequest from '../../services/dateRequest';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 
 export default function MobileInput() {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate] = useState(new Date());
   const [request, setRequest] = useState('');
   const [category, setCategory] = useState('');
   const [expenses, setExpenses] = useState('');
