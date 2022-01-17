@@ -2,6 +2,9 @@
 
 .wrapper-table {
   width: 282px;
+  @media screen and (max-width: 767px) {
+    margin-top: 350px;
+  }
   // position: absolute;
   // top: 306px;
   // left: -91px;
@@ -99,6 +102,7 @@
     }
   }
 }
+
 
 .income-sum {
   color: #407946;
