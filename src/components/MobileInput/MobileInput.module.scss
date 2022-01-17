@@ -1,0 +1,69 @@
+.expininput {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: flex-end;
+  // width: 598px;
+  // height: 44px;
+  //   border: 2px solid #f5f6fb;
+  //   border-radius: 16px 16px 16px 0;
+  // margin-left: 24px;
+}
+
+.inputfirst {
+  border: 2px solid #f5f6fb;
+  height: 86px;
+  border-radius: 16px 16px 16px 0;
+}
+
+.inputfirst > select {
+  border-top: 2px solid #f5f6fb;
+  //   text-align: left;
+}
+
+.iconCalculator {
+  position: absolute;
+  right: 76px;
+}
+
+.expinplace {
+  display: block;
+  width: 100%;
+  height: 40px;
+  border: 0;
+  padding: 0 20px 0;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  //   text-align: left;
+  background: transparent;
+}
+
+.expinplace::placeholder,
+.expinplace option {
+  color: #c7ccdc;
+}
+
+.secondinput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 184px;
+  border-radius: 22px;
+  border: 2px solid #f5f6fb;
+  margin-top: 30px;
+}
+
+.secondinput > input {
+  width: 125px;
+  border-right: 2px solid #f5f6fb;
+}
+
+.btnGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 266px;
+  margin-top: 80px;
+}
