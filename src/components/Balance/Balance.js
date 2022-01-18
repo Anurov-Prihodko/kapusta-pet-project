@@ -33,6 +33,7 @@ export default function Balance() {
   };
 
   const balanceNomalized = Number(newBalance).toFixed(2);
+
   const desctopOrLaptopSize = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -49,12 +50,12 @@ export default function Balance() {
           <label>
             <input
               disabled={balanceHasBeenSet}
+              placeholder={'00.00 UAH'}
               value={newBalance}
               className={'balance-value'}
               type="number"
               autoComplete="off"
               name="name"
-              placeholder={'00.00 UAH'}
               onChange={handleChange}
             />
           </label>
@@ -81,9 +82,10 @@ export default function Balance() {
           <BalanceConfirmModal onClose={togleModal}>
             <BalanceConfirmModalBody
               onClose={togleModal}
-              balance={balanceNomalized}
+              balance={Number(balanceNomalized)}
             >
-              Вы желаете установить начальный баланс в размере {balanceNomalized} UAH ?
+              Вы желаете установить начальный баланс в размере
+              {Number(balanceNomalized)} UAH ?
             </BalanceConfirmModalBody>
           </BalanceConfirmModal>
         )}
