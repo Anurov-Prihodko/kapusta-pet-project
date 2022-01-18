@@ -9,6 +9,7 @@ import Modal from '../Modal';
 import ModalBody from '../ModalBody';
 import { nameFromEmail } from '../../utils/nameFromEmail';
 import { getUserToken } from '../../redux/auth/authSelectors';
+import { NavLink } from 'react-router-dom';
 
 export default function HeaderHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,7 +37,9 @@ export default function HeaderHome() {
 
   return (
     <div className={s.header}>
-      <Icons name="logo" className={s.header__logo} />
+      <NavLink to="/">
+        <Icons name="logo" className={s.header__logo} />
+      </NavLink>
       {authToken ? (
         <div className={s.login__container}>
           <div className={s.header__logout}>
