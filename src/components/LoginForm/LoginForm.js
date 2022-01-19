@@ -18,6 +18,7 @@ export default function LoginForm() {
   const [isRegisterActive, setIsRegisterActive] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -64,6 +65,10 @@ export default function LoginForm() {
 
   const passwordErrorMessage =
     'пароль должен быть от 6 до 8 символов, содержать буквы латинского алфавита и хотя бы одну цифру';
+
+  const onTogglePasswordBtnClick = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <section className={styles.login}>
@@ -126,32 +131,46 @@ export default function LoginForm() {
           </span>
         </label>
 
-        <label className={styles.inputLabel}>
-          <span className={styles.inputLabelText}>
-            {requiredErrorPassword && (
-              <span className={styles.requiredLabel}>*</span>
-            )}
-            Пароль:
-          </span>
-          <input
-            type="password"
-            name="password"
-            placeholder="Пароль"
-            className={styles.input}
-            {...register('password', {
-              required: true,
-              minLength: 6,
-              maxLength: 8,
-              pattern: /^[a-zA-Z0-9]+$/,
-            })}
-          />
-          <span className={styles.inputErrorMessage}>
-            {requiredErrorPassword && 'это обязательное поле'}
-            {errors?.password?.type === 'minLength' && passwordErrorMessage}
-            {errors?.password?.type === 'maxLength' && passwordErrorMessage}
-            {errors?.password?.type === 'pattern' && passwordErrorMessage}
-          </span>
-        </label>
+        <div className={styles.inputWrap}>
+          <label className={styles.inputLabel}>
+            <span className={styles.inputLabelText}>
+              {requiredErrorPassword && (
+                <span className={styles.requiredLabel}>*</span>
+              )}
+              Пароль:
+            </span>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Пароль"
+              className={styles.input}
+              {...register('password', {
+                required: true,
+                minLength: 6,
+                maxLength: 8,
+                pattern: /^[a-zA-Z0-9]+$/,
+              })}
+            />
+            <span className={styles.inputErrorMessage}>
+              {requiredErrorPassword && 'это обязательное поле'}
+              {errors?.password?.type === 'minLength' && passwordErrorMessage}
+              {errors?.password?.type === 'maxLength' && passwordErrorMessage}
+              {errors?.password?.type === 'pattern' && passwordErrorMessage}
+            </span>
+          </label>
+          <button
+            type="button"
+            className={styles.togglePasswordVisibilityBtn}
+            onClick={onTogglePasswordBtnClick}
+          >
+            <Icons
+              name={showPassword ? 'eye-hide' : 'eye-visible'}
+              width="30"
+              height="30"
+              className={styles.iconEye}
+            />
+          </button>
+        </div>
 
         <div className={styles.loginFormBtnGroup}>
           <ButtonBasic

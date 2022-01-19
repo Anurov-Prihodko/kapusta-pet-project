@@ -81,6 +81,10 @@
   letter-spacing: 0.04em;
 }
 
+.inputWrap {
+  position: relative;
+}
+
 .inputLabel {
   display: block;
 
@@ -129,6 +133,31 @@
   margin-top: 4px;
 
   color: #eb5757;
+}
+
+.togglePasswordVisibilityBtn {
+  position: absolute;
+  top: 33px;
+  right: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 5px;
+
+  color: #a6abb9;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.iconEye {
+  &:hover,
+  &:focus {
+    color: #ff751d;
+  }
 }
 
 .loginFormBtnGroup {
