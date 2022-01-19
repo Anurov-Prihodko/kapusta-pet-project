@@ -2,7 +2,7 @@ import axios from 'axios';
 import { decode } from 'jsonwebtoken';
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Container from './components/Container';
 import { getUserToken } from './redux/auth/authSelectors';
 import HeaderHome from './components/HeaderHome';
@@ -43,12 +43,10 @@ export default function App() {
       <Suspense fallback={null}>
         {!isAuthenticated && <LoginView />}
         {isAuthenticated && (
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<HomeView />} />
-              <Route path="/reports" element={<ReportView />} />
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomeView />} />
+            <Route path="/reports" element={<ReportView />} />
+          </Routes>
         )}
       </Suspense>
     </Container>
