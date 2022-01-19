@@ -164,7 +164,7 @@ export default function LoginForm() {
             onClick={onTogglePasswordBtnClick}
           >
             <Icons
-              name={showPassword ? 'eye-hide' : 'eye-visible'}
+              name={showPassword ? 'eye-visible' : 'eye-hide'}
               width="30"
               height="30"
               className={styles.iconEye}
