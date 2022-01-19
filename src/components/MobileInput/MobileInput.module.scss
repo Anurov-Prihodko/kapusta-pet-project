@@ -1,3 +1,40 @@
+.body {
+  width: 100%;
+  // background: #fff;
+  background: transparent;
+}
+.close__btn {
+  border-radius: 50%;
+  display: inline-flex;
+
+  cursor: pointer;
+  border: hidden;
+  background-color: inherit;
+  padding: 0;
+
+  &_svg {
+    position: relative;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+  }
+  &_svg use {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(25%, 25%);
+    display: inline-block;
+  }
+}
+
+.wraper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .expininput {
   position: relative;
   display: flex;
