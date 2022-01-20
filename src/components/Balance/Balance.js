@@ -105,7 +105,7 @@ export default function Balance() {
               onClose={togleModal}
               balance={Number(balanceNomalized)}
             >
-              Вы желаете установить начальный баланс в размере
+              {'Вы желаете установить начальный баланс в размере '}
               {Number(balanceNomalized)} UAH ?
             </BalanceConfirmModalBody>
           </BalanceConfirmModal>
