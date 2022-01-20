@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { useSelector } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
+import { lastDayOfDecade } from 'date-fns';
+import './Balance.scss';
 
 import BalanceConfirmModalBody from '../BalanceConfirmModal/BalanceConfirmModalBody';
 import BalanceConfirmModal from '../BalanceConfirmModal';
-
-import './Balance.scss';
 import BalanceButton from '../BalanceButton';
-import { useSelector } from 'react-redux';
 import {
   getBalance,
   getBalanceHasBeenSet,
 } from '../../redux/auth/authSelectors';
+// import { formatBalanceSumm } from '../../utils/formatBalanceSumm';
 
 export default function Balance() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,6 +36,20 @@ export default function Balance() {
 
   const balanceNomalized = Number(newBalance).toFixed(2);
 
+  // Для красивой отрисовки нужно преобразовывать в число
+
+  // Вариант №1
+  // let formatBalance = new Intl.NumberFormat('ru').format(
+  //   Number(balanceNomalized),
+  // );
+
+  // Вариант №2
+  // let x = formatBalanceSumm(Number(balanceNomalized), 2, ',', ' ');
+
+  // console.log(x, formatBalance);
+
+  // ======
+
   const desctopOrLaptopSize = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -51,7 +67,7 @@ export default function Balance() {
             <input
               disabled={balanceHasBeenSet}
               placeholder={'00.00 UAH'}
-              value={balance === 0 ? null : newBalance}
+              value={!balance ? null : Number(balanceNomalized)}
               className={'balance-value'}
               type="number"
               autoComplete="off"
