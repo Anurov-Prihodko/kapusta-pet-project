@@ -61,11 +61,11 @@ const authSlice = createSlice({
 
     [removeExspenseById.fulfilled](state, action) {
       // console.log(action.payload)
-      state.user.balance = action.payload.balance
+      state.user.balance = action.payload.balance;
     },
     [removeIncomseById.fulfilled](state, action) {
       // console.log(action.payload)
-      state.user.balance = action.payload.balance
+      state.user.balance = action.payload.balance;
     },
   },
 });
