@@ -55,6 +55,7 @@ const authSlice = createSlice({
       state.user.balanceHasBeenSet = true;
     },
     [loginUserViaGoogle.fulfilled](state, action) {
+      console.log(action.payload);
       state.user.email = action.payload.user.email;
       state.token = action.payload.token;
     },
