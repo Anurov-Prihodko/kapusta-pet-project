@@ -73,6 +73,11 @@ export default function Balance() {
               autoComplete="off"
               name="name"
               onChange={handleChange}
+              style={
+                balance === 0
+                  ? { borderRadius: '22px 0 0 22px' }
+                  : { borderRadius: '16px' }
+              }
             />
           </label>
         </form>
