@@ -27,8 +27,8 @@ async function setBalance(newBalance) {
 }
 
 async function getLoginViaGoogle(email) {
-  const { user } = await axios.get('/users/login-via-google', email);
-  return user;
+  const { data } = await axios.get('/users/login-via-google', email);
+  return data.user;
 }
 
 const kapustaAuthAPI = {
