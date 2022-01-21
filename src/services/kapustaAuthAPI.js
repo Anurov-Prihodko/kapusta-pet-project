@@ -27,8 +27,8 @@ async function setBalance(newBalance) {
 }
 
 async function getLoginViaGoogle(email) {
-  const { user } = await axios.get('/users/login-via-google', email)
-  return user
+  const { user } = await axios.get('/users/login-via-google', email);
+  return user;
 }
 
 const kapustaAuthAPI = {
@@ -36,7 +36,7 @@ const kapustaAuthAPI = {
   postUserLoginData,
   deleteUserLoginData,
   setBalance,
-  getLoginViaGoogle
+  getLoginViaGoogle,
 };
 
 export default kapustaAuthAPI;

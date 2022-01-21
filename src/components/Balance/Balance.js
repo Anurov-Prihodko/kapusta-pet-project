@@ -67,7 +67,7 @@ export default function Balance() {
             <input
               disabled={balanceHasBeenSet}
               placeholder={'00.00 UAH'}
-              value={!balance ? 0 : Number(newBalance)}
+              value={!balance ? 0 : Number(balanceNomalized)}
               className={'balance-value'}
               type="number"
               autoComplete="off"
