@@ -55,17 +55,16 @@ const authSlice = createSlice({
       state.user.balanceHasBeenSet = true;
     },
     [loginUserViaGoogle.fulfilled](state, action) {
-      console.log(action.payload);
       state.user.email = action.payload.user.email;
+      state.user.balance = action.payload.user.balance;
+      state.user.balanceHasBeenSet = action.payload.user.balanceHasBeenSet;
       state.token = action.payload.token;
     },
 
     [removeExspenseById.fulfilled](state, action) {
-      // console.log(action.payload)
       state.user.balance = action.payload.balance;
     },
     [removeIncomseById.fulfilled](state, action) {
-      // console.log(action.payload)
       state.user.balance = action.payload.balance;
     },
   },
