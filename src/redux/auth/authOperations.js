@@ -44,7 +44,7 @@ const loginUserViaGoogle = createAsyncThunk(
       return rejectWithValue(err.message);
     }
   },
-);user нужно в скобки
+);
 
 const logOutUser = createAsyncThunk(
   'auth/logOutUser',
