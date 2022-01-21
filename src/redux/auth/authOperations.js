@@ -35,12 +35,15 @@ const loginUserViaGoogle = createAsyncThunk(
   'auth/loginUserViaGoogle',
   async ({ email, token }, { rejectWithValue }) => {
     try {
-      const user = await kapustaAuthAPI.getLoginViaGoogle({email})
+      console.log(email);
+      console.log('token ', token);
+      const user = await kapustaAuthAPI.getLoginViaGoogle({ email });
 
       authToken.set(token);
 
       return { user, token };
     } catch (err) {
+      console.log(err);
       return rejectWithValue(err.message);
     }
   },
