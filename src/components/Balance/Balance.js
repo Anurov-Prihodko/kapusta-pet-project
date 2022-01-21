@@ -30,9 +30,9 @@ export default function Balance() {
     setNewBalance(balance);
   }, [balance]);
 
-  const handleChange = e => {
-    setNewBalance(e.currentTarget.value);
-  };
+  // const handleChange = e => {
+  //   setNewBalance(e.target.value);
+  // };
 
   const balanceNomalized = Number(newBalance).toFixed(2);
 
@@ -67,12 +67,12 @@ export default function Balance() {
             <input
               disabled={balanceHasBeenSet}
               placeholder={'00.00 UAH'}
-              value={!balance ? 0 : Number(balanceNomalized)}
+              value={balance === 0 ? undefined : Number(balanceNomalized)}
               className={'balance-value'}
               type="number"
               autoComplete="off"
               name="name"
-              onChange={handleChange}
+              onChange={e => setNewBalance(e.target.value)}
               style={
                 balance === 0
                   ? { borderRadius: '22px 0 0 22px' }
@@ -95,7 +95,7 @@ export default function Balance() {
               <p>
                 Привет! Для начала работы внеси текущий баланс своего счета!
               </p>
-              <p>Ты не можешь тратить деньги пока их у тебя нет :)</p>
+              <p>{'Ты не можешь тратить деньги пока их у тебя нет :)'}</p>
             </div>
           </div>
         )}
