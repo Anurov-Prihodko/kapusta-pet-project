@@ -27,9 +27,7 @@ async function setBalance(newBalance) {
 }
 
 async function getLoginViaGoogle(email) {
-  // console.log('email: ', email);
-  const { data } = await axios.get('/users/login-via-google', email);
-  console.log('data: ', data);
+  const { data } = await axios.post('/users/login-via-google', email);
   return data.user;
 }
 
