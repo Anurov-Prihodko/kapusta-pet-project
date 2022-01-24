@@ -20,7 +20,7 @@ export default function Balance() {
 
   const balance = useSelector(getBalance);
   const balanceHasBeenSet = useSelector(getBalanceHasBeenSet);
-  const [newBalance, setNewBalance] = useState(balance);
+  const [newBalance, setNewBalance] = useState(Number(balance).toFixed(2));
 
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
@@ -30,11 +30,18 @@ export default function Balance() {
     setNewBalance(balance);
   }, [balance]);
 
-  // const handleChange = e => {
-  //   setNewBalance(e.target.value);
-  // };
+  const handleChange = e => {
+    setNewBalance(e.target.value);
 
-  const balanceNomalized = Number(newBalance).toFixed(2);
+    // console.log(newBalance[0]);
+
+    // if (newBalance[0] === 0) {
+    //   alert('Не может начинатся с 0');
+    //   return;
+    // }
+  };
+
+  // const balanceNomalized = Number(newBalance).toFixed(2);
 
   // Для красивой отрисовки нужно преобразовывать в число
 
@@ -67,12 +74,12 @@ export default function Balance() {
             <input
               disabled={balanceHasBeenSet}
               placeholder={'00.00 UAH'}
-              value={balance === 0 ? undefined : Number(balanceNomalized)}
+              value={Number(newBalance)}
               className={'balance-value'}
               type="number"
               autoComplete="off"
               name="name"
-              onChange={e => setNewBalance(e.target.value)}
+              onChange={handleChange}
               style={
                 balance === 0
                   ? { borderRadius: '22px 0 0 22px' }
@@ -103,10 +110,10 @@ export default function Balance() {
           <BalanceConfirmModal onClose={togleModal}>
             <BalanceConfirmModalBody
               onClose={togleModal}
-              balance={Number(balanceNomalized)}
+              balance={Number(newBalance)}
             >
               {'Вы желаете установить начальный баланс в размере '}
-              {Number(balanceNomalized)} UAH ?
+              {Number(newBalance)} UAH ?
             </BalanceConfirmModalBody>
           </BalanceConfirmModal>
         )}
