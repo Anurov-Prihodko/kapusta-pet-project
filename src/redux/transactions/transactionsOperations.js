@@ -1,22 +1,6 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from 'axios';
 
 import transactionsAPI from '../../services/transactionsAPI';
-
-// const addExpense = createAsyncThunk(
-//   'transactions/addExpense',
-//   async (expenseData, { rejectWithValue }) => {
-//     try {
-//       const expense = await transactionsAPI
-//         .postExpenseData(expenseData)
-//         .then(({ data }) => data);
-
-//       return expense;
-//     } catch (err) {
-//       return rejectWithValue(err.message);
-//     }
-//   },
-// );
 
 const changeIncome = createAction('transactions/addIncome');
 

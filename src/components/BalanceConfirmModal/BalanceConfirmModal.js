@@ -25,9 +25,7 @@ export default function BalanceConfirmModal({ children, onClose, onSubmit }) {
       onClose();
     }
     return;
-    };
-    
-    
+  };
 
   return createPortal(
     <div className={s.backdrop} onClick={handleBackdropClick}>

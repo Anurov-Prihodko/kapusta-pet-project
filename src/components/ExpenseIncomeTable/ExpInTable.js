@@ -517,7 +517,7 @@ export default function ExpInTable({ children }) {
       {!cash && (
         <Modal onClose={togleCashModal}>
           <p className={s.transactionAddError}>
-            Сумма транзакции не может превышать допустимый баланс!
+            Сумма расходов не может превышать баланс!
           </p>
         </Modal>
       )}

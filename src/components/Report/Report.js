@@ -38,13 +38,11 @@ export default function Report() {
                   <div className={s.balance_component}>
                     <Balance />
                   </div>
-                  {/* <p className={s.placeholder}>placeholder</p> */}
                 </>
               )}
               {!mobile && (
                 <>
                   <Balance />
-                  {/* <p className={s.placeholder}>placeholder</p> */}
                   <div className={s.month_selector_div}>
                     <MonthSelector />
                   </div>

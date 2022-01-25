@@ -8,7 +8,6 @@ import {
 } from '../transactions/transactionsOperations';
 
 const initialState = {
-  // expense: null,
   income: false,
   transactionsIncomeMonth: [],
   transactionsIncomeYear: [],

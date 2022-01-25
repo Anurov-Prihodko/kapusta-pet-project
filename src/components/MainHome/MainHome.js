@@ -11,7 +11,6 @@ export default function MainHome({ children }) {
           <JampCabb />
         </div>
       </div>
-      {/* <div className={s.main}></div> */}
       <div className={s.flayanimation}>
         <Cole />
       </div>

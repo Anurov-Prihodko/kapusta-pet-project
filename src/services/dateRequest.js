@@ -12,16 +12,3 @@ export default function dateRequest(date) {
 
   return resTxt;
 }
-// const dateFormatter = date => {
-//   const options = {
-//     year: 'numeric',
-//     month: 'numeric',
-//     day: 'numeric',
-//   };
-//   const normalDate = new Date(date)
-//     .toLocaleString('Ru-ru', options)
-//     .split('.')
-//     .join('-');
-
-//   return normalDate;
-// };

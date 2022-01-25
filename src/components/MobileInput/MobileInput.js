@@ -59,11 +59,6 @@ export default function MobileInput({ onClose }) {
     return normalDate;
   };
 
-  // const formatInputValue = inputValue => {
-  //   const interValue = Number(inputValue).toFixed(2);
-  //   return Number(interValue);
-  // };
-
   const handleNameChange = event => {
     setRequest(event.currentTarget.value);
   };

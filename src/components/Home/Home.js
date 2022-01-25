@@ -1,5 +1,4 @@
 import s from './Home.module.scss';
-// import Wrapper from '../Wrapper';
 import HomeTable from '../HomeTable';
 import MainHome from '../MainHome';
 import { Summary } from '../Summary';
@@ -34,7 +33,6 @@ export default function Home() {
   return (
     <div className={s.main_container}>
       <MainHome>
-        {/* <Wrapper> */}
         <div className={s.home_container}>
           <ExpInTable>
             <div className={s.table_container}>
