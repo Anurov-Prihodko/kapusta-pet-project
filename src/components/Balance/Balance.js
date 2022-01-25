@@ -32,13 +32,6 @@ export default function Balance() {
 
   const handleChange = e => {
     setNewBalance(e.target.value);
-
-    // console.log(newBalance[0]);
-
-    // if (newBalance[0] === 0) {
-    //   alert('Не может начинатся с 0');
-    //   return;
-    // }
   };
 
   // const balanceNomalized = Number(newBalance).toFixed(2);

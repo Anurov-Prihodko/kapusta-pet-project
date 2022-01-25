@@ -16,12 +16,8 @@ export default function HeaderHome() {
   const authToken = useSelector(getUserToken);
   const togleModal = () => setIsModalOpen(state => !state);
 
-  // console.log(authToken); // Почему тут есть токен после 1 часа?
-
-  //const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.user.email);
   const userName = userEmail ? nameFromEmail(userEmail) : null;
-  // console.log('email=', userEmail, ', name=', userName);
 
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
