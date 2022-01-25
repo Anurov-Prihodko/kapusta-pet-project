@@ -34,6 +34,7 @@ import {
 import { getAllCategories } from '../../redux/categories/categoriesSelectors';
 import { getTransactionsAnnual } from '../../redux/summary/summaryOperations';
 import { formatInputValue } from '../../utils/formatInputValue';
+import { getBalance } from '../../redux/auth/authSelectors';
 
 registerLocale('ru', ru);
 
@@ -44,10 +45,15 @@ export default function ExpInTable({ children }) {
   const [category, setCategory] = useState('');
   const [newCategory, setNewCategory] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
+  const [cash, setCash] = useState(true);
+
+  //  === Для предотвращение добавления транзакции при низком балансе
+  const balance = useSelector(getBalance);
 
   // === Модалка на инпут для мобилки
   const [isInputOpen, setIsInputOpen] = useState(false);
   const togleInput = () => setIsInputOpen(state => !state);
+  const togleCashModal = () => setCash(state => !state);
 
   const dateFormatter = date => {
     const options = {
@@ -196,6 +202,11 @@ export default function ExpInTable({ children }) {
       return;
     }
     if (!incomeStatus) {
+      if (formatInputValue(expenses) > balance) {
+        setCash(false);
+        onClear();
+        return;
+      }
       await dispatch(
         newExpenseData({
           sum: formatInputValue(expenses),
@@ -503,6 +514,13 @@ export default function ExpInTable({ children }) {
           </button>
         </div>
       </section>
+      {!cash && (
+        <Modal onClose={togleCashModal}>
+          <p className={s.transactionAddError}>
+            Сумма транзакции не может превышать допустимый баланс!
+          </p>
+        </Modal>
+      )}
       {/* Модалка на инпут для мобилки */}
       {isInputOpen && (
         <Modal onClose={togleInput}>
